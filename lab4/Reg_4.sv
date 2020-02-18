@@ -40,9 +40,11 @@ module reg_8 (input  logic Clk, Reset, Shift_In, Load, Shift_En,
 			  //concatenate shifted in data to the previous left-most 3 bits
 			  //note this works because we are in always_ff procedure block
 			  Data_Out <= { Shift_In, Data_Out[7:1] }; 
-	    end
+	     end
     end
 	
     assign Shift_Out = Data_Out[0];
 
 endmodule
+
+
