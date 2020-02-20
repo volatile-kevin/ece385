@@ -1,5 +1,5 @@
 module multiplier(
-
+						input logic[7:0] 
 						);
 
 
@@ -10,7 +10,7 @@ module adder_8bit(
 						input   logic[7:0]     A,
 						input   logic[7:0]     B,
 						output  logic[7:0]     Sum,
-						output  logic           CO
+						output  logic          CO
 						);
 						
 	logic C0;
