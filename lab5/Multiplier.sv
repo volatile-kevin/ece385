@@ -1,5 +1,7 @@
 module multiplier(
-						input logic[7:0] 
+						input logic[7:0] A,
+						input logic[7:0] B
+						
 						);
 
 
