@@ -15,7 +15,7 @@ module top_level (input logic Clk,Reset, Run, ClearA_LoadB,
 							 output logic X);
 				
 	
-	enum logic[3:0] {start,sh0,sh1,sh2,sh3,sh4,sh5,sh6,sh7} state, next_state;
+	enum logic[3:0] {start,sh0,sh1,sh2,sh3,sh4,sh5,sh6,sh7,add0,add1,add2,add3,add4,add5,add6,add6} state, next_state;
 	logic [6:0] AhexU_comb, AhexL_comb, BhexU_comb, BhexL_comb;
 	logic carryout;
 	logic [7:0]AdderBuffer = 8'h00;
@@ -26,37 +26,38 @@ module top_level (input logic Clk,Reset, Run, ClearA_LoadB,
 	always_ff @(posedge Clk) begin
 		if (Reset) begin
 			state <= start;
-			//Aval <= 8'h00;
-			//Bval <= 8'h00;
-//			X <= 1'b0;
 		end else if (ClearA_LoadB) begin
 			state <= start;
-			//Aval <= 8'h00;
-//			X <= 1'b0;
-			//Bval <= S;
 		end else if (Run) begin
-			state <= sh0;
-			//Aval <= S;
+			if (state == start)
+				state <= sh0;
+			else
+				state <= next_state;
+		else
+			state <= next_state
 		end
 	end
 	
 	//next state logic
 	always_comb begin 
 		next_state = state;
-		if (!Bval[0])
-			AdderBuffer = 8'h00;
-		else
-			AdderBuffer = S;
 		
 		unique case (state)
 			start : if (Run) next_state = sh0;
 			sh0 : next_state = sh1;
+			add0 : next_state = add1;
 			sh1 : next_state = sh2;
+			add1 : next_state = add2;
 			sh2 : next_state = sh3;
+			add2 : next_state = add3;
 			sh3 : next_state = sh4;
+			add3 : next_state = add4;
 			sh4 : next_state = sh5;
+			add4 : next_state = add5;
 			sh5 : next_state = sh6;
+			add5 : next_state = add6;
 			sh6 : next_state = sh7;
+			add6 : next_state = add2;
 			sh7 : if (!Run) next_state = start;
 		endcase
 		
