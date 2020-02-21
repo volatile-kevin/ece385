@@ -19,20 +19,23 @@ module top_level (input logic Clk,Reset, Run, ClearA_LoadB,
 	logic [6:0] AhexU_comb, AhexL_comb, BhexU_comb, BhexL_comb;
 	logic carryout;
 	logic [7:0]AdderBuffer = 8'h00;
+	logic shift_registers = 1'b0;
+	logic start_pin = 1'b1;
+	logic [7:0] tempA;
 	
 	always_ff @(posedge Clk) begin
 		if (Reset) begin
 			state <= start;
 			//Aval <= 8'h00;
-			Bval <= 8'h00;
+			//Bval <= 8'h00;
 //			X <= 1'b0;
 		end else if (ClearA_LoadB) begin
 			state <= start;
 			//Aval <= 8'h00;
 //			X <= 1'b0;
-			Bval <= S;
+			//Bval <= S;
 		end else if (Run) begin
-			state <= start;
+			state <= sh0;
 			//Aval <= S;
 		end
 	end
@@ -93,7 +96,7 @@ module top_level (input logic Clk,Reset, Run, ClearA_LoadB,
 		(
 			.A({Aval[7],Aval[7:0]}),
 			.B({AdderBuffer[7],AdderBuffer[7:0]}),
-			.Sum({X,Aval[7:0]}),
+			.Sum({X,tempA}),
 			.CO({carryout})
 		);
 		 
@@ -120,6 +123,30 @@ module top_level (input logic Clk,Reset, Run, ClearA_LoadB,
 				.In0(Bval[3:0]),
 				.Out0(BhexL_comb)
 		);
-
-						
+		
+		registerA regA
+		(
+			.Clk,
+			.Reset,
+			.Shift_In(X),
+			.Load_Zeroes(ClearA_LoadB),
+			.Shift_En(shift_registers),
+			.Parallel_Load(Bval[0]),
+			.Data_In(tempA),
+			.Data_Out(Aval),
+			.Shift_Out()
+		);
+		
+		registerB regB
+		(
+			.Clk,
+			.Reset,
+			.Shift_In(Aval[0]),
+			.Load(ClearA_LoadB),
+			.Shift_En(shift_registers),
+			.Data_In(S),
+			.Data_Out(Bval),
+			.Shift_Out()
+		);
+		
 endmodule
