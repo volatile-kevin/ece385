@@ -14,6 +14,8 @@ logic [6:0] BhexL;
 logic [7:0] Aval;
 logic [7:0] Bval;
 logic X;
+logic shift_registers;
+logic add_registers;
 
 
 
@@ -28,14 +30,19 @@ initial begin: CLOCK_INITIALIZATION
 end 
 
 initial begin: TEST
-	Reset = 0;
-	Run = 1;
-	S = 8'b10101010;
+	Reset = 1;
+	Run = 0;
+	ClearA_LoadB = 1;
+	S = 8'b11000101;
 	
-#2	ClearA_LoadB = 1;
-
 	
+#2 Reset = 0;
+#2	ClearA_LoadB = 0;
+S = 8'b00000111;
+	
+#2 Run = 1;
 
+#22 ;
 
 end
 endmodule
