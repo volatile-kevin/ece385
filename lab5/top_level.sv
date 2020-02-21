@@ -15,25 +15,69 @@ module top_level (input logic Clk,Reset, Run, ClearA_LoadB,
 							 output logic X);
 				
 	
-	enum logic[1:0] {start, compute_A, compute_B, halt} state, next_state;
+	enum logic[3:0] {start,sh0,sh1,sh2,sh3,sh4,sh5,sh6,sh7} state, next_state;
 	logic [6:0] AhexU_comb, AhexL_comb, BhexU_comb, BhexL_comb;
+	logic carryout;
+	logic [7:0]AdderBuffer = 8'h00;
 	
 	always_ff @(posedge Clk) begin
-		if (!Reset) begin
-			Aval <= 8'h00;
+		if (Reset) begin
+			state <= start;
+			//Aval <= 8'h00;
 			Bval <= 8'h00;
-			X <= 1'b0;
-		end else if (!ClearA_LoadB) begin
-			Aval <= 8'h00;
-			X <= 1'b0;
+//			X <= 1'b0;
+		end else if (ClearA_LoadB) begin
+			state <= start;
+			//Aval <= 8'h00;
+//			X <= 1'b0;
 			Bval <= S;
-		end else begin
-			Aval <= S;
+		end else if (Run) begin
+			state <= start;
+			//Aval <= S;
 		end
 	end
-
 	
-
+	//next state logic
+	always_comb begin 
+		next_state = state;
+		if (!Bval[0])
+			AdderBuffer = 8'h00;
+		else
+			AdderBuffer = S;
+		
+		unique case (state)
+			start : if (Run) next_state = sh0;
+			sh0 : next_state = sh1;
+			sh1 : next_state = sh2;
+			sh2 : next_state = sh3;
+			sh3 : next_state = sh4;
+			sh4 : next_state = sh5;
+			sh5 : next_state = sh6;
+			sh6 : next_state = sh7;
+			sh7 : if (!Run) next_state = start;
+		endcase
+		
+		//state logic	
+//		unique case (state)
+//			start : begin
+//					if (Bval[0])
+//						Aval = S;
+//			
+//			end
+//			sh0 : Aval = S;
+//			sh1 : Aval = S;
+//			sh2 : Aval = S;
+//			sh3 : Aval = S;
+//			sh4 : Aval = S;
+//			sh5 : Aval = S;
+//			sh6 : Aval = S;
+//			sh7 : Aval = S;
+//		endcase
+	end
+	
+	
+	
+	
 		/* Decoders for HEX drivers and output registers
 		* Note that the hex drivers are calculated one cycle after Sum so
 		* that they have minimal interfere with timing (fmax) analysis.
@@ -44,6 +88,14 @@ module top_level (input logic Clk,Reset, Run, ClearA_LoadB,
 			BhexU <= BhexU_comb;
 			BhexL <= BhexL_comb;
 		end
+		
+		adder_9bit adder9bit
+		(
+			.A({Aval[7],Aval[7:0]}),
+			.B({AdderBuffer[7],AdderBuffer[7:0]}),
+			.Sum({X,Aval[7:0]}),
+			.CO({carryout})
+		);
 		 
 		HexDriver Ahex_inst
 		(

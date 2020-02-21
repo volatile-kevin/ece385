@@ -1,12 +1,4 @@
-module multiplier(
-						input logic[7:0] A,
-						input logic[7:0] B
-						
-						);
 
-
-
-endmodule
 
 module adder_8bit(
 						input   logic[7:0]     A,
@@ -21,6 +13,21 @@ module adder_8bit(
 	four_bit_ra FRA1(.x(A[7:4]), .y(B[7:4]), .cin(C0), .s(Sum[7:4]), .cout(CO));
 
 			
+endmodule
+
+module adder_9bit(
+						input   logic[8:0]     A,
+						input   logic[8:0]     B,
+						output  logic[8:0]     Sum,
+						output  logic          CO
+						);
+	logic C0, C1;
+	
+	four_bit_ra FRA0(.x(A[3:0]), .y(B[3:0]), .cin(0), .s(Sum[3:0]), .cout(C0));
+	four_bit_ra FRA1(.x(A[7:4]), .y(B[7:4]), .cin(C0), .s(Sum[7:4]), .cout(C1));
+	full_adder fa3(.x(A[8]), .y(B[8]), .cin(C1), .s(Sum[8]), .cout(CO));
+	
+	
 endmodule
 
 module four_bit_ra(
