@@ -31,12 +31,12 @@ initial begin: TEST
 	Reset = 1;
 	Run = 0;
 	ClearA_LoadB = 1;
-	S = 8'b11111111;
+	S = 8'b11111110;
 	
 	
 #2 Reset = 0;
 #2	ClearA_LoadB = 0;
-S = 8'b11111111;
+S = 8'b00000010;
 	
 #2 Run = 1;
 
