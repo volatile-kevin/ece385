@@ -35,11 +35,12 @@ initial begin: TEST_VECTORS
 
 
 #2 Reset = 1;
+
 #2 Run = 0;
 //Run = 1 -> state 18
-#2 Run = 1;
+//#2 Run = 1;
 
-#10;
+#20;
 
 
 

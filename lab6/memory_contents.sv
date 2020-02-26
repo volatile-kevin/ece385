@@ -27,10 +27,11 @@ task memory_contents(output logic[15:0] mem_array[0:size-1]);
 // Note that if you do this, remember to turn "init_external" in test_memory.sv to 1 for 
 // any of your modifications to take effect.
 
-   mem_array[   0 ] =    opCLR(R0)                ;       // Clear the register so it can be used as a base
-   mem_array[   1 ] =    opLDR(R1, R0, inSW)      ;       // Load switches
+   mem_array[   0 ] =    opADDi(R0, R0, 2)                ;       // Clear the register so it can be used as a base
+   mem_array[   1 ] =    opANDi(R0, R0, 4)      ;       // Load switches
    mem_array[   2 ] =    opJMP(R1)                ;       // Jump to the start of a program
-   
+//  mem_array[   0 ] =    opCLR(R0)                ;       // Clear the register so it can be used as a base
+//  mem_array[   1 ] =    opLDR(R1, R0, inSW)      ;       // Load switches
                                                           // Basic I/O test 1
    mem_array[   3 ] =    opLDR(R1, R0, inSW)      ;       // Load switches
    mem_array[   4 ] =    opSTR(R1, R0, outHEX)    ;       // Output

@@ -109,19 +109,30 @@ module ISDU (   input logic         Clk,
 		unique case (State)
 			Halted : 
 				if (Run) begin 
-					$display("fuck yoy");
 					Next_state = S_18;
 				end                       
 			S_18 : 
+				begin
+				$display("state 18 hit");			
 				Next_state = S_33_1;
+				end
 			// Any states involving SRAM require more than one clock cycles.
 			// The exact number will be discussed in lecture.
 			S_33_1 : 
+				begin
+				$display("state 33_1 hit");
 				Next_state = S_33_2;
+				end
 			S_33_2 : 
+				begin
+				$display("state 33_2 hit");
 				Next_state = S_35;
+				end
 			S_35 : 
+				begin
+				$display("state 35 hit");
 				Next_state = PauseIR1;
+				end
 			// PauseIR1 and PauseIR2 are only for Week 1 such that TAs can see 
 			// the values in IR.
 			PauseIR1 : 
