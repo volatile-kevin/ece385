@@ -1,31 +1,29 @@
 
 
-module adder_8bit(
-						input   logic[7:0]     A,
-						input   logic[7:0]     B,
-						output  logic[7:0]     Sum,
-						output  logic          CO
-						);
-						
-	logic C0;
-	
-	four_bit_ra FRA0(.x(A[3:0]), .y(B[3:0]), .cin(0), .s(Sum[3:0]), .cout(C0));
-	four_bit_ra FRA1(.x(A[7:4]), .y(B[7:4]), .cin(C0), .s(Sum[7:4]), .cout(CO));
-
-			
-endmodule
-
 module adder_9bit(
 						input   logic[8:0]     A,
 						input   logic[8:0]     B,
+						input sub,
 						output  logic[8:0]     Sum,
-						output  logic          CO
+						output  logic          CO,
+						output logic [8:0] temp
 						);
 	logic C0, C1;
 	
-	four_bit_ra FRA0(.x(A[3:0]), .y(B[3:0]), .cin(0), .s(Sum[3:0]), .cout(C0));
-	four_bit_ra FRA1(.x(A[7:4]), .y(B[7:4]), .cin(C0), .s(Sum[7:4]), .cout(C1));
-	full_adder fa3(.x(A[8]), .y(B[8]), .cin(C1), .s(Sum[8]), .cout(CO));
+	always_comb begin
+		if(sub) 
+			begin
+				temp = ~B + 1'b1;
+			end
+		else 
+			begin
+				temp = B;
+			end
+	end
+	
+	four_bit_ra FRA0(.x(temp[3:0]), .y(A[3:0]), .cin(0), .s(Sum[3:0]), .cout(C0));
+	four_bit_ra FRA1(.x(temp[7:4]), .y(A[7:4]), .cin(C0), .s(Sum[7:4]), .cout(C1));
+	full_adder fa3(.x(temp[8]), .y(A[8]), .cin(C1), .s(Sum[8]), .cout(CO));
 	
 	
 endmodule

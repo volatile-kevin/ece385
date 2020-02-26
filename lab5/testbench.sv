@@ -14,18 +14,16 @@ logic [6:0] BhexL;
 logic [7:0] Aval;
 logic [7:0] Bval;
 logic X;
-logic shift_registers;
-logic add_registers;
-
-
+logic [8:0] temp;
+logic sub_reg;
 
 top_level penis(.*);
 
-always begin : CLOCK_GENERATION
+always begin : COCK_GENERATION
 #1 Clk = ~Clk;
 end
 
-initial begin: CLOCK_INITIALIZATION
+initial begin: COCK_INITIALIZATION
     Clk = 0;
 end 
 
@@ -33,12 +31,12 @@ initial begin: TEST
 	Reset = 1;
 	Run = 0;
 	ClearA_LoadB = 1;
-	S = 8'b11000101;
+	S = 8'b11111111;
 	
 	
 #2 Reset = 0;
 #2	ClearA_LoadB = 0;
-S = 8'b00000111;
+S = 8'b11111111;
 	
 #2 Run = 1;
 
