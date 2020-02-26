@@ -65,13 +65,27 @@ module pcmux (input logic[1:0] select,
 				  
 	always_comb begin
 		unique case (select)
-			2'b00 : Data_out = Bus_data;
+			2'b00 : Data_out = Plus_data;
+			// might need to change for week 2
 			2'b01 : Data_out = PC_offset_data;
-			2'b10 : Data_out = Plus_data;
-			2'b00 : Data_out = 4'h0000;
+			2'b10 : Data_out = Bus_data;
+			2'b11 : Data_out = 4'h0000;
 		endcase
 	end
 				
 endmodule		
-						 
+
+module mdrmux (input logic select,
+				  input logic[15:0] Bus_data,
+				  input logic[15:0] Data_to_CPU,
+				  output logic[15:0] Data_out);
+				  
+	always_comb begin
+		unique case (select)
+			1'b0 : Data_out = Data_to_CPU;
+			1'b1 : Data_out = Bus_data;
+		endcase
+	end
+				
+endmodule			 
 						 

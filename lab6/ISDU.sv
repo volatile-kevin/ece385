@@ -108,8 +108,10 @@ module ISDU (   input logic         Clk,
 		// Assign next state
 		unique case (State)
 			Halted : 
-				if (Run) 
-					Next_state = S_18;                      
+				if (Run) begin 
+					$display("fuck yoy");
+					Next_state = S_18;
+				end                       
 			S_18 : 
 				Next_state = S_33_1;
 			// Any states involving SRAM require more than one clock cycles.

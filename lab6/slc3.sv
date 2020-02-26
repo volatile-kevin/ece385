@@ -23,6 +23,8 @@ module slc3(
     output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7,
     output logic CE, UB, LB, OE, WE,
     output logic [19:0] ADDR,
+    output logic [15:0] busData,
+    output logic [15:0] PC,
     inout wire [15:0] Data //tristate buffers need to be of type wire
 );
 
@@ -42,14 +44,16 @@ logic DRMUX, SR1MUX, SR2MUX, ADDR1MUX;
 logic MIO_EN; //mio energy
 
 logic [15:0] MDR_In;
-logic [15:0] MAR, MDR, IR, PC, ALU; //created fake ALU for now
+logic [15:0] MAR, MDR, IR, ALU; //created fake ALU for now
 logic [15:0] Data_from_SRAM, Data_to_SRAM;
-logic [15:0] busData;
+// logic [15:0] busData;
 logic [15:0] plusData, pcOff;
 
-assign plusData = 16'h0000;
+logic [15:0] MDR_mux_out;
+
 assign pcOff = 16'h0000;
 assign ALU = 16'h0000;
+
 
 // Signals being displayed on hex display
 logic [3:0][3:0] hex_4;
@@ -80,7 +84,7 @@ assign MIO_EN = ~OE;
 
 // You need to make your own datapath module and connect everything to the datapath
 // Be careful about whether Reset is active high or low
-datapath d0 (.Reset(Reset_ah), .data1(PC), .data1_select(GatePC),.data2(MDR), .data2_select(GateMDR),.data3(ALU), .data3_select(GateALU),.data4(MAR), .data4_select(GateMARMUX), .data_out(busData));
+//datapath d0 (.Reset(Reset_ah), .data1(PC), .data1_select(GatePC),.data2(MDR), .data2_select(GateMDR),.data3(ALU), .data3_select(GateALU),.data4(MAR), .data4_select(GateMARMUX), .data_out(busData));
 
 // Our SRAM and I/O controller
 Mem2IO memory_subsystem(
@@ -103,16 +107,51 @@ ISDU state_controller(
 );
 
 register16 pc_register(
-	 .Clk(), .Reset(Reset_ah), .Data_In(PCMux_Out), .Load_Enable(LD_PC),
+	 .Clk(Clk), .Reset(Reset_ah), .Data_In(PCMux_Out), .Load_Enable(LD_PC),
 	 .Data_Out(PC)
-);
-
-tristate_gate #(.N(16)) pc_tristate(
-		.Clk(Clk), .tristate_output_enable(GatePC), .Data_in(PC), .Data_out(busData),
 );
 
 pcmux pc_mux(
 	.select(PCMUX), .Bus_data(busData),  .PC_offset_data(pcOff), .Plus_data(plusData)
+);
+
+pc_increment pcplusone(
+    .in(PC), .out(plusData)
+);
+
+register16 mdr_register(
+	 .Clk(Clk), .Reset(Reset_ah), .Data_In(MDR_mux_out), .Load_Enable(LD_MDR),
+	 .Data_Out(MDR)
+);
+
+register16 mar_register(
+	 .Clk(Clk), .Reset(Reset_ah), .Data_In(busData), .Load_Enable(LD_MAR),
+	 .Data_Out(MAR)
+);
+
+register16 ir_register(
+	 .Clk(Clk), .Reset(Reset_ah), .Data_In(busData), .Load_Enable(LD_IR),
+	 .Data_Out(IR)
+);
+
+mdrmux mdr_mux(
+    .select(MIO_EN), .Bus_data(busData), .Data_to_CPU(MDR_In), .Data_out(MDR_mux_out)
+);
+
+tristate_gate #(.N(16)) pc_tristate(
+		.Clk(Clk), .tristate_output_enable(GatePC), .Data_in(PC), .Data_out(busData)
+);
+
+tristate_gate #(.N(16)) marmux_tristate(
+		.Clk(Clk), .tristate_output_enable(GateMARMUX), .Data_in(pcOff), .Data_out(busData)
+);
+
+tristate_gate #(.N(16)) mdr_tristate(
+		.Clk(Clk), .tristate_output_enable(GateMDR), .Data_in(MDR), .Data_out(busData)
+);
+
+tristate_gate #(.N(16)) alu_tristate(
+		.Clk(Clk), .tristate_output_enable(GateALU), .Data_in(ALU), .Data_out(busData)
 );
 
 endmodule
