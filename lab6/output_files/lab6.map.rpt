@@ -1,6 +1,6 @@
 Analysis & Synthesis report for lab6
-Mon Feb 24 15:49:54 2020
-Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Wed Feb 26 15:27:31 2020
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
 ---------------------
@@ -55,8 +55,8 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Feb 24 15:49:54 2020       ;
-; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
+; Analysis & Synthesis Status        ; Successful - Wed Feb 26 15:27:31 2020       ;
+; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; lab6                                        ;
 ; Top-level Entity Name              ; lab6_toplevel                               ;
 ; Family                             ; Cyclone IV E                                ;
@@ -163,35 +163,35 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 8           ;
-; Maximum allowed            ; 4           ;
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 2           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 4           ;
+; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-4         ;   0.0%      ;
+;     Processor 2            ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                    ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                ; Library ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------+---------+
-; Registers.sv                     ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/Registers.sv       ;         ;
-; HexDriver.sv                     ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/HexDriver.sv       ;         ;
-; tristate.sv                      ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/tristate.sv        ;         ;
-; test_memory.sv                   ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/test_memory.sv     ;         ;
-; SLC3_2.sv                        ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/SLC3_2.sv          ;         ;
-; slc3.sv                          ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/slc3.sv            ;         ;
-; memory_contents.sv               ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/memory_contents.sv ;         ;
-; Mem2IO.sv                        ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/Mem2IO.sv          ;         ;
-; lab6_toplevel.sv                 ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/lab6_toplevel.sv   ;         ;
-; ISDU.sv                          ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/ISDU.sv            ;         ;
-; datapath.sv                      ; yes             ; User SystemVerilog HDL File  ; U:/documents/ece385/lab6/datapath.sv        ;         ;
-+----------------------------------+-----------------+------------------------------+---------------------------------------------+---------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                         ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                     ; Library ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+---------+
+; Registers.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv       ;         ;
+; HexDriver.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/HexDriver.sv       ;         ;
+; tristate.sv                      ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/tristate.sv        ;         ;
+; test_memory.sv                   ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv     ;         ;
+; SLC3_2.sv                        ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/SLC3_2.sv          ;         ;
+; slc3.sv                          ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv            ;         ;
+; memory_contents.sv               ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/memory_contents.sv ;         ;
+; Mem2IO.sv                        ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Mem2IO.sv          ;         ;
+; lab6_toplevel.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv   ;         ;
+; ISDU.sv                          ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/ISDU.sv            ;         ;
+; datapath.sv                      ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/datapath.sv        ;         ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------------+
@@ -439,192 +439,195 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
-    Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Mon Feb 24 15:49:41 2020
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+    Info: Processing started: Wed Feb 26 15:27:17 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab6 -c lab6
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file testbench.sv
+    Info (12023): Found entity 1: testbench File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/testbench.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file pc_increment.sv
-    Info (12023): Found entity 1: pc_increment File: U:/documents/ece385/lab6/pc_increment.sv Line: 1
+    Info (12023): Found entity 1: pc_increment File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/pc_increment.sv Line: 1
 Info (12021): Found 4 design units, including 4 entities, in source file registers.sv
-    Info (12023): Found entity 1: registerB File: U:/documents/ece385/lab6/Registers.sv Line: 4
-    Info (12023): Found entity 2: registerA File: U:/documents/ece385/lab6/Registers.sv Line: 24
-    Info (12023): Found entity 3: register16 File: U:/documents/ece385/lab6/Registers.sv Line: 46
-    Info (12023): Found entity 4: pcmux File: U:/documents/ece385/lab6/Registers.sv Line: 60
+    Info (12023): Found entity 1: registerB File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 4
+    Info (12023): Found entity 2: registerA File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 24
+    Info (12023): Found entity 3: register16 File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 46
+    Info (12023): Found entity 4: pcmux File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 60
 Info (12021): Found 1 design units, including 1 entities, in source file hexdriver.sv
-    Info (12023): Found entity 1: HexDriver File: U:/documents/ece385/lab6/HexDriver.sv Line: 1
+    Info (12023): Found entity 1: HexDriver File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/HexDriver.sv Line: 1
 Info (12021): Found 2 design units, including 2 entities, in source file tristate.sv
-    Info (12023): Found entity 1: tristate File: U:/documents/ece385/lab6/tristate.sv Line: 16
-    Info (12023): Found entity 2: tristate_gate File: U:/documents/ece385/lab6/tristate.sv Line: 42
+    Info (12023): Found entity 1: tristate File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/tristate.sv Line: 16
+    Info (12023): Found entity 2: tristate_gate File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/tristate.sv Line: 42
 Info (12021): Found 1 design units, including 1 entities, in source file test_memory.sv
-    Info (12023): Found entity 1: test_memory File: U:/documents/ece385/lab6/test_memory.sv Line: 22
+    Info (12023): Found entity 1: test_memory File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv Line: 22
 Info (12021): Found 1 design units, including 0 entities, in source file slc3_2.sv
-    Info (12022): Found design unit 1: SLC3_2 (SystemVerilog) File: U:/documents/ece385/lab6/SLC3_2.sv Line: 24
-Warning (10275): Verilog HDL Module Instantiation warning at slc3.sv(112): ignored dangling comma in List of Port Connections File: U:/documents/ece385/lab6/slc3.sv Line: 112
+    Info (12022): Found design unit 1: SLC3_2 (SystemVerilog) File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/SLC3_2.sv Line: 24
+Warning (10275): Verilog HDL Module Instantiation warning at slc3.sv(112): ignored dangling comma in List of Port Connections File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 112
 Info (12021): Found 1 design units, including 1 entities, in source file slc3.sv
-    Info (12023): Found entity 1: slc3 File: U:/documents/ece385/lab6/slc3.sv Line: 19
+    Info (12023): Found entity 1: slc3 File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 19
 Info (12021): Found 1 design units, including 1 entities, in source file memory_contents.sv
-    Info (12023): Found entity 1: memory_parser File: U:/documents/ece385/lab6/memory_contents.sv Line: 16
+    Info (12023): Found entity 1: memory_parser File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/memory_contents.sv Line: 16
 Info (12021): Found 1 design units, including 1 entities, in source file mem2io.sv
-    Info (12023): Found entity 1: Mem2IO File: U:/documents/ece385/lab6/Mem2IO.sv Line: 16
+    Info (12023): Found entity 1: Mem2IO File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Mem2IO.sv Line: 16
 Info (12021): Found 1 design units, including 1 entities, in source file lab6_toplevel.sv
-    Info (12023): Found entity 1: lab6_toplevel File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
+    Info (12023): Found entity 1: lab6_toplevel File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
 Info (12021): Found 1 design units, including 1 entities, in source file isdu.sv
-    Info (12023): Found entity 1: ISDU File: U:/documents/ece385/lab6/ISDU.sv Line: 19
+    Info (12023): Found entity 1: ISDU File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/ISDU.sv Line: 19
 Info (12021): Found 1 design units, including 1 entities, in source file datapath.sv
-    Info (12023): Found entity 1: datapath File: U:/documents/ece385/lab6/datapath.sv Line: 1
-Warning (10236): Verilog HDL Implicit Net warning at slc3.sv(106): created implicit net for "PCMux_Out" File: U:/documents/ece385/lab6/slc3.sv Line: 106
+    Info (12023): Found entity 1: datapath File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/datapath.sv Line: 1
+Warning (10236): Verilog HDL Implicit Net warning at slc3.sv(106): created implicit net for "PCMux_Out" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 106
 Info (12127): Elaborating entity "lab6_toplevel" for the top level hierarchy
-Info (12128): Elaborating entity "slc3" for hierarchy "slc3:my_slc" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 18
-Warning (10036): Verilog HDL or VHDL warning at slc3.sv(42): object "MIO_EN" assigned a value but never read File: U:/documents/ece385/lab6/slc3.sv Line: 42
-Warning (10030): Net "BEN" at slc3.sv(37) has no driver or initial value, using a default initial value '0' File: U:/documents/ece385/lab6/slc3.sv Line: 37
-Warning (10034): Output port "LED" at slc3.sv(22) has no driver File: U:/documents/ece385/lab6/slc3.sv Line: 22
-Info (12128): Elaborating entity "HexDriver" for hierarchy "slc3:my_slc|HexDriver:hex_driver3" File: U:/documents/ece385/lab6/slc3.sv Line: 58
-Info (12128): Elaborating entity "datapath" for hierarchy "slc3:my_slc|datapath:d0" File: U:/documents/ece385/lab6/slc3.sv Line: 83
-Info (10264): Verilog HDL Case Statement information at datapath.sv(16): all case item expressions in this case statement are onehot File: U:/documents/ece385/lab6/datapath.sv Line: 16
-Info (12128): Elaborating entity "Mem2IO" for hierarchy "slc3:my_slc|Mem2IO:memory_subsystem" File: U:/documents/ece385/lab6/slc3.sv Line: 91
-Info (12128): Elaborating entity "tristate" for hierarchy "slc3:my_slc|tristate:tr0" File: U:/documents/ece385/lab6/slc3.sv Line: 96
-Info (12128): Elaborating entity "ISDU" for hierarchy "slc3:my_slc|ISDU:state_controller" File: U:/documents/ece385/lab6/slc3.sv Line: 103
-Info (12128): Elaborating entity "register16" for hierarchy "slc3:my_slc|register16:pc_register" File: U:/documents/ece385/lab6/slc3.sv Line: 108
-Info (12128): Elaborating entity "tristate_gate" for hierarchy "slc3:my_slc|tristate_gate:pc_tristate" File: U:/documents/ece385/lab6/slc3.sv Line: 112
-Info (12128): Elaborating entity "pcmux" for hierarchy "slc3:my_slc|pcmux:pc_mux" File: U:/documents/ece385/lab6/slc3.sv Line: 116
-Warning (10272): Verilog HDL Case Statement warning at Registers.sv(71): case item expression covers a value already covered by a previous case item File: U:/documents/ece385/lab6/Registers.sv Line: 71
-Warning (10958): SystemVerilog warning at Registers.sv(67): unique or priority keyword makes case statement complete File: U:/documents/ece385/lab6/Registers.sv Line: 67
-Warning (10829): SystemVerilog warning at Registers.sv(67): unique case statement has overlapping case items File: U:/documents/ece385/lab6/Registers.sv Line: 67
-Info (12128): Elaborating entity "test_memory" for hierarchy "test_memory:my_test_memory" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 22
-Warning (10036): Verilog HDL or VHDL warning at test_memory.sv(42): object "actual_address" assigned a value but never read File: U:/documents/ece385/lab6/test_memory.sv Line: 42
-Info (12128): Elaborating entity "memory_parser" for hierarchy "test_memory:my_test_memory|memory_parser:parser" File: U:/documents/ece385/lab6/test_memory.sv Line: 48
+Info (12128): Elaborating entity "slc3" for hierarchy "slc3:my_slc" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 18
+Warning (10036): Verilog HDL or VHDL warning at slc3.sv(42): object "MIO_EN" assigned a value but never read File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 42
+Warning (10030): Net "BEN" at slc3.sv(37) has no driver or initial value, using a default initial value '0' File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 37
+Warning (10034): Output port "LED" at slc3.sv(22) has no driver File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 22
+Info (12128): Elaborating entity "HexDriver" for hierarchy "slc3:my_slc|HexDriver:hex_driver3" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 58
+Info (12128): Elaborating entity "datapath" for hierarchy "slc3:my_slc|datapath:d0" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 83
+Info (10264): Verilog HDL Case Statement information at datapath.sv(16): all case item expressions in this case statement are onehot File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/datapath.sv Line: 16
+Info (12128): Elaborating entity "Mem2IO" for hierarchy "slc3:my_slc|Mem2IO:memory_subsystem" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 91
+Info (12128): Elaborating entity "tristate" for hierarchy "slc3:my_slc|tristate:tr0" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 96
+Info (12128): Elaborating entity "ISDU" for hierarchy "slc3:my_slc|ISDU:state_controller" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 103
+Info (12128): Elaborating entity "register16" for hierarchy "slc3:my_slc|register16:pc_register" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 108
+Info (12128): Elaborating entity "tristate_gate" for hierarchy "slc3:my_slc|tristate_gate:pc_tristate" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 112
+Info (12128): Elaborating entity "pcmux" for hierarchy "slc3:my_slc|pcmux:pc_mux" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 116
+Warning (10272): Verilog HDL Case Statement warning at Registers.sv(71): case item expression covers a value already covered by a previous case item File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 71
+Warning (10958): SystemVerilog warning at Registers.sv(67): unique or priority keyword makes case statement complete File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 67
+Warning (10829): SystemVerilog warning at Registers.sv(67): unique case statement has overlapping case items File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 67
+Info (12128): Elaborating entity "test_memory" for hierarchy "test_memory:my_test_memory" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 22
+Warning (10036): Verilog HDL or VHDL warning at test_memory.sv(42): object "actual_address" assigned a value but never read File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv Line: 42
+Info (12128): Elaborating entity "memory_parser" for hierarchy "test_memory:my_test_memory|memory_parser:parser" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv Line: 48
+Warning (12158): Entity "memory_parser" contains only dangling pins File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv Line: 48
 Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LED[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[6]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[7]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[8]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[9]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[10]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[11]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "HEX0[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[6]" is stuck at VCC File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[6]" is stuck at VCC File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[6]" is stuck at VCC File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[6]" is stuck at VCC File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[6]" is stuck at VCC File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[6]" is stuck at VCC File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[6]" is stuck at VCC File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[6]" is stuck at VCC File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "CE" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 14
-    Warning (13410): Pin "UB" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 14
-    Warning (13410): Pin "LB" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 14
-    Warning (13410): Pin "WE" is stuck at VCC File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 14
-    Warning (13410): Pin "ADDR[0]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[1]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[2]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[3]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[4]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[5]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[6]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[7]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[8]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[9]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[10]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[11]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[12]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[13]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[14]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[15]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[16]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[17]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[18]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[19]" is stuck at GND File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "LED[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[6]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[7]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[8]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[9]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[10]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "LED[11]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
+    Warning (13410): Pin "HEX0[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX0[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX0[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX0[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX0[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX0[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX0[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX1[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX1[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX1[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX1[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX1[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX1[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX1[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX2[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX2[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX2[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX2[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX2[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX2[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX2[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX3[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX3[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX3[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX3[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX3[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX3[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX3[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX4[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX4[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX4[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX4[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX4[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX4[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX4[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX5[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX5[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX5[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX5[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX5[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX5[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX5[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX6[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX6[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX6[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX6[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX6[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX6[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX6[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX7[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX7[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX7[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX7[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX7[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX7[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "HEX7[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
+    Warning (13410): Pin "CE" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 14
+    Warning (13410): Pin "UB" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 14
+    Warning (13410): Pin "LB" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 14
+    Warning (13410): Pin "WE" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 14
+    Warning (13410): Pin "ADDR[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[6]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[7]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[8]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[9]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[10]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[11]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[12]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[13]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[14]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[15]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[16]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[17]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[18]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[19]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 5 registers lost all their fanouts during netlist optimizations.
-Info (144001): Generated suppressed messages file U:/documents/ece385/lab6/output_files/lab6.map.smsg
+Info (144001): Generated suppressed messages file C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/output_files/lab6.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 16 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "S[0]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[1]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[2]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[3]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[4]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[5]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[6]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[7]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[8]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[9]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[10]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[11]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[12]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[13]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[14]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[15]" File: U:/documents/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[0]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[1]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[2]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[3]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[4]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[5]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[6]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[7]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[8]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[9]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[10]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[11]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[12]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[13]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[14]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Warning (15610): No output dependent on input pin "S[15]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
 Info (21057): Implemented 138 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 20 input pins
     Info (21059): Implemented 93 output pins
     Info (21060): Implemented 16 bidirectional pins
     Info (21061): Implemented 9 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 121 warnings
-    Info: Peak virtual memory: 4778 megabytes
-    Info: Processing ended: Mon Feb 24 15:49:54 2020
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:23
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 122 warnings
+    Info: Peak virtual memory: 4748 megabytes
+    Info: Processing ended: Wed Feb 26 15:27:31 2020
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:30
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in U:/documents/ece385/lab6/output_files/lab6.map.smsg.
+The suppressed messages can be found in C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/output_files/lab6.map.smsg.
 
 
