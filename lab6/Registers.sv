@@ -82,8 +82,8 @@ module mdrmux (input logic select,
 				  
 	always_comb begin
 		unique case (select)
-			1'b0 : Data_out = Data_to_CPU;
-			1'b1 : Data_out = Bus_data;
+			1'b0 : Data_out = Bus_data;
+			1'b1 : Data_out = Data_to_CPU;
 		endcase
 	end
 				

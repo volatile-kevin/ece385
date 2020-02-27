@@ -113,24 +113,20 @@ module ISDU (   input logic         Clk,
 				end                       
 			S_18 : 
 				begin
-				$display("state 18 hit");			
 				Next_state = S_33_1;
 				end
 			// Any states involving SRAM require more than one clock cycles.
 			// The exact number will be discussed in lecture.
 			S_33_1 : 
 				begin
-				$display("state 33_1 hit");
 				Next_state = S_33_2;
 				end
 			S_33_2 : 
 				begin
-				$display("state 33_2 hit");
 				Next_state = S_35;
 				end
 			S_35 : 
 				begin
-				$display("state 35 hit");
 				Next_state = PauseIR1;
 				end
 			// PauseIR1 and PauseIR2 are only for Week 1 such that TAs can see 
@@ -169,20 +165,26 @@ module ISDU (   input logic         Clk,
 			Halted: ;
 			S_18 : 
 				begin 
+					$display("state 18 hit");			
 					GatePC = 1'b1;
 					LD_MAR = 1'b1;
 					PCMUX = 2'b00;
 					LD_PC = 1'b1;
 				end
 			S_33_1 : 
-				Mem_OE = 1'b0;
+				begin
+					$display("state 33_1 hit");
+					Mem_OE = 1'b0;
+				end
 			S_33_2 : 
 				begin 
+					$display("state 33_2 hit");
 					Mem_OE = 1'b0;
 					LD_MDR = 1'b1;
 				end
 			S_35 : 
 				begin 
+					$display("state 35 hit");
 					GateMDR = 1'b1;
 					LD_IR = 1'b1;
 				end

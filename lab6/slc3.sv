@@ -24,7 +24,7 @@ module slc3(
     output logic CE, UB, LB, OE, WE,
     output logic [19:0] ADDR,
     output logic [15:0] busData,
-    output logic [15:0] PC,
+    output logic [15:0] PC, MDR, IR, // These need to be local, not outputs
     inout wire [15:0] Data //tristate buffers need to be of type wire
 );
 
@@ -44,12 +44,12 @@ logic DRMUX, SR1MUX, SR2MUX, ADDR1MUX;
 logic MIO_EN; //mio energy
 
 logic [15:0] MDR_In;
-logic [15:0] MAR, MDR, IR, ALU; //created fake ALU for now
+logic [15:0] MAR, ALU; //created fake ALU for now
 logic [15:0] Data_from_SRAM, Data_to_SRAM;
 // logic [15:0] busData;
 logic [15:0] plusData, pcOff;
 
-logic [15:0] MDR_mux_out;
+logic [15:0] MDR_mux_out, PC_mux_out;
 
 assign pcOff = 16'h0000;
 assign ALU = 16'h0000;
@@ -84,7 +84,7 @@ assign MIO_EN = ~OE;
 
 // You need to make your own datapath module and connect everything to the datapath
 // Be careful about whether Reset is active high or low
-//datapath d0 (.Reset(Reset_ah), .data1(PC), .data1_select(GatePC),.data2(MDR), .data2_select(GateMDR),.data3(ALU), .data3_select(GateALU),.data4(MAR), .data4_select(GateMARMUX), .data_out(busData));
+// datapath d0 (.Reset(Reset_ah), .data1(PC), .data1_select(GatePC),.data2(MDR), .data2_select(GateMDR),.data3(ALU), .data3_select(GateALU),.data4(MAR), .data4_select(GateMARMUX), .data_out(busData));
 
 // Our SRAM and I/O controller
 Mem2IO memory_subsystem(
@@ -112,7 +112,8 @@ register16 pc_register(
 );
 
 pcmux pc_mux(
-	.select(PCMUX), .Bus_data(busData),  .PC_offset_data(pcOff), .Plus_data(plusData)
+	.select(PCMUX), .Bus_data(busData),  .PC_offset_data(pcOff), .Plus_data(plusData),
+    .Data_out(PC_mux_out)
 );
 
 pc_increment pcplusone(
