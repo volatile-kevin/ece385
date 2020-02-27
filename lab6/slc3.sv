@@ -107,7 +107,7 @@ ISDU state_controller(
 );
 
 register16 pc_register(
-	 .Clk(Clk), .Reset(Reset_ah), .Data_In(PCMux_Out), .Load_Enable(LD_PC),
+	 .Clk(Clk), .Reset(Reset_ah), .Data_In(PC_mux_out), .Load_Enable(LD_PC),
 	 .Data_Out(PC)
 );
 
