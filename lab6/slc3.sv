@@ -24,7 +24,7 @@ module slc3(
     output logic CE, UB, LB, OE, WE,
     output logic [19:0] ADDR,
     output logic [15:0] busData,
-    output logic [15:0] PC, MDR, IR, // These need to be local, not outputs
+    output logic [15:0] PC, MDR, IR, // These eventually need to be local, not outputs
     inout wire [15:0] Data //tristate buffers need to be of type wire
 );
 

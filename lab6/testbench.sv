@@ -40,7 +40,10 @@ initial begin: TEST_VECTORS
 //Run = 1 -> state 18
 //#2 Run = 1;
 
-#20;
+#10;
+
+#20 Continue = 0;
+#2 Continue = 1;
 
 
 
