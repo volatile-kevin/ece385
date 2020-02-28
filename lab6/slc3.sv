@@ -24,7 +24,7 @@ module slc3(
     output logic CE, UB, LB, OE, WE,
     output logic [19:0] ADDR,
     output logic [15:0] busData,
-    output logic [15:0] PC, MDR, IR, // These eventually need to be local, not outputs
+ logic [15:0] PC, MDR, IR, // These eventually need to be local, not outputs
     inout wire [15:0] Data //tristate buffers need to be of type wire
 );
 
@@ -44,14 +44,22 @@ logic DRMUX, SR1MUX, SR2MUX, ADDR1MUX;
 logic MIO_EN; //mio energy
 
 logic [15:0] MDR_In;
-logic [15:0] MAR, ALU; //created fake ALU for now
+logic [15:0] MAR, PC, MDR, IR; 
 logic [15:0] Data_from_SRAM, Data_to_SRAM;
-// logic [15:0] busData;
-logic [15:0] plusData, pcOff;
 
+
+
+
+// MODIFIED:
+logic [15:0] plus_data, pc_off; // plus_data = PC+1, pc_off = PC+offset
+logic [15:0] ALU; //created fake ALU for now (6.1)
 logic [15:0] MDR_mux_out, PC_mux_out;
 
-assign pcOff = 16'h0000;
+
+
+
+
+assign pc_off = 16'h0000;
 assign ALU = 16'h0000;
 
 
@@ -108,60 +116,64 @@ ISDU state_controller(
 );
 
 
+//*****************************************************************************************//
+// MODIFIED
+//*****************************************************************************************//
 
 // registers
 register16 pc_register(
-	 .Clk(Clk), .Reset(Reset_ah), .Data_In(PC_mux_out), .Load_Enable(LD_PC),
-	 .Data_Out(PC)
+	 .Clk(Clk), .Reset(Reset_ah), .data_in(PC_mux_out), .Load_Enable(LD_PC),
+	 .data_out(PC)
 );
 
 register16 mdr_register(
-	 .Clk(Clk), .Reset(Reset_ah), .Data_In(MDR_mux_out), .Load_Enable(LD_MDR),
-	 .Data_Out(MDR)
+	 .Clk(Clk), .Reset(Reset_ah), .data_in(MDR_mux_out), .Load_Enable(LD_MDR),
+	 .data_out(MDR)
 );
 
 register16 mar_register(
-	 .Clk(Clk), .Reset(Reset_ah), .Data_In(busData), .Load_Enable(LD_MAR),
-	 .Data_Out(MAR)
+	 .Clk(Clk), .Reset(Reset_ah), .data_in(busData), .Load_Enable(LD_MAR),
+	 .data_out(MAR)
 );
 
 register16 ir_register(
-	 .Clk(Clk), .Reset(Reset_ah), .Data_In(busData), .Load_Enable(LD_IR),
-	 .Data_Out(IR)
+	 .Clk(Clk), .Reset(Reset_ah), .data_in(busData), .Load_Enable(LD_IR),
+	 .data_out(IR)
 );
 
 
 // register muxes
-pcmux pc_mux(
-	.select(PCMUX), .Bus_data(busData),  .PC_offset_data(pcOff), .Plus_data(plusData),
-    .Data_out(PC_mux_out)
+muxFour pc_mux(
+	.select(PCMUX), ..data_in_3(busData),  ..data_in_2(pc_off), .data_in_1(plus_data),
+    .data_out(PC_mux_out)
 );
 
-mdrmux mdr_mux(
-    .select(MIO_EN), .Bus_data(busData), .Data_to_CPU(MDR_In), .Data_out(MDR_mux_out)
+muxTwo mdr_mux(
+    .select(MIO_EN), .data_in_1(busData), .data_in_2(MDR_In), 
+    .data_out(MDR_mux_out)
 );
 
 
 // tristate buffers
 tristate_gate #(.N(16)) pc_tristate(
-		.Clk(Clk), .tristate_output_enable(GatePC), .Data_in(PC), .Data_out(busData)
+		.Clk(Clk), .tristate_output_enable(GatePC), .data_in(PC), .data_out(busData)
 );
 
 tristate_gate #(.N(16)) marmux_tristate(
-		.Clk(Clk), .tristate_output_enable(GateMARMUX), .Data_in(pcOff), .Data_out(busData)
+		.Clk(Clk), .tristate_output_enable(GateMARMUX), .data_in(pc_off), .data_out(busData)
 );
 
 tristate_gate #(.N(16)) mdr_tristate(
-		.Clk(Clk), .tristate_output_enable(GateMDR), .Data_in(MDR), .Data_out(busData)
+		.Clk(Clk), .tristate_output_enable(GateMDR), .data_in(MDR), .data_out(busData)
 );
 
 tristate_gate #(.N(16)) alu_tristate(
-		.Clk(Clk), .tristate_output_enable(GateALU), .Data_in(ALU), .Data_out(busData)
+		.Clk(Clk), .tristate_output_enable(GateALU), .data_in(ALU), .data_out(busData)
 );
 
 // misc
 pc_increment pcplusone(
-    .in(PC), .out(plusData)
+    .in(PC), .out(plus_data)
 );
 
 endmodule

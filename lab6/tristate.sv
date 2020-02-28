@@ -42,8 +42,8 @@ endmodule
 module tristate_gate #(N = 16) (
 	input logic Clk,
 	input logic tristate_output_enable, //enable output to bus
-	input logic [N-1:0]Data_in, //data from register
-	output logic [N-1:0]Data_out //data to bus
+	input logic [N-1:0]data_in, //data from register
+	output logic [N-1:0]data_outs //data to bus
 );
 
 assign Data_out = tristate_output_enable ? Data_in : {N{1'bz}};
