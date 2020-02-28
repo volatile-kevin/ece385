@@ -55,11 +55,12 @@ logic [15:0] MDR_mux_out, PC_mux_out;
 logic [15:0] bus_data;
 
 
-
+logic [15:0] SR1, SR2;
+logic [15:0] SR2MUX_out;
+logic [15:0] IR_SEXT;
 
 
 assign pc_off = 16'h0000;
-assign ALU = 16'h0000;
 
 
 // Signals being displayed on hex display
@@ -88,6 +89,7 @@ HexDriver hex_driver4 (PC[3:0], HEX4);
 // input into MDR)
 assign ADDR = { 4'b00, MAR }; //Note, our external SRAM chip is 1Mx16, but address space is only 64Kx16
 assign MIO_EN = ~OE;
+
 
 // You need to make your own datapath module and connect everything to the datapath
 // Be careful about whether Reset is active high or low
@@ -118,6 +120,26 @@ ISDU state_controller(
 //*****************************************************************************************//
 // MODIFIED
 //*****************************************************************************************//
+
+// register unit
+registerUnit regFile(
+    .Clk(Clk), .Reset(Reset_ah), .LD_REG(LD_REG), .DR_select(DRMUX), .SR1_select(SR1MUX), .SR2(IR[2:0]), .bus_data(bus_data), .IR(IR),
+    .SR1_out(SR1), .SR2_out(SR2)
+);
+
+sext_16 sext16(
+    .in(IR[4:0]), .out(IR_SEXT)
+);
+
+mux2_16 sr2_mux(
+    .select(SR2MUX), .data_in_1(SR2), .data_in_2(IR_SEXT), 
+    .data_out(SR2MUX_out)    
+);
+
+alu alu_bruh (
+    .select(ALUK), .A(SR1), .B(SR2MUX_out),
+    .data_out(ALU)
+);
 
 // registers
 register16 pc_register(
