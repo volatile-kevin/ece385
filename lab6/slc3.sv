@@ -60,8 +60,6 @@ logic [15:0] SR2MUX_out;
 logic [15:0] IR_SEXT;
 
 
-assign pc_off = 16'h0000;
-
 
 // Signals being displayed on hex display
 logic [3:0][3:0] hex_4;
@@ -126,8 +124,8 @@ registerUnit regFile(
     .Clk(Clk), .Reset(Reset_ah), .LD_REG(LD_REG), .DR_select(DRMUX), .SR1_select(SR1MUX), .SR2(IR[2:0]), .bus_data(bus_data), .IR(IR),
     .SR1_out(SR1), .SR2_out(SR2)
 );
-
-sext_16 sext16(
+// sext(IR[4:0])
+sext_5_16 sext516(
     .in(IR[4:0]), .out(IR_SEXT)
 );
 
@@ -135,11 +133,25 @@ mux2_16 sr2_mux(
     .select(SR2MUX), .data_in_1(SR2), .data_in_2(IR_SEXT), 
     .data_out(SR2MUX_out)    
 );
-
+// ALU, bruh
 alu alu_bruh (
     .select(ALUK), .A(SR1), .B(SR2MUX_out),
     .data_out(ALU)
 );
+
+
+// address calculation unit
+addr_unit addr_bruh(
+    .IR(IR), .SR1(SR1), .PC(PC), .ADDR2MUX_select(), .ADDR1MUX(ADDR2MUX), 
+    .addr_out(pc_off) 
+);
+
+// NZP for branch enable
+nzp nzp_bruh(
+    .Clk(Clk), .Reset(Reset), .bus_data(bus_data), .IR(IR[11:9]), .LD_CC(LD_CC), .LD_BEN(LD_BEN),
+    .BEN(BEN)
+);
+
 
 // registers
 register16 pc_register(

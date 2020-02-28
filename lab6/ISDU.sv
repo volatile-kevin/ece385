@@ -302,9 +302,16 @@ module ISDU (   input logic         Clk,
 				end
 			S_09 : // DR <- NOT(SR), set CC
 				begin
+					ALUK = 2'b10;
+					GateALU = 1'b1;
+					SR1MUX = 1'b0;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
 				end
 			S_06 : // MAR <- B + off6
 				begin
+					// SR1MUX = 1'b0;				
+					// LD_MAR = 1'b1;
 				end
 				S_25 : // MDR <- M[MAR]
 					begin
