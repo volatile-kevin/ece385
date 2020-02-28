@@ -23,7 +23,6 @@ module slc3(
     output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, HEX6, HEX7,
     output logic CE, UB, LB, OE, WE,
     output logic [19:0] ADDR,
-    output logic [15:0] busData,
     inout wire [15:0] Data //tristate buffers need to be of type wire
 );
 
@@ -53,6 +52,7 @@ logic [15:0] Data_from_SRAM, Data_to_SRAM;
 logic [15:0] plus_data, pc_off; // plus_data = PC+1, pc_off = PC+offset
 logic [15:0] ALU; //created fake ALU for now (6.1)
 logic [15:0] MDR_mux_out, PC_mux_out;
+logic [15:0] bus_data;
 
 
 
@@ -91,7 +91,7 @@ assign MIO_EN = ~OE;
 
 // You need to make your own datapath module and connect everything to the datapath
 // Be careful about whether Reset is active high or low
-// datapath d0 (.Reset(Reset_ah), .data1(PC), .data1_select(GatePC),.data2(MDR), .data2_select(GateMDR),.data3(ALU), .data3_select(GateALU),.data4(MAR), .data4_select(GateMARMUX), .data_out(busData));
+// datapath d0 (.Reset(Reset_ah), .data1(PC), .data1_select(GatePC),.data2(MDR), .data2_select(GateMDR),.data3(ALU), .data3_select(GateALU),.data4(MAR), .data4_select(GateMARMUX), .data_out(bus_data));
 
 // Our SRAM and I/O controller
 Mem2IO memory_subsystem(
@@ -131,43 +131,43 @@ register16 mdr_register(
 );
 
 register16 mar_register(
-	 .Clk(Clk), .Reset(Reset_ah), .data_in(busData), .Load_Enable(LD_MAR),
+	 .Clk(Clk), .Reset(Reset_ah), .data_in(bus_data), .Load_Enable(LD_MAR),
 	 .data_out(MAR)
 );
 
 register16 ir_register(
-	 .Clk(Clk), .Reset(Reset_ah), .data_in(busData), .Load_Enable(LD_IR),
+	 .Clk(Clk), .Reset(Reset_ah), .data_in(bus_data), .Load_Enable(LD_IR),
 	 .data_out(IR)
 );
 
 
 // register muxes
 muxFour pc_mux(
-	.select(PCMUX), ..data_in_3(busData),  ..data_in_2(pc_off), .data_in_1(plus_data),
+	.select(PCMUX), ..data_in_3(bus_data),  ..data_in_2(pc_off), .data_in_1(plus_data),
     .data_out(PC_mux_out)
 );
 
 muxTwo mdr_mux(
-    .select(MIO_EN), .data_in_1(busData), .data_in_2(MDR_In), 
+    .select(MIO_EN), .data_in_1(bus_data), .data_in_2(MDR_In), 
     .data_out(MDR_mux_out)
 );
 
 
 // tristate buffers
 tristate_gate #(.N(16)) pc_tristate(
-		.Clk(Clk), .tristate_output_enable(GatePC), .data_in(PC), .data_out(busData)
+		.Clk(Clk), .tristate_output_enable(GatePC), .data_in(PC), .data_out(bus_data)
 );
 
 tristate_gate #(.N(16)) marmux_tristate(
-		.Clk(Clk), .tristate_output_enable(GateMARMUX), .data_in(pc_off), .data_out(busData)
+		.Clk(Clk), .tristate_output_enable(GateMARMUX), .data_in(pc_off), .data_out(bus_data)
 );
 
 tristate_gate #(.N(16)) mdr_tristate(
-		.Clk(Clk), .tristate_output_enable(GateMDR), .data_in(MDR), .data_out(busData)
+		.Clk(Clk), .tristate_output_enable(GateMDR), .data_in(MDR), .data_out(bus_data)
 );
 
 tristate_gate #(.N(16)) alu_tristate(
-		.Clk(Clk), .tristate_output_enable(GateALU), .data_in(ALU), .data_out(busData)
+		.Clk(Clk), .tristate_output_enable(GateALU), .data_in(ALU), .data_out(bus_data)
 );
 
 // misc
