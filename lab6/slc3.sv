@@ -99,6 +99,7 @@ tristate #(.N(16)) tr0(
     .Clk(Clk), .tristate_output_enable(~WE), .Data_write(Data_to_SRAM), .Data_read(Data_from_SRAM), .Data(Data)
 );
 
+
 // State machine and control signals
 ISDU state_controller(
     .*, .Reset(Reset_ah), .Run(Run_ah), .Continue(Continue_ah),
@@ -106,18 +107,12 @@ ISDU state_controller(
     .Mem_CE(CE), .Mem_UB(UB), .Mem_LB(LB), .Mem_OE(OE), .Mem_WE(WE)
 );
 
+
+
+// registers
 register16 pc_register(
 	 .Clk(Clk), .Reset(Reset_ah), .Data_In(PC_mux_out), .Load_Enable(LD_PC),
 	 .Data_Out(PC)
-);
-
-pcmux pc_mux(
-	.select(PCMUX), .Bus_data(busData),  .PC_offset_data(pcOff), .Plus_data(plusData),
-    .Data_out(PC_mux_out)
-);
-
-pc_increment pcplusone(
-    .in(PC), .out(plusData)
 );
 
 register16 mdr_register(
@@ -135,10 +130,19 @@ register16 ir_register(
 	 .Data_Out(IR)
 );
 
+
+// register muxes
+pcmux pc_mux(
+	.select(PCMUX), .Bus_data(busData),  .PC_offset_data(pcOff), .Plus_data(plusData),
+    .Data_out(PC_mux_out)
+);
+
 mdrmux mdr_mux(
     .select(MIO_EN), .Bus_data(busData), .Data_to_CPU(MDR_In), .Data_out(MDR_mux_out)
 );
 
+
+// tristate buffers
 tristate_gate #(.N(16)) pc_tristate(
 		.Clk(Clk), .tristate_output_enable(GatePC), .Data_in(PC), .Data_out(busData)
 );
@@ -153,6 +157,11 @@ tristate_gate #(.N(16)) mdr_tristate(
 
 tristate_gate #(.N(16)) alu_tristate(
 		.Clk(Clk), .tristate_output_enable(GateALU), .Data_in(ALU), .Data_out(busData)
+);
+
+// misc
+pc_increment pcplusone(
+    .in(PC), .out(plusData)
 );
 
 endmodule
