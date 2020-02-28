@@ -1,6 +1,6 @@
 module registerUnit(
-                    input logic Clk, Reset, LDREG,
-                    input logic DR, SR1,
+                    input logic Clk, Reset, LD_REG,
+                    input logic DR_select, SR1_select,
                     input logic [2:0] SR2,
                     input logic [15:0] bus_data,                     input logic [15:0] bus_data, 
                     input logic [15:0] IR, 
@@ -47,13 +47,87 @@ always_comb
                 SR2_out = r7;   
             end
     end
+
+always_comb
+    begin
+        case(SR1_mux_out)
+        3b'000 : 
+            begin
+                SR1_out = r0;
+            end
+        3b'001 : 
+            begin
+                SR1_out = r1; 
+            end
+        3b'010 : 
+            begin
+                SR1_out = r2;    
+            end
+        3b'011 : 
+            begin
+                SR1_out = r3; 
+            end
+        3b'100 : 
+            begin
+                SR1_out = r4;   
+            end
+        3b'101 : 
+            begin
+                SR1_out = r5;   
+            end
+        3b'110 : 
+            begin
+                SR1_out = r6;       
+            end
+        3b'111 : 
+            begin
+                SR1_out = r7;   
+            end
+    end
+
+always_comb
+    begin
+        case(DR)
+        3b'000 : 
+            begin
+                ld_r0 = LD_REG;
+            end
+        3b'001 : 
+            begin
+                ld_r1 = LD_REG;
+            end
+        3b'010 : 
+            begin
+                ld_r2 = LD_REG;
+            end
+        3b'011 : 
+            begin
+                ld_r3 = LD_REG;
+            end
+        3b'100 : 
+            begin
+                ld_r4 = LD_REG;
+            end
+        3b'101 : 
+            begin
+                ld_r5 = LD_REG;
+            end
+        3b'110 : 
+            begin
+                ld_r6 = LD_REG;
+            end
+        3b'111 : 
+            begin
+                ld_r7 = LD_REG;
+            end
+    end
 mux2_3 DR_mux(
-    .select(DR), .data_in_1(3'b111), .data_in_2(IR[11:9]), 
+    .select(DR_select), .data_in_1(IR[11:9]), .data_in_2(3'b111), 
     .data_out(SR1_mux_out)
 );
 
 mux2_3 SR1_mux(
-    .select(SR1), .data_in_1(IR[11:9]), .data_in_2(IR[8:6]), 
+    .select(SR1_select), .data_in_1(IR[8:6]), .data_in_2(IR[11:9]), 
     .data_out(DR_mux_out)
 );
 

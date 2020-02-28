@@ -288,7 +288,8 @@ module ISDU (   input logic         Clk,
 					ALUK = 2'b00;
 					GateALU = 1'b1;
 					LD_REG = 1'b1;
-					// incomplete...
+					DRMUX = 1'b0;
+					SR1MUX = 1'b1;
 				end
 			S_05 : // DR <- SR1 & OP2, set CC
 				begin
