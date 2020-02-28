@@ -142,12 +142,12 @@ register16 ir_register(
 
 
 // register muxes
-muxFour pc_mux(
+mux4_16 pc_mux(
 	.select(PCMUX), ..data_in_3(bus_data),  ..data_in_2(pc_off), .data_in_1(plus_data),
     .data_out(PC_mux_out)
 );
 
-muxTwo mdr_mux(
+mux2_16 mdr_mux(
     .select(MIO_EN), .data_in_1(bus_data), .data_in_2(MDR_In), 
     .data_out(MDR_mux_out)
 );

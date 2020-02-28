@@ -13,7 +13,7 @@ module register16 (input logic Clk, Reset, Load_Enable,
 		
 endmodule
 
-module muxFour (input logic[1:0] select,
+module mux4_16 (input logic[1:0] select,
 				  input logic[15:0] data_in_3,
 				  input logic[15:0] data_in_2,
 				  input logic[15:0] data_in_1,
@@ -31,7 +31,7 @@ module muxFour (input logic[1:0] select,
 				
 endmodule		
 
-module muxTwo (input logic select,
+module mux2_16 (input logic select,
 				  input logic[15:0] data_in_1,
 				  input logic[15:0] data_in_2,
 				  output logic[15:0] data_out);
@@ -45,3 +45,17 @@ module muxTwo (input logic select,
 				
 endmodule			 
 						 
+
+module mux2_3 (input logic select,
+				  input logic[2:0] data_in_1,
+				  input logic[2:0] data_in_2,
+				  output logic[2:0] data_out);
+				  
+	always_comb begin
+		unique case (select)
+			1'b0 : data_out = data_in_1;
+			1'b1 : data_out = data_in_2;
+		endcase
+	end
+				
+endmodule
