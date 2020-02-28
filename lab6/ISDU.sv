@@ -76,7 +76,7 @@ module ISDU (   input logic         Clk,
 						S_00,
 						S_22,
 						S_12,
-						S_4,
+						S_04,
 						S_21 // (6.2)
 					}   State, Next_state;   // Internal state logic
 		
@@ -320,8 +320,8 @@ module ISDU (   input logic         Clk,
 			S_00 : // [BEN]
 				begin 
 					// branch enable
-					if (BEN)
-					else
+//					if (BEN)
+//					else
 				end
 				S_22 : // PC <- PC + off9
 						begin

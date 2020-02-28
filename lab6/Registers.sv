@@ -8,7 +8,7 @@ module register16 (input logic Clk, Reset, Load_Enable,
 			if (Reset)
 				data_out <= 16'h0;
 			else if (Load_Enable)
-				data_out <= Data_In;
+				data_out <= data_in;
 		end
 		
 endmodule

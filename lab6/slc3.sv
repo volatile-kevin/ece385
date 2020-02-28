@@ -143,7 +143,7 @@ register16 ir_register(
 
 // register muxes
 mux4_16 pc_mux(
-	.select(PCMUX), ..data_in_3(bus_data),  ..data_in_2(pc_off), .data_in_1(plus_data),
+	.select(PCMUX), .data_in_3(bus_data),  .data_in_2(pc_off), .data_in_1(plus_data),
     .data_out(PC_mux_out)
 );
 
