@@ -45,6 +45,11 @@ initial begin: TEST_VECTORS
 #20 Continue = 0;
 #2 Continue = 1;
 
+#20 Continue = 0;
+#2 Continue = 1;
+
+#20 Continue = 0;
+#2 Continue = 1;
 
 
 end
