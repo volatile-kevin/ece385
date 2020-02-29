@@ -27,7 +27,7 @@ mux4_16 addr2mux(
 );
 
 mux2_16 addr1mux(
-    .select(), .data_in_1(SR1), .data_in_2(PC), 
+    .select(ADDR1MUX), .data_in_1(SR1), .data_in_2(PC), 
     .data_out(ADDR1_OUT)
 );
 

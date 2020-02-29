@@ -142,7 +142,7 @@ alu alu_bruh (
 
 // address calculation unit
 addr_unit addr_bruh(
-    .IR(IR), .SR1(SR1), .PC(PC), .ADDR2MUX_select(), .ADDR1MUX(ADDR2MUX), 
+    .IR(IR), .SR1(SR1), .PC(PC), .ADDR2MUX_select(ADDR2MUX), .ADDR1MUX(ADDR1MUX), 
     .addr_out(pc_off) 
 );
 

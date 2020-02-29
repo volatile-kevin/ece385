@@ -10,7 +10,7 @@ module nzp(
 logic n, z, p;
 logic [15:0] temp;
 logic [2:0] nzp_compare;
-logic ben_compare;
+logic ben;
 
 assign temp = bus_data | 4'b0000;
 
@@ -36,19 +36,19 @@ assign temp = bus_data | 4'b0000;
 
     always_comb
 			begin
-			BEN = 1'b0;
+			ben = 1'b0;
         
             if((IR[2] & nzp_compare[2]))
                 begin
-                    BEN = 1'b1;
+                    ben = 1'b1;
                 end
             else if((IR[1] & nzp_compare[1]))
                 begin
-                    BEN = 1'b1;
+                    ben = 1'b1;
                 end
             else if((IR[0] & nzp_compare[0]))
                 begin
-                    BEN = 1'b1;
+                    ben = 1'b1;
                 end
         end
 
@@ -58,8 +58,8 @@ register3 nzp_reg(
 );
 
 register1 ben_reg(
-    .Clk(Clk), .Reset(Reset), .Load_Enable(LD_BEN), .data_in(ben_compare), 
-    .data_out(ben)
+    .Clk(Clk), .Reset(Reset), .Load_Enable(LD_BEN), .data_in(ben), 
+    .data_out(BEN)
 );
 
 

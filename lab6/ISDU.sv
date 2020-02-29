@@ -143,7 +143,7 @@ module ISDU (   input logic         Clk,
 				end
 			S_35 : 
 				begin
-					Next_state = PauseIR1;
+					Next_state = S_32;
 				end
 			// PauseIR1 and PauseIR2 are only for Week 1 such that TAs can see 
 			// the values in IR.

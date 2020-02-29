@@ -13,7 +13,12 @@ logic [19:0] ADDR;
 wire [15:0] Data;
 
 
+logic [15:0] pc, bus;
+
 lab6_toplevel LC3(.*);
+
+assign pc = LC3.my_slc.PC;
+assign bus = LC3.my_slc.bus_data;
 
 // Toggle the clock
 // #1 means wait for a delay of 1 timeunit
@@ -33,22 +38,14 @@ initial begin: TEST_VECTORS
 
 
 #2 Reset = 1;
-#2 Reset = 0;
+
 
 #2 Run = 0;
 //Run = 1 -> state 18
-#2 Run = 1;
+//#2 Run = 1;
 
 #10;
 
-#20 Continue = 0;
-#2 Continue = 1;
-
-#20 Continue = 0;
-#2 Continue = 1;
-
-#20 Continue = 0;
-#2 Continue = 1;
 
 
 end
