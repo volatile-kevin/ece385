@@ -1,5 +1,5 @@
 module nzp(
-    input logic Clk Reset,
+    input logic Clk, Reset,
     input logic [15:0] bus_data,
     input logic [2:0] IR,
     input logic LD_CC,
@@ -16,6 +16,9 @@ assign temp = bus_data | 4'b0000;
 
     always_comb
         begin
+				n = 1'b0;
+				z = 1'b0;
+				p = 1'b0;
             if(bus_data[15])
                 begin
                     n = 1'b1;
@@ -29,11 +32,12 @@ assign temp = bus_data | 4'b0000;
                     p = 1'b1;
                 end
         end
-    end
+    
 
     always_comb
-        BEN = 1'b0;
-        begin
+			begin
+			BEN = 1'b0;
+        
             if((IR[2] & nzp_compare[2]))
                 begin
                     BEN = 1'b1;
@@ -42,7 +46,7 @@ assign temp = bus_data | 4'b0000;
                 begin
                     BEN = 1'b1;
                 end
-            else if((IR[0]) & nzp_compare[0]))
+            else if((IR[0] & nzp_compare[0]))
                 begin
                     BEN = 1'b1;
                 end
@@ -55,7 +59,7 @@ register3 nzp_reg(
 
 register1 ben_reg(
     .Clk(Clk), .Reset(Reset), .Load_Enable(LD_BEN), .data_in(ben_compare), 
-    .data_out(ben))
+    .data_out(ben)
 );
 
 
