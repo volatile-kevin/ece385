@@ -68,11 +68,13 @@ module ISDU (   input logic         Clk,
 						S_05,
 						S_09,
 						S_06,
-						S_25,
+						S_25_1,
+						S_25_2,
 						S_27,
 						S_07,
 						S_23,
-						S_16,
+						S_16_1,
+						S_16_2,
 						S_00,
 						S_22,
 						S_12,
@@ -196,9 +198,14 @@ module ISDU (   input logic         Clk,
 				end
 			S_06 : // MAR <- B + off6
 				begin
-					Next_state = S_25;
+					Next_state = S_25_1;
 				end
-				S_25 : // MDR <- M[MAR]
+				S_25_1 : // MDR <- M[MAR]
+					begin
+						// if(R)
+						Next_state = S_25_2;
+					end
+				S_25_2 : // MDR <- M[MAR]
 					begin
 						// if(R)
 						Next_state = S_27;
@@ -213,9 +220,14 @@ module ISDU (   input logic         Clk,
 				end
 				S_23 : // MDR <- SR
 					begin
-						Next_state = S_16;
+						Next_state = S_16_1;
 					end
-				S_16 : // M[MAR] <- MDR
+				S_16_1 : // M[MAR] <- MDR
+					begin
+						// if(R)
+						Next_state = S_16_2;
+					end
+				S_16_2 : // M[MAR] <- MDR
 					begin
 						// if(R)
 						Next_state = S_18;
@@ -290,6 +302,7 @@ module ISDU (   input logic         Clk,
 					LD_REG = 1'b1;
 					DRMUX = 1'b0;
 					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
 				end
 			S_05 : // DR <- SR1 & OP2, set CC
 				begin
@@ -299,6 +312,7 @@ module ISDU (   input logic         Clk,
 					LD_REG = 1'b1;
 					DRMUX = 1'b0;
 					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
 				end
 			S_09 : // DR <- NOT(SR), set CC
 				begin
@@ -307,49 +321,91 @@ module ISDU (   input logic         Clk,
 					SR1MUX = 1'b0;
 					LD_REG = 1'b1;
 					DRMUX = 1'b0;
+					LD_CC = 1'b1;
 				end
 			S_06 : // MAR <- B + off6
 				begin
-					// SR1MUX = 1'b0;				
-					// LD_MAR = 1'b1;
+					SR1MUX = 1'b0;
+					ADDR2MUX = 2'b10;
+					ADDR1MUX = 1'b0;				
+					LD_MAR = 1'b1;
+					GateMARMUX = 1'b1;
 				end
-				S_25 : // MDR <- M[MAR]
+				S_25_1 : // MDR <- M[MAR]
 					begin
-						// if(R)
+						Mem_OE = 1'b0;
+					end
+				S_25_2 : // MDR <- M[MAR]
+					begin
+						Mem_OE = 1'b0;
+						LD_MDR = 1'b1;
 					end
 				S_27 : // DR <- MDR, set CC
 					begin
+						DRMUX = 1'b0;
+						GateMDR = 1'b1;
+						LD_CC = 1'b1;
+						LD_REG = 1'b1;
 					end
 			S_07 : // MAR <- B + off6
 				begin
+					SR1MUX = 1'b0;
+					ADDR2MUX = 2'b10;
+					ADDR1MUX = 1'b0;				
+					LD_MAR = 1'b1;
+					GateMARMUX = 1'b1;
 				end
 				S_23 : // MDR <- SR
 					begin
+						LD_MDR = 1'b1;
+						SR1MUX = 1'b1;
+						GateALU = 1'b1;
+						ALUK = 2'b11;
 					end
-				S_16 : // M[MAR] <- MDR
+				S_16_1 : // M[MAR] <- MDR
 					begin
 						// if(R)
+						Mem_WE = 1'b0;
+					end
+				S_16_2 : // M[MAR] <- MDR
+					begin
+						// if(R)
+						Mem_WE = 1'b0;
 					end
 			S_00 : // [BEN]
 				begin 
-					// branch enable
-//					if (BEN)
-//					else
+					// Do nothing??
+					// if (BEN)
+					// else
 				end
 				S_22 : // PC <- PC + off9
 						begin
+							LD_PC = 1'b1;
+							PCMUX = 2'b01;
+							ADDR1MUX = 1'b1;
+							ADDR2MUX = 2'b01;
 						end
 			S_12 : // PC <- BaseR
 					begin
+						LD_PC = 1'b1;
+						SR1MUX = 1'b0;
+						ADDR1MUX = 1'b1;
+						ADDR2MUX = 2'b11;
+						PCMUX = 2'b01;
 					end
 			S_04: // R7 <- PC
 					begin
+						GatePC = 1'b1;
+						DRMUX = 1'b1;
+						LD_REG = 1'b1;
 					end
 				S_21 : // PC <- PC + off11
 					begin
+						LD_PC = 1'b1;
+						PCMUX = 2'b01;
+						ADDR1MUX = 1'b1;
+						ADDR2MUX = 2'b00;
 					end
-			// You need to finish the rest of states.....
-
 			default : ;
 		endcase
 	end 
