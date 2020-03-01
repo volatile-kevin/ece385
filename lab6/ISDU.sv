@@ -160,6 +160,7 @@ module ISDU (   input logic         Clk,
 				else 
 					Next_state = S_18;
 			S_32 : 
+				$display("state %s hit", State);
 				case (Opcode)
 					4'b0001 : // ADD
 						Next_state = S_01;
@@ -265,7 +266,7 @@ module ISDU (   input logic         Clk,
 			Halted: ;
 			S_18 : 
 				begin 
-					$display("state 18 hit");			
+					$display("state %s hit", State);
 					GatePC = 1'b1;
 					LD_MAR = 1'b1;
 					PCMUX = 2'b00;
@@ -273,18 +274,18 @@ module ISDU (   input logic         Clk,
 				end
 			S_33_1 : 
 				begin
-					$display("state 33_1 hit");
+					$display("state %s hit", State);
 					Mem_OE = 1'b0;
 				end
 			S_33_2 : 
 				begin 
-					$display("state 33_2 hit");
+					$display("state %s hit", State);
 					Mem_OE = 1'b0;
 					LD_MDR = 1'b1;
 				end
 			S_35 : 
 				begin 
-					$display("state 35 hit");
+					$display("state %s hit", State);
 					GateMDR = 1'b1;
 					LD_IR = 1'b1;
 				end
@@ -296,6 +297,7 @@ module ISDU (   input logic         Clk,
 // TODO: LOGIC
 			S_01 : // DR <- SR1 + OP2, set CC
 				begin 
+					$display("state %s hit", State);
 					SR2MUX = IR_5;
 					ALUK = 2'b00;
 					GateALU = 1'b1;
@@ -306,6 +308,7 @@ module ISDU (   input logic         Clk,
 				end
 			S_05 : // DR <- SR1 & OP2, set CC
 				begin
+					$display("state %s hit", State);
 					SR2MUX = IR_5;
 					ALUK = 2'b01;
 					GateALU = 1'b1;
@@ -316,6 +319,7 @@ module ISDU (   input logic         Clk,
 				end
 			S_09 : // DR <- NOT(SR), set CC
 				begin
+					$display("state %s hit", State);
 					ALUK = 2'b10;
 					GateALU = 1'b1;
 					SR1MUX = 1'b0;
@@ -325,6 +329,7 @@ module ISDU (   input logic         Clk,
 				end
 			S_06 : // MAR <- B + off6
 				begin
+					$display("state %s hit", State);
 					SR1MUX = 1'b0;
 					ADDR2MUX = 2'b10;
 					ADDR1MUX = 1'b0;				
@@ -333,15 +338,18 @@ module ISDU (   input logic         Clk,
 				end
 				S_25_1 : // MDR <- M[MAR]
 					begin
+						$display("state %s hit", State);
 						Mem_OE = 1'b0;
 					end
 				S_25_2 : // MDR <- M[MAR]
 					begin
+						$display("state %s hit", State);
 						Mem_OE = 1'b0;
 						LD_MDR = 1'b1;
 					end
 				S_27 : // DR <- MDR, set CC
 					begin
+						$display("state %s hit", State);
 						DRMUX = 1'b0;
 						GateMDR = 1'b1;
 						LD_CC = 1'b1;
@@ -349,6 +357,7 @@ module ISDU (   input logic         Clk,
 					end
 			S_07 : // MAR <- B + off6
 				begin
+					$display("state %s hit", State);
 					SR1MUX = 1'b0;
 					ADDR2MUX = 2'b10;
 					ADDR1MUX = 1'b0;				
@@ -357,6 +366,7 @@ module ISDU (   input logic         Clk,
 				end
 				S_23 : // MDR <- SR
 					begin
+						$display("state %s hit", State);
 						LD_MDR = 1'b1;
 						SR1MUX = 1'b1;
 						GateALU = 1'b1;
@@ -364,22 +374,26 @@ module ISDU (   input logic         Clk,
 					end
 				S_16_1 : // M[MAR] <- MDR
 					begin
+						$display("state %s hit", State);
 						// if(R)
 						Mem_WE = 1'b0;
 					end
 				S_16_2 : // M[MAR] <- MDR
 					begin
+						$display("state %s hit", State);
 						// if(R)
 						Mem_WE = 1'b0;
 					end
 			S_00 : // [BEN]
 				begin 
+					$display("state %s hit", State);
 					// Do nothing??
 					// if (BEN)
 					// else
 				end
 				S_22 : // PC <- PC + off9
 						begin
+							$display("state %s hit", State);	
 							LD_PC = 1'b1;
 							PCMUX = 2'b01;
 							ADDR1MUX = 1'b1;
@@ -387,6 +401,7 @@ module ISDU (   input logic         Clk,
 						end
 			S_12 : // PC <- BaseR
 					begin
+						$display("state %s hit", State);
 						LD_PC = 1'b1;
 						SR1MUX = 1'b0;
 						ADDR1MUX = 1'b1;
@@ -395,12 +410,14 @@ module ISDU (   input logic         Clk,
 					end
 			S_04: // R7 <- PC
 					begin
+						$display("state %s hit", State);
 						GatePC = 1'b1;
 						DRMUX = 1'b1;
 						LD_REG = 1'b1;
 					end
 				S_21 : // PC <- PC + off11
 					begin
+						$display("state %s hit", State);
 						LD_PC = 1'b1;
 						PCMUX = 2'b01;
 						ADDR1MUX = 1'b1;
