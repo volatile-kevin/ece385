@@ -160,7 +160,6 @@ module ISDU (   input logic         Clk,
 				else 
 					Next_state = S_18;
 			S_32 : 
-				$display("state %s hit", State);
 				case (Opcode)
 					4'b0001 : // ADD
 						Next_state = S_01;
