@@ -403,7 +403,7 @@ module ISDU (   input logic         Clk,
 						$display("state %s hit", State);
 						LD_PC = 1'b1;
 						SR1MUX = 1'b0;
-						ADDR1MUX = 1'b1;
+						ADDR1MUX = 1'b0;
 						ADDR2MUX = 2'b11;
 						PCMUX = 2'b01;
 					end

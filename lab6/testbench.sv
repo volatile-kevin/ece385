@@ -31,7 +31,7 @@ initial begin: CLOCK_INITIALIZATION
 end 
 
 initial begin: TEST_VECTORS
-    S = 16'h0000;
+    S = 16'h0003;
     Reset = 0;
     Run = 1;
     Continue = 1;
