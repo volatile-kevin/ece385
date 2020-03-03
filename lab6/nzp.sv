@@ -12,7 +12,6 @@ logic [15:0] temp;
 logic [2:0] nzp_compare;
 logic ben;
 
-assign temp = bus_data | 4'b0000;
 
     always_comb
         begin
@@ -23,7 +22,7 @@ assign temp = bus_data | 4'b0000;
                 begin
                     n = 1'b1;
                 end
-            else if (!temp)
+            else if (!bus_data)
                 begin
                     z = 1'b1;
                 end
