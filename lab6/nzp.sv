@@ -22,7 +22,7 @@ logic ben;
                 begin
                     n = 1'b1;
                 end
-            else if (!bus_data)
+            else  if (!bus_data)
                 begin
                     z = 1'b1;
                 end
@@ -72,7 +72,7 @@ module register3 (input logic Clk, Reset, Load_Enable,
 		always_ff @ (posedge Clk)
 		begin
 			if (Reset)
-				data_out <= 3'h0;
+				data_out <= 3'b000;
 			else if (Load_Enable)
 				data_out <= data_in;
 		end
@@ -86,7 +86,7 @@ module register1 (input logic Clk, Reset, Load_Enable,
 		always_ff @ (posedge Clk)
 		begin
 			if (Reset)
-				data_out <= 1'h0;
+				data_out <= 1'b0;
 			else if (Load_Enable)
 				data_out <= data_in;
 		end

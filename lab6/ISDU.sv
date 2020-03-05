@@ -270,6 +270,9 @@ module ISDU (   input logic         Clk,
 					LD_MAR = 1'b1;
 					PCMUX = 2'b00;
 					LD_PC = 1'b1;
+					
+					Mem_OE = 1'b1;
+					Mem_WE = 1'b1;
 				end
 			S_33_1 : 
 				begin
@@ -287,8 +290,11 @@ module ISDU (   input logic         Clk,
 					$display("state %s hit", State);
 					GateMDR = 1'b1;
 					LD_IR = 1'b1;
+					Mem_OE = 1'b1;
+
 				end
-			PauseIR1: ;
+			PauseIR1: 
+						LD_LED = 1'b1;
 			PauseIR2: ;
 			S_32 : 
 				LD_BEN = 1'b1;

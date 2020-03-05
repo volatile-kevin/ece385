@@ -52,7 +52,7 @@ logic [15:0] Data_from_SRAM, Data_to_SRAM;
 logic [15:0] plus_data, pc_off; // plus_data = PC+1, pc_off = PC+offset
 logic [15:0] ALU; //created fake ALU for now (6.1)
 logic [15:0] MDR_mux_out, PC_mux_out;
-logic [15:0] bus_data;
+wire [15:0] bus_data;
 
 
 logic [15:0] SR1, SR2;
@@ -148,7 +148,7 @@ addr_unit addr_bruh(
 
 // NZP for branch enable
 nzp nzp_bruh(
-    .Clk(Clk), .Reset(Reset), .bus_data(bus_data), .IR(IR[11:9]), .LD_CC(LD_CC), .LD_BEN(LD_BEN),
+    .Clk(Clk), .Reset(Reset_ah), .bus_data(bus_data), .IR(IR[11:9]), .LD_CC(LD_CC), .LD_BEN(LD_BEN),
     .BEN(BEN)
 );
 

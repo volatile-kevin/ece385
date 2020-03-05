@@ -1,3 +1,5 @@
+
+//.IR(IR), .SR1(SR1), .PC(PC), .ADDR2MUX_select(ADDR2MUX), .ADDR1MUX(ADDR1MUX),
 module addr_unit(
     input logic [15:0] IR,
     input logic [15:0] SR1,
