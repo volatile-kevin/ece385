@@ -54,7 +54,7 @@ package SLC3_2;
    parameter nzp = 3'b111;
  
    parameter outHEX = -1;
-   parameter inSW = 3;
+   parameter inSW = -1;
   
    // opCLR(DR): same as DR <- DR AND DR
    function [15:0] opCLR ( input [2:0] DR );

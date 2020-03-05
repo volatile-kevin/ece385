@@ -139,12 +139,12 @@ always_comb
     
 mux2_3 DR_mux(
     .select(DR_select), .data_in_1(IR[11:9]), .data_in_2(3'b111), 
-    .data_out(SR1_mux_out)
+    .data_out(DR_mux_out)
 );
 
 mux2_3 SR1_mux(
     .select(SR1_select), .data_in_1(IR[8:6]), .data_in_2(IR[11:9]), 
-    .data_out(DR_mux_out)
+    .data_out(SR1_mux_out)
 );
 
 register16 R0(

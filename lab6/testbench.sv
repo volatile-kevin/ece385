@@ -31,7 +31,7 @@ initial begin: CLOCK_INITIALIZATION
 end 
 
 initial begin: TEST_VECTORS
-    S = 16'h0003;
+    S = 16'h000B;
     Reset = 0;
     Run = 1;
     Continue = 1;
@@ -46,7 +46,8 @@ initial begin: TEST_VECTORS
 
 #10;
 
-
+#58 Continue = 0;
+#2 Continue = 1;
 
 end
 endmodule
