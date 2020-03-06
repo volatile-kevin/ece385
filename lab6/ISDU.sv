@@ -295,6 +295,7 @@ module ISDU (   input logic         Clk,
 				end
 			PauseIR1: 
 						LD_LED = 1'b1;
+						
 			PauseIR2: ;
 			S_32 : 
 				LD_BEN = 1'b1;

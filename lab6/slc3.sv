@@ -59,8 +59,6 @@ logic [15:0] SR1, SR2;
 logic [15:0] SR2MUX_out;
 logic [15:0] IR_SEXT;
 
-
-
 // Signals being displayed on hex display
 logic [3:0][3:0] hex_4;
 
@@ -207,6 +205,11 @@ tristate_gate #(.N(16)) alu_tristate(
 // misc
 pc_increment pcplusone(
     .in(PC), .out(plus_data)
+);
+
+register12 ledreg(
+	.Clk(Clk), .Reset(Reset_ah), .ld_LED(LD_LED), .LEDin(IR[11:0]), 
+	.LEDout(LED)
 );
 
 endmodule

@@ -13,6 +13,18 @@ module register16 (input logic Clk, Reset, Load_Enable,
 		
 endmodule
 
+module register12 (input logic Clk, Reset, ld_LED,
+					    input logic [11:0] LEDin,
+						 output logic [11:0] LEDout);
+			always_ff @ (posedge Clk)
+			begin
+				if (Reset)
+					LEDout <= 1'h1;
+				else
+					LEDout <= LEDin;
+			end
+endmodule
+
 module mux4_16 (input logic[1:0] select,
 				  input logic[15:0] data_in_3,
 				  input logic[15:0] data_in_2,
