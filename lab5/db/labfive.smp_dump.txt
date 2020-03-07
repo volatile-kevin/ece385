@@ -1,0 +1,21 @@
+
+State Machine - |top_level|control:control_unit|state
+Name state.stop state.add7 state.add6 state.add5 state.add4 state.add3 state.add2 state.add1 state.add0 state.sh7 state.sh6 state.sh5 state.sh4 state.sh3 state.sh2 state.sh1 state.sh0 state.start 
+state.start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.sh0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.sh1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.sh2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.sh3 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.sh4 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.sh5 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.sh6 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.sh7 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.add0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.add1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.add2 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.add3 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state.add4 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.add5 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.add6 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.add7 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.stop 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 

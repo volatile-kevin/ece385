@@ -1,0 +1,45 @@
+//Lychewow and Joe
+//8-bit multiplier circuit
+//function(char a, char b){
+//		return a * b;
+//}
+
+module top_level (input logic Clk,
+											 Reset,
+											 Run,
+											 ClearA_LoadB,
+							 input logic [7:0] S,
+							 output logic [6:0] AhexU,
+							 output logic [6:0] AhexL,
+							 output logic [6:0] BhexU,
+							 output logic [6:0] BhexL,
+							 output logic [7:0] Aval,
+							 output logic [7:0] Bval,
+							 output logic X);
+							 
+	logic button1_status;
+	
+	
+//	register regA(
+//						.Clk,
+//						.Reset,
+//						.Shift_In(X),
+//						.Load(0),
+//						.Shift_En(0),
+//						.Data_In(0),
+//						.Data_Out(0),
+//						.Shift_Out(0)
+//	);
+	
+//	register regB(
+//						.Clk,
+//						.Reset,
+//						.Shift_In(),
+//						.Load(),
+//						.Shift_En(),
+//						.Data_In(),
+//						.Data_Out(),
+//						.Shift_Out()
+//	);
+							 
+endmodule
