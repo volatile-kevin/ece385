@@ -10,6 +10,7 @@ University of Illinois ECE Department
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 #include "aes.h"
 
@@ -20,44 +21,11 @@ volatile unsigned int * AES_PTR = (unsigned int *) 0x00000080;
 int run_mode = 0;
 
 
-void RotateWord(unsigned char * key, int i, unsigned char * result){
-	int index = 4*i;
+void RotateWord(unsigned char * key, int index, unsigned char * result){
 	result[0] = key[index + 1];
 	result[1] = key[index + 2];
 	result[2] = key[index + 3];
 	result[3] = key[index];
-}
-
-void KeyExpansion(unsigned char * keySchedule){
-	int i, j, k, l;
-	int rconCounter = 1;
-	for(i = 0; i < 11; i++){
-		for(j = 0; j < 4; j++){
-			for(k = 0; k < 4; k++){
-				unsigned char temp[4];
-				if(j % 4 == 0){
-					RotateWord(keySchedule, 4*i + 3+j, temp);
-					SubBytesButOnly4(temp);
-					if(k == 0){
-						keySchedule[4*(4*i + 3+j) + k+4] = temp[k] ^ keySchedule[4*(4*i + 3+j) + k-12] ^ (Rcon[rconCounter] >> 24);
-						rconCounter++;
-					}
-					else{
-						keySchedule[4*(4*i + 3+j) + k+4] = temp[k] ^ keySchedule[4*(4*i + 3+j) + k-12];
-					}
-				}
-				else{
-					if(k == 0){
-						for(l = 0; l < 4; l++){
-							temp[l] = keySchedule[4*(4*i + 3+j) + k + l];
-						}
-					}
-					keySchedule[4*(4*i + 3+j) + k+4] = temp[k] ^ keySchedule[4*(4*i + 3+j) + k-12];
-				}
-			}
-		}
-	}
-
 }
 
 void SubBytesButOnly4(unsigned char * msg){
@@ -69,6 +37,41 @@ void SubBytesButOnly4(unsigned char * msg){
 		msg[i] = aes_sbox[upper * 16 + lower];
 	}
 }
+
+void KeyExpansion(unsigned char * keySchedule){
+	int i, j, k, l;
+	int columnIndex;
+	int rconCounter = 1;
+	for(i = 0; i < 11; i++){
+		for(j = 0; j < 4; j++){
+			unsigned char temp[4];
+			columnIndex = 4*i + 3+j;
+			if(j == 0){
+				// if j % 4 is 0 then rotate and subbyte
+				RotateWord(keySchedule, columnIndex*4, temp);
+				SubBytesButOnly4(temp);				
+			}
+			else{
+				for(l = 0; l < 4; l++){
+					temp[l] = keySchedule[4*columnIndex + l];
+				}
+			}
+			for(k = 0; k < 4; k++){
+				// Rcon XOR has 24 LSB as 0, equivalent to adding 0 -> do nothing
+				if(k == 0 && j == 0){
+					keySchedule[4*columnIndex + k+4] = temp[k] ^ keySchedule[4*columnIndex + k-12] ^ (Rcon[rconCounter] >> 24);
+					rconCounter++;	
+				}
+				else{
+					keySchedule[4*columnIndex + k+4] = temp[k] ^ keySchedule[4*columnIndex + k-12];
+				}
+			}
+		}
+	}
+
+}
+
+
 
 void SubBytes(unsigned char * msg){
 	int i;
@@ -116,8 +119,32 @@ void ShiftRows(unsigned char * msg){
 	msg[15] = temp0;
 }
 
-void MixColumns(unsigned char * msg){
+unsigned char m2(unsigned char in){
+	if(in & 0x80){
+		in <<= 1;
+		return in ^ 0x1b;
+	}
+	else{
+		return in << 1;
+	}
+}
 
+unsigned char m3(unsigned char in){
+	return m2(in) ^ in;
+}
+
+void MixColumns(unsigned char * msg){
+	int i;
+	unsigned char t[16];
+	memcpy(t, msg, 16);
+
+
+	for(i = 0; i < 4; i++){
+		msg[4*i] = m2(t[4*i]) ^ m3(t[4*i + 1]) ^ t[4*i + 2] ^ t[4*i + 3];
+		msg[4*i + 1] = t[4*i] ^ m2(t[4*i + 1]) ^ m3(t[4*i + 2]) ^ t[4*i + 3];
+		msg[4*i + 2] = t[4*i] ^ t[4*i + 1] ^ m2(t[4*i + 2]) ^ m3(t[4*i + 3]);
+		msg[4*i + 3] = m3(t[4*i]) ^ t[4*i + 1] ^ t[4*i + 2] ^ m2(t[4*i + 3]);
+	}
 }
 
 
@@ -175,8 +202,9 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 	int i;
 	unsigned char keySched[176];
 	unsigned char message_in[16];
-
-	// strncpy((char *)message_in, (char *)msg_ascii, 32);
+	unsigned char tempKey[16];
+	// clean up the keySched array
+	memset(keySched, 0, 176);
 
 	for(i = 0; i < 16; i++){
 		message_in[i] = charsToHex(msg_ascii[2*i], msg_ascii[2*i+1]);
@@ -185,18 +213,22 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 
 	KeyExpansion(keySched);
 
-	AddRoundKey(message_in, key_ascii);
+
+	strncpy((char *)tempKey, (char *)&keySched, 16);
+	AddRoundKey(message_in, tempKey);
 	// fix indexing!
-	for(i = 0; i < 9; i++){
+	for(i = 1; i < 10; i++){
 		SubBytes(message_in);
 		ShiftRows(message_in);
 		MixColumns(message_in);
-		AddRoundKey(message_in, keySched[i]);
+		strncpy((char *)tempKey, (char *)&keySched[i*16], 16);
+		AddRoundKey(message_in, tempKey);
 	}
 
 	SubBytes(message_in);
 	ShiftRows(message_in);
-	AddRoundKey(message_in, keySched[9]);
+	strncpy((char *)tempKey, (char *)&keySched[160], 16);
+	AddRoundKey(message_in, tempKey);
 }
 
 /** decrypt
@@ -226,28 +258,8 @@ int main()
 	unsigned int msg_dec[4];
 
 
-	unsigned char mykey[176];
-	mykey[0] = 0x2b;
-	mykey[1] = 0x7e;
-	mykey[2] = 0x15;
-	mykey[3] = 0x16;
-	mykey[4] = 0x28;
-	mykey[5] = 0xae;
-	mykey[6] = 0xd2;
-	mykey[7] = 0xa6;
-	mykey[8] = 0xab;
-	mykey[9] = 0xf7;
-	mykey[10] = 0x15;
-	mykey[11] = 0x88;
-	mykey[12] = 0x09;
-	mykey[13] = 0xcf;
-	mykey[14] = 0x4f;
-	mykey[15] = 0x3c;
-	for(int i = 16; i < 176; i++){
-		mykey[i] = 0;
-	}
 
-	KeyExpansion(mykey);
+	// KeyExpansion(mykey);
 
 	printf("Select execution mode: 0 for testing, 1 for benchmarking: ");
 	scanf("%d", &run_mode);
