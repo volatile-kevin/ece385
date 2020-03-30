@@ -22,32 +22,37 @@ int run_mode = 0;
 
 void RotateWord(unsigned char * key, int i, unsigned char * result){
 	int index = 4*i;
-	result[0] = key[index + 3];
-	result[1] = key[index];
-	result[2] = key[index + 1];
-	result[3] = key[index + 2];
+	result[0] = key[index + 1];
+	result[1] = key[index + 2];
+	result[2] = key[index + 3];
+	result[3] = key[index];
 }
 
-void KeyExpansion(unsigned char * key, unsigned char * keySchedule){
-	int i, j, k;
+void KeyExpansion(unsigned char * keySchedule){
+	int i, j, k, l;
 	int rconCounter = 1;
 	for(i = 0; i < 11; i++){
 		for(j = 0; j < 4; j++){
-			unsigned char temp[4];
-			RotateWord(keySchedule, 4*i + 3+j, temp);
-			SubBytesButOnly4(temp);
 			for(k = 0; k < 4; k++){
-				if((j+1) % 4 == 0){
+				unsigned char temp[4];
+				if(j % 4 == 0){
+					RotateWord(keySchedule, 4*i + 3+j, temp);
+					SubBytesButOnly4(temp);
 					if(k == 0){
-						keySchedule[4*i + 3+j + k+4] = temp[k] ^ keySchedule[4*i + 3+j + k-12] ^ Rcon[rconCounter];
+						keySchedule[4*(4*i + 3+j) + k+4] = temp[k] ^ keySchedule[4*(4*i + 3+j) + k-12] ^ (Rcon[rconCounter] >> 24);
 						rconCounter++;
 					}
 					else{
-						keySchedule[4*i + 3+j + k+4] = temp[k] ^ keySchedule[4*i + 3+j + k-12];
+						keySchedule[4*(4*i + 3+j) + k+4] = temp[k] ^ keySchedule[4*(4*i + 3+j) + k-12];
 					}
 				}
 				else{
-					keySchedule[4*i + 3+j + k+4] = temp[k] ^ keySchedule[4*i + 3+j + k-12];
+					if(k == 0){
+						for(l = 0; l < 4; l++){
+							temp[l] = keySchedule[4*(4*i + 3+j) + k + l];
+						}
+					}
+					keySchedule[4*(4*i + 3+j) + k+4] = temp[k] ^ keySchedule[4*(4*i + 3+j) + k-12];
 				}
 			}
 		}
@@ -61,7 +66,7 @@ void SubBytesButOnly4(unsigned char * msg){
 	for(i = 0; i < 4; i++){
 		char upper = msg[i] >> 4;
 		char lower = msg[i] & 0x0F;
-		msg[i] = aes_sbox[upper * 0xF + lower];
+		msg[i] = aes_sbox[upper * 16 + lower];
 	}
 }
 
@@ -71,7 +76,7 @@ void SubBytes(unsigned char * msg){
 	for(i = 0; i < 16; i++){
 		char upper = msg[i] >> 4;
 		char lower = msg[i] & 0x0F;
-		msg[i] = aes_sbox[upper * 0xF + lower];
+		msg[i] = aes_sbox[upper * 16 + lower];
 	}
 }
 
@@ -178,7 +183,7 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 		keySched[i] = charsToHex(key_ascii[2*i], key_ascii[2*i+1]);
 	}
 
-	KeyExpansion(key_ascii, keySched);
+	KeyExpansion(keySched);
 
 	AddRoundKey(message_in, key_ascii);
 	// fix indexing!
@@ -219,6 +224,30 @@ int main()
 	unsigned int key[4];
 	unsigned int msg_enc[4];
 	unsigned int msg_dec[4];
+
+
+	unsigned char mykey[176];
+	mykey[0] = 0x2b;
+	mykey[1] = 0x7e;
+	mykey[2] = 0x15;
+	mykey[3] = 0x16;
+	mykey[4] = 0x28;
+	mykey[5] = 0xae;
+	mykey[6] = 0xd2;
+	mykey[7] = 0xa6;
+	mykey[8] = 0xab;
+	mykey[9] = 0xf7;
+	mykey[10] = 0x15;
+	mykey[11] = 0x88;
+	mykey[12] = 0x09;
+	mykey[13] = 0xcf;
+	mykey[14] = 0x4f;
+	mykey[15] = 0x3c;
+	for(int i = 16; i < 176; i++){
+		mykey[i] = 0;
+	}
+
+	KeyExpansion(mykey);
 
 	printf("Select execution mode: 0 for testing, 1 for benchmarking: ");
 	scanf("%d", &run_mode);
