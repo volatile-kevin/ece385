@@ -65,7 +65,7 @@ module avalon_aes_interface (
 				LE_DONE = 1'b0;
 				if (AVL_WRITE)
 					begin
-						case(AVL_ADDR)
+						case(AVL_ADDR && AVL_CS)
 							4'b0000:
 								LE_KEY0 = 1'b1;
 							4'b0001:
@@ -105,44 +105,45 @@ module avalon_aes_interface (
 			
 		always_comb
 			begin
-				EXPORT_DATA = 8'h00000000; 
-				if(AVL_READ)
+				AVL_READDATA = 8'h00000000;
+				if(AVL_READ && AVL_CS)
 					begin
 						case(AVL_ADDR)
 							4'b0000:
-								EXPORT_DATA = AES_KEY[31:0];
+								AVL_READDATA = AES_KEY[31:0];
 							4'b0001:
-								EXPORT_DATA = AES_KEY[63:32];
+								AVL_READDATA = AES_KEY[63:32];
 							4'b0010:
-								EXPORT_DATA = AES_KEY[95:64];
+								AVL_READDATA = AES_KEY[95:64];
 							4'b0011:
-								EXPORT_DATA = AES_KEY[127:0];
+								AVL_READDATA = AES_KEY[127:0];
 							4'b0100:
-								EXPORT_DATA = AES_MSG_EN[31:0];
+								AVL_READDATA = AES_MSG_EN[31:0];
 							4'b0101:
-								EXPORT_DATA = AES_MSG_EN[63:32];
+								AVL_READDATA = AES_MSG_EN[63:32];
 							4'b0110:
-								EXPORT_DATA = AES_MSG_EN[95:64];
+								AVL_READDATA = AES_MSG_EN[95:64];
 							4'b0111:
-								EXPORT_DATA = AES_MSG_EN[127:0];
+								AVL_READDATA = AES_MSG_EN[127:0];
 							4'b1000:
-								EXPORT_DATA = AES_MSG_DE[31:0];
+								AVL_READDATA = AES_MSG_DE[31:0];
 							4'b1001:
-								EXPORT_DATA = AES_MSG_DE[63:32];
+								AVL_READDATA = AES_MSG_DE[63:32];
 							4'b1010:
-								EXPORT_DATA = AES_MSG_DE[95:64];
+								AVL_READDATA = AES_MSG_DE[95:64];
 							4'b1011:
-								EXPORT_DATA = AES_MSG_DE[127:0];
+								AVL_READDATA = AES_MSG_DE[127:0];
 							//start and done
 							4'b1110:
-								EXPORT_DATA = dumb_start;
+								AVL_READDATA = dumb_start;
 							4'b1111:
-								EXPORT_DATA = dumb_done;
+								AVL_READDATA = dumb_done;
 							default:
-								EXPORT_DATA = 8'h00000000; 
+								AVL_READDATA = 8'h00000000;
 						endcase
 					end
 			end
+		assign EXPORT_DATA = {AES_MSG_EN[127:112], AES_MSG_EN[15:0]};
 		//AES_KEY
  		register32 AES_KEY0(
 		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY0), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 

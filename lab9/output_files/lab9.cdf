@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE115F29) Path("C:/Users/KevPy/Downloads/Lab9_Avalon_Provided_2.0/output_files/") File("lab9.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE115F29) Path("C:/Users/KevPy/Desktop/ece385Repo/lab9/output_files/") File("lab9.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
