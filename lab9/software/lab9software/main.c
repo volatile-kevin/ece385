@@ -95,10 +95,10 @@ void ShiftRows(unsigned char * msg){
 	char temp1 = msg[5];
 	char temp2 = msg[9];
 	char temp3 = msg[13];
-	msg[1] = temp3;
-	msg[5] = temp0;
-	msg[9] = temp1;
-	msg[13] = temp3;
+	msg[1] = temp1;
+	msg[5] = temp2;
+	msg[9] = temp3;
+	msg[13] = temp0;
 
 	temp0 = msg[2];
 	temp1 = msg[6];
@@ -113,10 +113,10 @@ void ShiftRows(unsigned char * msg){
 	temp1 = msg[7];
 	temp2 = msg[11];
 	temp3 = msg[15];
-	msg[3] = temp1;
-	msg[7] = temp2;
-	msg[11] = temp3;
-	msg[15] = temp0;
+	msg[3] = temp3;
+	msg[7] = temp0;
+	msg[11] = temp1;
+	msg[15] = temp2;
 }
 
 unsigned char m2(unsigned char in){
@@ -204,30 +204,65 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 	unsigned char message_in[16];
 	unsigned char tempKey[16];
 	// clean up the keySched array
-	memset(keySched, 0, 176);
+	// memset(keySched, 0, 176);
 
-	for(i = 0; i < 16; i++){
-		message_in[i] = charsToHex(msg_ascii[2*i], msg_ascii[2*i+1]);
-		keySched[i] = charsToHex(key_ascii[2*i], key_ascii[2*i+1]);
+	// for(i = 0; i < 16; i++){
+	// 	message_in[i] = charsToHex(msg_ascii[2*i], msg_ascii[2*i+1]);
+	// 	keySched[i] = charsToHex(key_ascii[2*i], key_ascii[2*i+1]);
+	// }
+	message_in[0] = 0x32;
+	message_in[1] = 0x43;
+	message_in[2] = 0xf6;
+	message_in[3] = 0xa8;
+	message_in[4] = 0x88;
+	message_in[5] = 0x5a;
+	message_in[6] = 0x30;
+	message_in[7] = 0x8d;
+	message_in[8] = 0x31;
+	message_in[9] = 0x31;
+	message_in[10] = 0x98;
+	message_in[11] = 0xa2;
+	message_in[12] = 0xe0;
+	message_in[13] = 0x37;
+	message_in[14] = 0x07;
+	message_in[15] = 0x34;
+
+	keySched[0] = 0x2b;
+	keySched[1] = 0x7e;
+	keySched[2] = 0x15;
+	keySched[3] = 0x16;
+	keySched[4] = 0x28;
+	keySched[5] = 0xae;
+	keySched[6] = 0xd2;
+	keySched[7] = 0xa6;
+	keySched[8] = 0xab;
+	keySched[9] = 0xf7;
+	keySched[10] = 0x15;
+	keySched[11] = 0x88;
+	keySched[12] = 0x09;
+	keySched[13] = 0xcf;
+	keySched[14] = 0x4f;
+	keySched[15] = 0x3c;
+	for(int i = 16; i < 176; i++){
+		keySched[i] = 0;
 	}
-
 	KeyExpansion(keySched);
 
 
-	strncpy((char *)tempKey, (char *)&keySched, 16);
+	memcpy((char *)tempKey, (char *)&keySched, 16);
 	AddRoundKey(message_in, tempKey);
 	// fix indexing!
 	for(i = 1; i < 10; i++){
 		SubBytes(message_in);
 		ShiftRows(message_in);
 		MixColumns(message_in);
-		strncpy((char *)tempKey, (char *)&keySched[i*16], 16);
+		memcpy((char *)tempKey, (char *)&keySched[i*16], 16);
 		AddRoundKey(message_in, tempKey);
 	}
 
 	SubBytes(message_in);
 	ShiftRows(message_in);
-	strncpy((char *)tempKey, (char *)&keySched[160], 16);
+	memcpy((char *)tempKey, (char *)&keySched[160], 16);
 	AddRoundKey(message_in, tempKey);
 }
 
@@ -258,8 +293,7 @@ int main()
 	unsigned int msg_dec[4];
 
 
-
-	// KeyExpansion(mykey);
+	encrypt(msg_ascii, key_ascii, msg_enc, msg_dec);
 
 	printf("Select execution mode: 0 for testing, 1 for benchmarking: ");
 	scanf("%d", &run_mode);
