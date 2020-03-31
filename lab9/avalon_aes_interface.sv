@@ -144,6 +144,94 @@ module avalon_aes_interface (
 					end
 			end
 		assign EXPORT_DATA = {AES_MSG_EN[127:112], AES_MSG_EN[15:0]};
+		
+		
+		
+//		 		register32 AES_KEY0(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY0), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_KEY[31:0])
+//		);
+//		
+//		register32 AES_KEY1(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY1), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_KEY[63:32])
+//		);
+//		
+//		register32 AES_KEY2(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY2), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_KEY[95:64])
+//		);
+//		
+//		register32 AES_KEY3(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY3), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_KEY[127:96])
+//		);
+//		
+//		//AES_MEG_EN
+//		register32 AES_MSG_EN0(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_EN0), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_MSG_EN[31:0])
+//		);
+//		
+//		register32 AES_MSG_EN1(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_EN1), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_MSG_EN[63:32])
+//		);
+//		
+//		register32 AES_MSG_EN2(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_EN2), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_MSG_EN[95:64])
+//		);
+//		
+//		register32 AES_MSG_EN3(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_EN3), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_MSG_EN[127:96])
+//		);
+//		
+//		//AES_MSG_DE
+//		register32 AES_MSG_DE0(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_DE0), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_MSG_DE[31:0])
+//		);
+//		
+//		register32 AES_MSG_DE1(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_DE1), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_MSG_DE[63:32])
+//		);
+//		
+//		register32 AES_MSG_DE2(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_DE2), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_MSG_DE[95:64])
+//		);
+//		
+//		register32 AES_MSG_DE3(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_DE3), .data_in(AVL_WRITEDATA), 
+//		.data_out(AES_MSG_DE[127:96])
+//		);
+//		
+//		
+//		//START & DONE
+//		register32 START(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_START), .data_in(AVL_WRITEDATA), 
+//		.data_out(dumb_start)
+//		);
+//		
+//		register32 DONE(
+//		.Clk(CLK), .Reset(RESET), .load_enable(LE_DONE), .data_in(AVL_WRITEDATA), 
+//		.data_out(dumb_done)
+//		);
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+		
+		
+		
+		
+		
 		//AES_KEY
  		register32 AES_KEY0(
 		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY0), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
@@ -243,7 +331,7 @@ module avalon_aes_interface (
 //		AES aesbruh(
 //		.CLK(CLK), .RESET(RESET), .AES_START(), .AES_DONE(), .AES_KEY(), .AES_ENC(), .AES_DEC(AES_MSG_DE[127:0])
 //		);
-//*********************************************************************************************************//
+////*********************************************************************************************************//
 
 endmodule
 

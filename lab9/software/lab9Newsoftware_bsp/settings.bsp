@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Mar 30, 2020 10:33:39 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1585625619823</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Mar 31, 2020 4:47:06 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1585691226688</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\KevPy\Desktop\ece385Repo\lab9\software\lab9Newsoftware_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\lab9_soc.sopcinfo</SopcDesignFile>
