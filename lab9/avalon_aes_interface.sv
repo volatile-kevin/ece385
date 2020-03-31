@@ -145,7 +145,7 @@ module avalon_aes_interface (
 			end
 		assign EXPORT_DATA = {AES_MSG_EN[127:112], AES_MSG_EN[15:0]};
 		
-		
+//		assign EXPORT_DATA = 32'b11111111111111111111111111111111;
 		
 //		 		register32 AES_KEY0(
 //		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY0), .data_in(AVL_WRITEDATA), 
