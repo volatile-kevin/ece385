@@ -38,30 +38,28 @@ void SubBytesButOnly4(unsigned char * msg){
 
 void KeyExpansion(unsigned char * keySchedule){
 	int i, j, k, l;
-	int columnIndex;
 	int rconCounter = 1;
-	for(i = 0; i < 11; i++){
+	for(i = 1; i < 11; i++){
 		for(j = 0; j < 4; j++){
 			unsigned char temp[4];
-			columnIndex = 4*i + 3+j;
 			if(j == 0){
 				// if j % 4 is 0 then rotate and subbyte
-				RotateWord(keySchedule, columnIndex*4, temp);
+				RotateWord(keySchedule, i*16 + 4*j - 4, temp);
 				SubBytesButOnly4(temp);
 			}
 			else{
 				for(l = 0; l < 4; l++){
-					temp[l] = keySchedule[4*columnIndex + l];
+					temp[l] = keySchedule[16*i + 4*j + l - 4];
 				}
 			}
 			for(k = 0; k < 4; k++){
 				// Rcon XOR has 24 LSB as 0, equivalent to adding 0 -> do nothing
 				if(k == 0 && j == 0){
-					keySchedule[4*columnIndex + k+4] = temp[k] ^ keySchedule[4*columnIndex + k-12] ^ (Rcon[rconCounter] >> 24);
+					keySchedule[16*i + 4*j + k] = temp[k] ^ keySchedule[16*i + 4*j + k-16] ^ (Rcon[rconCounter] >> 24);
 					rconCounter++;
 				}
 				else{
-					keySchedule[4*columnIndex + k+4] = temp[k] ^ keySchedule[4*columnIndex + k-12];
+					keySchedule[16*i + 4*j + k] = temp[k] ^ keySchedule[16*i + 4*j + k-16];
 				}
 			}
 		}
@@ -247,32 +245,45 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 	KeyExpansion(keySched);
 
 
-	memcpy((char *)tempKey, (char *)&keySched, 16);
-	AddRoundKey(message_in, tempKey);
+	// memcpy((char *)tempKey, (char *)&keySched, 16);
+	// AddRoundKey(message_in, tempKey);
+	AddRoundKey(message_in, keySched);
 	// fix indexing!
 	for(i = 1; i < 10; i++){
 		SubBytes(message_in);
 		ShiftRows(message_in);
 		MixColumns(message_in);
-		memcpy((char *)tempKey, (char *)&keySched[i*16], 16);
-		AddRoundKey(message_in, tempKey);
+		// memcpy((char *)tempKey, (char *)&keySched[i*16], 16);
+		// AddRoundKey(message_in, tempKey);
+		AddRoundKey(message_in, &keySched[i * 16]);
 	}
 
 	SubBytes(message_in);
 	ShiftRows(message_in);
-	memcpy((char *)tempKey, (char *)&keySched[160], 16);
-	AddRoundKey(message_in, tempKey);
-
+	// memcpy((char *)tempKey, (char *)&keySched[160], 16);
+	// AddRoundKey(message_in, tempKey);
+	AddRoundKey(message_in, &keySched[160]);
 	// memcpy(msg_enc, message_in, 16);
 	// memcpy(key, key_ascii, 16);
 	int h;
-	for(h = 0; h < 16; h++){
-		printf("%02x", message_in[h]);
-	}
+	// for(h = 0; h < 16; h++){
+	// 	printf("%02x", message_in[h]);
+	// }
+	// printf("\n");
+	// 	for(h = 0; h < 4; h++){
+	// 	printf("%08x", msg_enc[h]);
+	// }
+	// 	printf("\n");
+
 	for(h = 0; h < 4; h++){
 		msg_enc[h] = (message_in[4*h] << 24) | (message_in[4*h+1] << 16) | (message_in[4*h+2] << 8) | message_in[4*h+3];
 		key[h] = (keySched[4*h] << 24) | (keySched[4*h+1] << 16) | (keySched[4*h+2] << 8) | keySched[4*h+3];
 	}
+	// for(h = 0; h < 4; h++){
+	// 	printf("%08x", msg_enc[h]);
+	// }
+	// 	printf("\n");
+
 }
 
 /** decrypt
@@ -294,21 +305,23 @@ void decrypt(unsigned int * msg_enc, unsigned int * msg_dec, unsigned int * key)
 int main()
 {
 	// Input Message and Key as 32x 8-bit ASCII Characters ([33] is for NULL terminator)
-	 unsigned char msg_ascii[33];
-	 unsigned char key_ascii[33];
+	//  unsigned char msg_ascii[33];
+	//  unsigned char key_ascii[33];
 	// Key, Encrypted Message, and Decrypted Message in 4x 32-bit Format to facilitate Read/Write to Hardware
 	unsigned int key[4];
 	unsigned int msg_enc[4];
 	unsigned int msg_dec[4];
-
+	int it;
 	// AES_PTR[10] = 0xDEADBEEF;
 	// if(AES_PTR[10] != 0xDEADBEEF){
 	// 	printf("%x\n", AES_PTR[10]);
 	// }
-//	unsigned char msg_ascii[33] = {'3', '2', '4', '3', 'f', '6', 'a', '8', '8', '8', '5', 'a', '3', '0', '8', 'd', '3', '1', '3', '1', '9', '8', 'a', '2', 'e', '0', '3', '7', '0', '7', '3', '4', '\0'};
-//	unsigned char key_ascii[33] = {'2', 'b', '7', 'e', '1', '5', '1', '6', '2', '8', 'a', 'e', 'd', '2', 'a', '6', 'a', 'b', 'f', '7', '1', '5', '8', '8', '0', '9', 'c', 'f', '4', 'f', '3', 'c', '\0'};
-//	encrypt(msg_ascii, key_ascii, msg_enc, key);
-
+	unsigned char msg_ascii[33] = {'3', '2', '4', '3', 'f', '6', 'a', '8', '8', '8', '5', 'a', '3', '0', '8', 'd', '3', '1', '3', '1', '9', '8', 'a', '2', 'e', '0', '3', '7', '0', '7', '3', '4', '\0'};
+	unsigned char key_ascii[33] = {'2', 'b', '7', 'e', '1', '5', '1', '6', '2', '8', 'a', 'e', 'd', '2', 'a', '6', 'a', 'b', 'f', '7', '1', '5', '8', '8', '0', '9', 'c', 'f', '4', 'f', '3', 'c', '\0'};
+	encrypt(msg_ascii, key_ascii, msg_enc, key);
+			for(it = 0; it < 4; it++){
+				printf("%08x", msg_enc[it]);
+			}
 	printf("Select execution mode: 0 for testing, 1 for benchmarking: ");
 	scanf("%d", &run_mode);
 
