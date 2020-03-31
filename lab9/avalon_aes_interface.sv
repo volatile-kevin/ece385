@@ -63,9 +63,9 @@ module avalon_aes_interface (
 				LE_DE3 = 1'b0;
 				LE_START = 1'b0;
 				LE_DONE = 1'b0;
-				if (AVL_WRITE)
+				if (AVL_WRITE && AVL_CS)
 					begin
-						case(AVL_ADDR && AVL_CS)
+						case(AVL_ADDR)
 							4'b0000:
 								LE_KEY0 = 1'b1;
 							4'b0001:

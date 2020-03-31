@@ -264,6 +264,8 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 	ShiftRows(message_in);
 	memcpy((char *)tempKey, (char *)&keySched[160], 16);
 	AddRoundKey(message_in, tempKey);
+
+	
 }
 
 /** decrypt
@@ -292,7 +294,10 @@ int main()
 	unsigned int msg_enc[4];
 	unsigned int msg_dec[4];
 
-
+	AES_PTR[10] = 0xDEADBEEF;
+	if(AES_PTR[10] != 0xDEADBEEF){
+		printf("%x\n", AES_PTR[10]);
+	}
 	encrypt(msg_ascii, key_ascii, msg_enc, msg_dec);
 
 	printf("Select execution mode: 0 for testing, 1 for benchmarking: ");
