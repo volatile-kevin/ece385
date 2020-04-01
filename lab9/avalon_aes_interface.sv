@@ -116,7 +116,7 @@ module avalon_aes_interface (
 							4'b0010:
 								AVL_READDATA = AES_KEY[95:64];
 							4'b0011:
-								AVL_READDATA = AES_KEY[127:0];
+								AVL_READDATA = AES_KEY[127:96];
 							4'b0100:
 								AVL_READDATA = AES_MSG_EN[31:0];
 							4'b0101:
@@ -124,7 +124,7 @@ module avalon_aes_interface (
 							4'b0110:
 								AVL_READDATA = AES_MSG_EN[95:64];
 							4'b0111:
-								AVL_READDATA = AES_MSG_EN[127:0];
+								AVL_READDATA = AES_MSG_EN[127:96];
 							4'b1000:
 								AVL_READDATA = AES_MSG_DE[31:0];
 							4'b1001:
@@ -132,7 +132,7 @@ module avalon_aes_interface (
 							4'b1010:
 								AVL_READDATA = AES_MSG_DE[95:64];
 							4'b1011:
-								AVL_READDATA = AES_MSG_DE[127:0];
+								AVL_READDATA = AES_MSG_DE[127:96];
 							//start and done
 							4'b1110:
 								AVL_READDATA = dumb_start;
@@ -143,7 +143,7 @@ module avalon_aes_interface (
 						endcase
 					end
 			end
-		assign EXPORT_DATA = {AES_MSG_EN[127:112], AES_MSG_EN[15:0]};
+		assign EXPORT_DATA = {AES_KEY[31:16], AES_KEY[111:96]};
 		
 //		assign EXPORT_DATA = 32'b11111111111111111111111111111111;
 		

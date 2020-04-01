@@ -277,7 +277,9 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 
 	for(h = 0; h < 4; h++){
 		msg_enc[h] = (message_in[4*h] << 24) | (message_in[4*h+1] << 16) | (message_in[4*h+2] << 8) | message_in[4*h+3];
+		AES_PTR[4+h] = (message_in[4*h] << 24) | (message_in[4*h+1] << 16) | (message_in[4*h+2] << 8) | message_in[4*h+3];
 		key[h] = (keySched[4*h] << 24) | (keySched[4*h+1] << 16) | (keySched[4*h+2] << 8) | keySched[4*h+3];
+		AES_PTR[h] = (keySched[4*h] << 24) | (keySched[4*h+1] << 16) | (keySched[4*h+2] << 8) | keySched[4*h+3];
 	}
 	// for(h = 0; h < 4; h++){
 	// 	printf("%08x", msg_enc[h]);
