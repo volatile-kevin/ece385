@@ -46,7 +46,6 @@ module testbench();
 	initial begin: TEST_VECTORS
 	RESET = 1;
 //	AES_KEY <= 128'h000102030405060708090a0b0c0d0e0f;
-//	AES_KEY <= 128'h13111d7fe3944a17f307a78b4d2b30c5;
 //	AES_MSG_ENC <= 128'hdaec3055df058e1c39e814ea76f6747e;
 	
 	#2 RESET = 0;
@@ -54,7 +53,11 @@ module testbench();
 	#2 AVL_WRITEDATA = 1'b0;
 	
 
+	#50 AVL_ADDR =4'b1000; AVL_WRITE = 1'b0; AVL_READ = 1'b1; AVL_CS = 1'b1;
 	
+	
+	
+		
 	end
 	
 	

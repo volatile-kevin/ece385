@@ -298,28 +298,41 @@ void encrypt(unsigned char * msg_ascii, unsigned char * key_ascii, unsigned int 
 void decrypt(unsigned int * msg_enc, unsigned int * msg_dec, unsigned int * key)
 {
 	// Implement this function
+	// write to ENC registers and KEY registers
 	for(int i = 0; i < 4; i++){
 		AES_PTR[4+i] = msg_enc[i];
 		AES_PTR[i] = key[i];
 	}
-
-	AES_PTR[14] = 1;
-
-
-	while(!AES_PTR[15]){
+	// write to START register
+	AES_PTR[14] = 0x01;
+	AES_PTR[14] = 0x00;
+	// while DONE register is 0 do nothing
+	while(AES_PTR[15] == 0x00){
 		printf("%d, %d\n", AES_PTR[14], AES_PTR[15]);
 	}
 
-	if(AES_PTR[15]){
+	// when DONE register is 1, READ decrypted message and write it to msg_dec
+	if(AES_PTR[15] == 0x01){
 		for(int i = 0; i < 4; i++){
-			msg_dec = AES_PTR[8+i];
+			msg_dec[i] = AES_PTR[8+i];
 		}
+
 		for(int i = 0; i < 4; i++){
 			printf("%08x", msg_dec[i]);
 		}
 	}
 }
 
+
+void dest(){
+	for(int i = 8; i < 12; i++){
+		AES_PTR[i] = 0xFF;
+		if(AES_PTR[i] != 0xFF){
+			printf("%d\n", i);
+		}
+	}
+
+}
 /** main
  *  Allows the user to enter the message, key, and select execution mode
  *
@@ -344,6 +357,7 @@ int main()
 //			for(it = 0; it < 4; it++){
 //				printf("%08x", msg_enc[it]);
 //			}
+//	dest();
 	printf("Select execution mode: 0 for testing, 1 for benchmarking: ");
 	scanf("%d", &run_mode);
 
