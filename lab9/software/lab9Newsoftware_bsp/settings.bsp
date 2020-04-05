@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Mar 31, 2020 9:24:37 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1585707877945</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Apr 4, 2020 9:54:43 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1586055283672</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>C:\Users\KevPy\Desktop\ece385Repo\lab9\software\lab9Newsoftware_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\lab9_soc.sopcinfo</SopcDesignFile>
@@ -14,7 +14,7 @@
                 <SettingName>hal.sys_clk_timer</SettingName>
                 <Identifier>ALT_SYS_CLK</Identifier>
                 <Type>UnquotedString</Type>
-                <Value>none</Value>
+                <Value>timer_0</Value>
                 <DefaultValue>none</DefaultValue>
                 <DestinationFile>system_h_define</DestinationFile>
                 <Description>Slave descriptor of the system clock timer device. This device provides a periodic interrupt ("tick") and is typically required for RTOS use. This setting defines the value of ALT_SYS_CLK in system.h.</Description>
@@ -927,6 +927,12 @@
                 <addressRange>0x00000080 - 0x000000BF</addressRange>
                 <addressSpan>64</addressSpan>
                 <attributes/>
+        </MemoryMap>
+        <MemoryMap>
+                <slaveDescriptor>timer_0</slaveDescriptor>
+                <addressRange>0x00000180 - 0x0000019F</addressRange>
+                <addressSpan>32</addressSpan>
+                <attributes>timer</attributes>
         </MemoryMap>
         <MemoryMap>
                 <slaveDescriptor>sdram</slaveDescriptor>

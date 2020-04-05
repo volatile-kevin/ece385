@@ -91,13 +91,13 @@ endmodule
 // Input : System Clock, input Byte
 // Output: InvSubBytes transformation of the Byte
 module InvSubBytes (
-	input  logic clk,
+	input  logic CLK,
 	input  logic [7:0] in,
 	output logic [7:0] out
 );
 
 // This module will be synthesized into a RAM
-always_ff @ (negedge clk)
+always_ff @ (negedge CLK)
 	case (in)
 	8'h00: out <= 8'h52;    8'h01: out <= 8'h09;    8'h02: out <= 8'h6a;    8'h03: out <= 8'hd5;
 	8'h04: out <= 8'h30;    8'h05: out <= 8'h36;    8'h06: out <= 8'ha5;    8'h07: out <= 8'h38;
@@ -164,4 +164,78 @@ always_ff @ (negedge clk)
 	8'hf8: out <= 8'he1;    8'hf9: out <= 8'h69;    8'hfa: out <= 8'h14;    8'hfb: out <= 8'h63;
 	8'hfc: out <= 8'h55;    8'hfd: out <= 8'h21;    8'hfe: out <= 8'h0c;    8'hff: out <= 8'h7d;
 	endcase
+endmodule
+
+
+module InvSubBytes16 (
+							input logic CLK,
+							input logic [127:0] din,
+							output logic [127:0] dout
+								);
+								
+	InvSubBytes isb0(
+						.CLK(CLK), .in(din[7:0]), .out(dout[7:0])
+	);
+	
+	InvSubBytes isb1(
+						.CLK(CLK), .in(din[15:8]), .out(dout[15:8])
+	);
+	
+	InvSubBytes isb2(
+						.CLK(CLK), .in(din[23:16]), .out(dout[23:16])
+	);
+	
+	InvSubBytes isb3(
+						.CLK(CLK), .in(din[31:24]), .out(dout[31:24])
+	);
+	
+	InvSubBytes isb4(
+						.CLK(CLK), .in(din[39:32]), .out(dout[39:32])
+	);
+	
+	InvSubBytes isb5(
+						.CLK(CLK), .in(din[47:40]), .out(dout[47:40])
+	);
+	
+	InvSubBytes isb6(
+						.CLK(CLK), .in(din[55:48]), .out(dout[55:48])
+	);
+	
+	InvSubBytes isb7(
+						.CLK(CLK), .in(din[63:56]), .out(dout[63:56])
+	);
+	
+	InvSubBytes isb8(
+						.CLK(CLK), .in(din[71:64]), .out(dout[71:64])
+	);
+	
+	InvSubBytes isb9(
+						.CLK(CLK), .in(din[79:72]), .out(dout[79:72])
+	);
+	
+	InvSubBytes isb10(
+						.CLK(CLK), .in(din[87:80]), .out(dout[87:80])
+	);
+	
+	InvSubBytes isb11(
+						.CLK(CLK), .in(din[95:88]), .out(dout[95:88])
+	);
+	
+	InvSubBytes isb12(
+						.CLK(CLK), .in(din[103:96]), .out(dout[103:96])
+	);
+	
+	InvSubBytes isb13(
+						.CLK(CLK), .in(din[111:104]), .out(dout[111:104])
+	);
+	
+	InvSubBytes isb14(
+						.CLK(CLK), .in(din[119:112]), .out(dout[119:112])
+	);
+	
+	InvSubBytes isb15(
+						.CLK(CLK), .in(din[127:120]), .out(dout[127:120])
+	);
+	
+	
 endmodule

@@ -19,7 +19,7 @@ module lab9_soc (
 		output wire        sdram_wire_we_n         //           .we_n
 	);
 
-	wire         sdram_pll_c0_clk;                                            // sdram_pll:c0 -> [irq_mapper:clk, irq_synchronizer:sender_clk, mm_interconnect_0:sdram_pll_c0_clk, nios2_gen2_0:clk, rst_controller_002:clk, sdram:clk]
+	wire         sdram_pll_c0_clk;                                            // sdram_pll:c0 -> [irq_mapper:clk, irq_synchronizer:sender_clk, irq_synchronizer_001:sender_clk, mm_interconnect_0:sdram_pll_c0_clk, nios2_gen2_0:clk, rst_controller_002:clk, sdram:clk]
 	wire  [31:0] nios2_gen2_0_data_master_readdata;                           // mm_interconnect_0:nios2_gen2_0_data_master_readdata -> nios2_gen2_0:d_readdata
 	wire         nios2_gen2_0_data_master_waitrequest;                        // mm_interconnect_0:nios2_gen2_0_data_master_waitrequest -> nios2_gen2_0:d_waitrequest
 	wire         nios2_gen2_0_data_master_debugaccess;                        // nios2_gen2_0:debug_mem_slave_debugaccess_to_roms -> mm_interconnect_0:nios2_gen2_0_data_master_debugaccess
@@ -77,14 +77,21 @@ module lab9_soc (
 	wire         mm_interconnect_0_sdram_s1_readdatavalid;                    // sdram:za_valid -> mm_interconnect_0:sdram_s1_readdatavalid
 	wire         mm_interconnect_0_sdram_s1_write;                            // mm_interconnect_0:sdram_s1_write -> sdram:az_wr_n
 	wire  [31:0] mm_interconnect_0_sdram_s1_writedata;                        // mm_interconnect_0:sdram_s1_writedata -> sdram:az_data
+	wire         mm_interconnect_0_timer_0_s1_chipselect;                     // mm_interconnect_0:timer_0_s1_chipselect -> timer_0:chipselect
+	wire  [15:0] mm_interconnect_0_timer_0_s1_readdata;                       // timer_0:readdata -> mm_interconnect_0:timer_0_s1_readdata
+	wire   [2:0] mm_interconnect_0_timer_0_s1_address;                        // mm_interconnect_0:timer_0_s1_address -> timer_0:address
+	wire         mm_interconnect_0_timer_0_s1_write;                          // mm_interconnect_0:timer_0_s1_write -> timer_0:write_n
+	wire  [15:0] mm_interconnect_0_timer_0_s1_writedata;                      // mm_interconnect_0:timer_0_s1_writedata -> timer_0:writedata
 	wire  [31:0] nios2_gen2_0_irq_irq;                                        // irq_mapper:sender_irq -> nios2_gen2_0:irq
 	wire         irq_mapper_receiver0_irq;                                    // irq_synchronizer:sender_irq -> irq_mapper:receiver0_irq
 	wire   [0:0] irq_synchronizer_receiver_irq;                               // jtag_uart_0:av_irq -> irq_synchronizer:receiver_irq
-	wire         rst_controller_reset_out_reset;                              // rst_controller:reset_out -> [AES:RESET, mm_interconnect_0:AES_RESET_reset_bridge_in_reset_reset, sysid_qsys_0:reset_n]
+	wire         irq_mapper_receiver1_irq;                                    // irq_synchronizer_001:sender_irq -> irq_mapper:receiver1_irq
+	wire   [0:0] irq_synchronizer_001_receiver_irq;                           // timer_0:irq -> irq_synchronizer_001:receiver_irq
+	wire         rst_controller_reset_out_reset;                              // rst_controller:reset_out -> [AES:RESET, irq_synchronizer_001:receiver_reset, mm_interconnect_0:AES_RESET_reset_bridge_in_reset_reset, sysid_qsys_0:reset_n, timer_0:reset_n]
 	wire         nios2_gen2_0_debug_reset_request_reset;                      // nios2_gen2_0:debug_reset_request -> [rst_controller:reset_in1, rst_controller_002:reset_in1]
 	wire         rst_controller_001_reset_out_reset;                          // rst_controller_001:reset_out -> [irq_synchronizer:receiver_reset, jtag_uart_0:rst_n, mm_interconnect_0:sdram_pll_inclk_interface_reset_reset_bridge_in_reset_reset, onchip_memory2_0:reset, rst_translator:in_reset, sdram_pll:reset]
 	wire         rst_controller_001_reset_out_reset_req;                      // rst_controller_001:reset_req -> [onchip_memory2_0:reset_req, rst_translator:reset_req_in]
-	wire         rst_controller_002_reset_out_reset;                          // rst_controller_002:reset_out -> [irq_mapper:reset, irq_synchronizer:sender_reset, mm_interconnect_0:nios2_gen2_0_reset_reset_bridge_in_reset_reset, nios2_gen2_0:reset_n, rst_translator_001:in_reset, sdram:reset_n]
+	wire         rst_controller_002_reset_out_reset;                          // rst_controller_002:reset_out -> [irq_mapper:reset, irq_synchronizer:sender_reset, irq_synchronizer_001:sender_reset, mm_interconnect_0:nios2_gen2_0_reset_reset_bridge_in_reset_reset, nios2_gen2_0:reset_n, rst_translator_001:in_reset, sdram:reset_n]
 	wire         rst_controller_002_reset_out_reset_req;                      // rst_controller_002:reset_req -> [nios2_gen2_0:reset_req, rst_translator_001:reset_req_in]
 
 	avalon_aes_interface aes (
@@ -210,6 +217,17 @@ module lab9_soc (
 		.address  (mm_interconnect_0_sysid_qsys_0_control_slave_address)   //              .address
 	);
 
+	lab9_soc_timer_0 timer_0 (
+		.clk        (clk_clk),                                 //   clk.clk
+		.reset_n    (~rst_controller_reset_out_reset),         // reset.reset_n
+		.address    (mm_interconnect_0_timer_0_s1_address),    //    s1.address
+		.writedata  (mm_interconnect_0_timer_0_s1_writedata),  //      .writedata
+		.readdata   (mm_interconnect_0_timer_0_s1_readdata),   //      .readdata
+		.chipselect (mm_interconnect_0_timer_0_s1_chipselect), //      .chipselect
+		.write_n    (~mm_interconnect_0_timer_0_s1_write),     //      .write_n
+		.irq        (irq_synchronizer_001_receiver_irq)        //   irq.irq
+	);
+
 	lab9_soc_mm_interconnect_0 mm_interconnect_0 (
 		.clk_0_clk_clk                                               (clk_clk),                                                     //                                             clk_0_clk.clk
 		.sdram_pll_c0_clk                                            (sdram_pll_c0_clk),                                            //                                          sdram_pll_c0.clk
@@ -272,13 +290,19 @@ module lab9_soc (
 		.sdram_pll_pll_slave_readdata                                (mm_interconnect_0_sdram_pll_pll_slave_readdata),              //                                                      .readdata
 		.sdram_pll_pll_slave_writedata                               (mm_interconnect_0_sdram_pll_pll_slave_writedata),             //                                                      .writedata
 		.sysid_qsys_0_control_slave_address                          (mm_interconnect_0_sysid_qsys_0_control_slave_address),        //                            sysid_qsys_0_control_slave.address
-		.sysid_qsys_0_control_slave_readdata                         (mm_interconnect_0_sysid_qsys_0_control_slave_readdata)        //                                                      .readdata
+		.sysid_qsys_0_control_slave_readdata                         (mm_interconnect_0_sysid_qsys_0_control_slave_readdata),       //                                                      .readdata
+		.timer_0_s1_address                                          (mm_interconnect_0_timer_0_s1_address),                        //                                            timer_0_s1.address
+		.timer_0_s1_write                                            (mm_interconnect_0_timer_0_s1_write),                          //                                                      .write
+		.timer_0_s1_readdata                                         (mm_interconnect_0_timer_0_s1_readdata),                       //                                                      .readdata
+		.timer_0_s1_writedata                                        (mm_interconnect_0_timer_0_s1_writedata),                      //                                                      .writedata
+		.timer_0_s1_chipselect                                       (mm_interconnect_0_timer_0_s1_chipselect)                      //                                                      .chipselect
 	);
 
 	lab9_soc_irq_mapper irq_mapper (
 		.clk           (sdram_pll_c0_clk),                   //       clk.clk
 		.reset         (rst_controller_002_reset_out_reset), // clk_reset.reset
 		.receiver0_irq (irq_mapper_receiver0_irq),           // receiver0.irq
+		.receiver1_irq (irq_mapper_receiver1_irq),           // receiver1.irq
 		.sender_irq    (nios2_gen2_0_irq_irq)                //    sender.irq
 	);
 
@@ -291,6 +315,17 @@ module lab9_soc (
 		.sender_reset   (rst_controller_002_reset_out_reset), //   sender_clk_reset.reset
 		.receiver_irq   (irq_synchronizer_receiver_irq),      //           receiver.irq
 		.sender_irq     (irq_mapper_receiver0_irq)            //             sender.irq
+	);
+
+	altera_irq_clock_crosser #(
+		.IRQ_WIDTH (1)
+	) irq_synchronizer_001 (
+		.receiver_clk   (clk_clk),                            //       receiver_clk.clk
+		.sender_clk     (sdram_pll_c0_clk),                   //         sender_clk.clk
+		.receiver_reset (rst_controller_reset_out_reset),     // receiver_clk_reset.reset
+		.sender_reset   (rst_controller_002_reset_out_reset), //   sender_clk_reset.reset
+		.receiver_irq   (irq_synchronizer_001_receiver_irq),  //           receiver.irq
+		.sender_irq     (irq_mapper_receiver1_irq)            //             sender.irq
 	);
 
 	altera_reset_controller #(
