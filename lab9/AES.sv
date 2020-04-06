@@ -14,7 +14,8 @@ module AES (
 	output logic AES_DONE,
 	input  logic [127:0] AES_KEY,
 	input  logic [127:0] AES_MSG_ENC,
-	output logic [127:0] AES_MSG_DEC
+	output logic [127:0] AES_MSG_DEC,
+	output logic dumbReset
 );
 	// load enables for registers
 	logic msgRegLE, barrierRegLE;

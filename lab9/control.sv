@@ -6,7 +6,8 @@ module control(
 					output logic [1:0] imcSelect,
 					output logic [3:0] arkSelect,
 					output logic msgRegLE,
-					output logic barrierRegLE
+					output logic barrierRegLE,
+					output logic dumbReset
 					);
 
 						
@@ -136,6 +137,7 @@ module control(
 			msgRegLE = 1'b0;
 			barrierRegLE = 1'b0;
 			AES_DONE = 1'b0;
+			dumbReset = 1'b0;
 			unique case (State)
 			
 				Halt : 
@@ -1117,7 +1119,10 @@ module control(
 						AES_DONE = 1'b1;
 					end
 					
-				DoNothing: ;
+				DoNothing: 
+					begin
+						dumbReset = 1'b1;
+					end
 				default: ;
 			endcase
 		end

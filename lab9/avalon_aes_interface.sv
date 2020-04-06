@@ -38,6 +38,7 @@ module avalon_aes_interface (
 	output logic [31:0] EXPORT_DATA		// Exported Conduit Signal to LEDs
 );
 		
+		logic dumbReset;
 		logic LE_KEY0, LE_KEY1, LE_KEY2, LE_KEY3,
 				LE_EN0, LE_EN1, LE_EN2, LE_EN3, 
 				LE_DE0, LE_DE1, LE_DE2, LE_DE3,
@@ -144,77 +145,77 @@ module avalon_aes_interface (
 			end
 		
 			
-		assign EXPORT_DATA = {AES_MSG_DE[31:16], AES_MSG_DE[111:96]};
-//		assign EXPORT_DATA = {AES_KEY[31:16], AES_KEY[111:96]};
+//		assign EXPORT_DATA = {AES_MSG_DE[31:16], AES_MSG_DE[111:96]};
+		assign EXPORT_DATA = {AES_KEY[31:16], AES_KEY[111:96]};
 
 		// 000102030...0f - 0001 0e0f
 		//AES_KEY
  		register32 AES_KEY0(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY0), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_KEY0), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
 		.data_out(AES_KEY[31:0])
 		);
 		
 		register32 AES_KEY1(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY1), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_KEY1), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
 		.data_out(AES_KEY[63:32])
 		);
 		
 		register32 AES_KEY2(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY2), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_KEY2), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
 		.data_out(AES_KEY[95:64])
 		);
 		
 		register32 AES_KEY3(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_KEY3), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_KEY3), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
 		.data_out(AES_KEY[127:96])
 		);
 		
 		//AES_MEG_EN
 		register32 AES_MSG_EN0(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_EN0), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_EN0), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
 		.data_out(AES_MSG_EN[31:0])
 		);
 		
 		register32 AES_MSG_EN1(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_EN1), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_EN1), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
 		.data_out(AES_MSG_EN[63:32])
 		);
 		
 		register32 AES_MSG_EN2(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_EN2), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_EN2), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
 		.data_out(AES_MSG_EN[95:64])
 		);
 		
 		register32 AES_MSG_EN3(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_EN3), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_EN3), .byte_enable(AVL_BYTE_EN), .data_in(AVL_WRITEDATA), 
 		.data_out(AES_MSG_EN[127:96])
 		);
 		
 		//AES_MSG_DE
 		register32 AES_MSG_DE0(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_DE0), .byte_enable(4'b1111), .data_in(AES_MSG_DE[31:0]), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_DE0), .byte_enable(4'b1111), .data_in(AES_MSG_DE[31:0]), 
 		.data_out(AES_MSG_DE_READ[31:0])
 		);
 		
 		register32 AES_MSG_DE1(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_DE1), .byte_enable(4'b1111), .data_in(AES_MSG_DE[63:32]), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_DE1), .byte_enable(4'b1111), .data_in(AES_MSG_DE[63:32]), 
 		.data_out(AES_MSG_DE_READ[63:32])
 		);
 		
 		register32 AES_MSG_DE2(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_DE2), .byte_enable(4'b1111), .data_in(AES_MSG_DE[95:64]), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_DE2), .byte_enable(4'b1111), .data_in(AES_MSG_DE[95:64]), 
 		.data_out(AES_MSG_DE_READ[95:64])
 		);
 		
 		register32 AES_MSG_DE3(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_DE3), .byte_enable(4'b1111), .data_in(AES_MSG_DE[127:96]), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_DE3), .byte_enable(4'b1111), .data_in(AES_MSG_DE[127:96]), 
 		.data_out(AES_MSG_DE_READ[127:96])
 		);
 		
 		
 		//START & DONE
 		register32 START(
-		.Clk(CLK), .Reset(RESET), .load_enable(LE_START), .byte_enable(4'b1111), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_START), .byte_enable(4'b1111), .data_in(AVL_WRITEDATA), 
 		.data_out(dumb_start)
 		);
 		
@@ -228,7 +229,8 @@ module avalon_aes_interface (
 		AES AESBruh(
 			.CLK(CLK), .RESET(RESET), .AES_START(dumb_start), .AES_DONE(dumb_done), 
 			.AES_KEY({AES_KEY[31:0], AES_KEY[63:32], AES_KEY[95:64], AES_KEY[127:96]}), 
-			.AES_MSG_ENC({AES_MSG_EN[31:0], AES_MSG_EN[63:32], AES_MSG_EN[95:64], AES_MSG_EN[127:96]}), .AES_MSG_DEC(AES_MSG_DE)
+			.AES_MSG_ENC({AES_MSG_EN[31:0], AES_MSG_EN[63:32], AES_MSG_EN[95:64], AES_MSG_EN[127:96]}), .AES_MSG_DEC(AES_MSG_DE),
+			.dumbReset(dumbReset) // find and replace
 		);
 		
 		

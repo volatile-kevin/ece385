@@ -49,11 +49,10 @@ module testbench();
 //	AES_MSG_ENC <= 128'hdaec3055df058e1c39e814ea76f6747e;
 	
 	#2 RESET = 0;
-	#2 AVL_ADDR = 4'b1110; AVL_WRITE = 1'b1; AVL_CS = 1'b1; AVL_WRITEDATA = 1'b1;
-	#2 AVL_WRITEDATA = 1'b0;
+	#2 AVL_ADDR = 4'b1110; AVL_WRITE = 1'b1; AVL_CS = 1'b1; AVL_WRITEDATA = 1'b1; AVL_BYTE_EN = 4'b1111;
+	#10 AVL_WRITEDATA = 1'b0;
 	
 
-	#50 AVL_ADDR =4'b1000; AVL_WRITE = 1'b0; AVL_READ = 1'b1; AVL_CS = 1'b1;
 	
 	
 	
