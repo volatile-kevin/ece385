@@ -115,6 +115,7 @@ module control(
 								
 								Done,
 								Done1,
+
 								DoNothing
 		
 							} State, Next_state;
@@ -131,13 +132,7 @@ module control(
 	always_comb
 		begin
 			Next_state = State;
-			regSelect = 2'b00;
-			imcSelect = 2'b00;
-			arkSelect = 4'b0000;
-			msgRegLE = 1'b0;
-			barrierRegLE = 1'b0;
-			AES_DONE = 1'b0;
-			dumbReset = 1'b0;
+
 			unique case (State)
 			
 				Halt : 
@@ -589,20 +584,22 @@ module control(
 					end
 				Done:
 					begin
-						if(AES_START)
-							Next_state = Done;
-						else 
-							Next_state = Done1;
+//						if(AES_START)
+//							Next_state = Done;
+//						else 
+//							Next_state = Done1;
+						Next_state = Done1;
 					end
 					
 				Done1:
 					begin
-						if(~AES_START)
-							Next_state = DoNothing;
-						else
-							Next_state = Done1;
+//						if(~AES_START)
+//							Next_state = DoNothing;
+//						else
+//							Next_state = Done1;
+						Next_state = DoNothing;
 					end
-					
+
 				DoNothing:
 					begin
 						if(AES_START)
@@ -615,6 +612,13 @@ module control(
 			
 			
 			// ACTUAL LOGIC
+			regSelect = 2'b00;
+			imcSelect = 2'b00;
+			arkSelect = 4'b0000;
+			msgRegLE = 1'b0;
+			barrierRegLE = 1'b0;
+			AES_DONE = 1'b0;
+			dumbReset = 1'b0;
 			case(State)
 				Halt : 
 					begin
@@ -1118,7 +1122,7 @@ module control(
 					begin
 						AES_DONE = 1'b1;
 					end
-					
+
 				DoNothing: 
 					begin
 						dumbReset = 1'b1;

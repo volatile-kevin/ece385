@@ -49,6 +49,14 @@ module avalon_aes_interface (
 		logic [127:0] AES_MSG_DE_READ; 
 
 		
+				//WEEK 2 
+		AES AESBruh(
+			.CLK(CLK), .RESET(RESET), .AES_START(dumb_start), .AES_DONE(dumb_done), 
+			.AES_KEY({AES_KEY[31:0], AES_KEY[63:32], AES_KEY[95:64], AES_KEY[127:96]}), 
+			.AES_MSG_ENC({AES_MSG_EN[31:0], AES_MSG_EN[63:32], AES_MSG_EN[95:64], AES_MSG_EN[127:96]}), .AES_MSG_DEC(AES_MSG_DE),
+			.dumbReset(dumbReset) // find and replace
+		);
+		
 		always_comb
 			begin
 				LE_KEY0 = 1'b0;
@@ -126,13 +134,13 @@ module avalon_aes_interface (
 							4'b0111:
 								AVL_READDATA = AES_MSG_EN[127:96];
 							4'b1000:
-								AVL_READDATA = AES_MSG_DE_READ[31:0];
+								AVL_READDATA = AES_MSG_DE[31:0];
 							4'b1001:
-								AVL_READDATA = AES_MSG_DE_READ[63:32];
+								AVL_READDATA = AES_MSG_DE[63:32];
 							4'b1010:
-								AVL_READDATA = AES_MSG_DE_READ[95:64];
+								AVL_READDATA = AES_MSG_DE[95:64];
 							4'b1011:
-								AVL_READDATA = AES_MSG_DE_READ[127:96];
+								AVL_READDATA = AES_MSG_DE[127:96];
 							//start and done
 							4'b1110:
 								AVL_READDATA = dumb_start;
@@ -225,13 +233,7 @@ module avalon_aes_interface (
 		);
 
 
-		//WEEK 2 
-		AES AESBruh(
-			.CLK(CLK), .RESET(RESET), .AES_START(dumb_start), .AES_DONE(dumb_done), 
-			.AES_KEY({AES_KEY[31:0], AES_KEY[63:32], AES_KEY[95:64], AES_KEY[127:96]}), 
-			.AES_MSG_ENC({AES_MSG_EN[31:0], AES_MSG_EN[63:32], AES_MSG_EN[95:64], AES_MSG_EN[127:96]}), .AES_MSG_DEC(AES_MSG_DE),
-			.dumbReset(dumbReset) // find and replace
-		);
+
 		
 		
 endmodule
@@ -246,7 +248,7 @@ module register32 (
 		always_ff @ (posedge Clk)
 		begin
 			if (Reset)
-				data_out <= 31'h0;
+				data_out <= 32'h00000000000000000000000000000000;
 			else if (load_enable)
 				begin
 					if(byte_enable[0])

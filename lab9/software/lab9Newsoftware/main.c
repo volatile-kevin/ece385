@@ -308,17 +308,12 @@ void decrypt(unsigned int * msg_enc, unsigned int * msg_dec, unsigned int * key)
 	AES_PTR[14] = 0x00;
 	// while DONE register is 0 do nothing
 	while(AES_PTR[15] == 0x00){
-		printf("%d, %d\n", AES_PTR[14], AES_PTR[15]);
 	}
 
 	// when DONE register is 1, READ decrypted message and write it to msg_dec
 	if(AES_PTR[15] == 0x01){
 		for(int i = 0; i < 4; i++){
 			msg_dec[i] = AES_PTR[8+i];
-		}
-
-		for(int i = 0; i < 4; i++){
-			printf("%08x", msg_dec[i]);
 		}
 	}
 }
