@@ -33,6 +33,9 @@ package SLC3_2;
    parameter op_LDR = 4'b0110;
    parameter op_STR = 4'b0111;
    parameter op_PSE = 4'b1101;
+	
+	// final project multiplication
+	parameter op_MUL = 4'b1111;
    
    parameter NO_OP = 15'b0;   // "branch never" is a no op
   
@@ -55,6 +58,26 @@ package SLC3_2;
  
    parameter outHEX = -1;
    parameter inSW = -1;
+  
+  
+     // opMUL(DR, SR1, SR2): DR <- SR1 * SR2
+   function [15:0] opMUL ( input [2:0] DR, SR1, SR2 );
+      opMUL[15:12] = op_MUL;
+      opMUL[11: 9] = DR;
+      opMUL[ 8: 6] = SR1;
+      opMUL[ 5: 3] = 3'b0;
+      opMUL[ 2: 0] = SR2;
+   endfunction
+   
+   // opMUL(DR, SR1, imm5): DR <- SR1 * SEXT(imm5)
+   function [15:0] opMULi ( input [2:0] DR, SR, integer imm5 );
+      opMULi[15:12] = op_ADD;
+      opMULi[11: 9] = DR;
+      opMULi[ 8: 6] = SR;
+      opMULi[ 5   ] = 1'b1;
+      opMULi[ 4: 0] = imm5[4:0];
+   endfunction
+  
   
    // opCLR(DR): same as DR <- DR AND DR
    function [15:0] opCLR ( input [2:0] DR );

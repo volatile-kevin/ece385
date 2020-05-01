@@ -1,17 +1,28 @@
 module alu(
-            input logic [1:0] select,
+            input logic [2:0] select,
             input logic [15:0] A, B,
             output logic [15:0] data_out
 );
+	logic [31:0] mul_out; 
 	always_comb 
         begin
-            unique case (select)
-                2'b00 : data_out = A + B;
-                2'b01 : data_out = A & B;
-                2'b10 : data_out = ~A;
-                2'b11 : data_out = A;
-            endcase
+		  		data_out = 16'b0;
+				if(select == 3'b000)
+					data_out = A + B;
+				if(select == 3'b001)
+					data_out = A & B;
+				if(select == 3'b010)
+					data_out = ~A;
+				if(select == 3'b011)
+					data_out = A;
+				if(select == 3'b100)
+					data_out = mul_out[15:0];
 	    end
+		 
+	WallaceTree mul(
+		.MUR(A), .MUD(B), .result(mul_out)
+	);
+	
 endmodule
 
 module sext_5_16(

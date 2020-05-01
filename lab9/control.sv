@@ -131,9 +131,9 @@ module control(
 	always_comb
 		begin
 			Next_state = State;
-			regSelect = 2'b00;
-			imcSelect = 2'b00;
-			arkSelect = 4'b0000;
+			regSelect = 2'bxx;
+			imcSelect = 2'bxx;
+			arkSelect = 4'bxxxx;
 			msgRegLE = 1'b0;
 			barrierRegLE = 1'b0;
 			AES_DONE = 1'b0;
@@ -589,24 +589,27 @@ module control(
 					end
 				Done:
 					begin
-						if(AES_START)
-							Next_state = Done;
-						else 
-							Next_state = Done1;
+//						if(AES_START)
+//							Next_state = Done;
+//						else 
+//							Next_state = Done1;
+						Next_state = Done1;
 					end
 					
 				Done1:
 					begin
-						if(~AES_START)
-							Next_state = DoNothing;
-						else
-							Next_state = Done1;
+//						if(~AES_START)
+//							Next_state = DoNothing;
+//						else
+//							Next_state = Done1;
+						Next_state = Done1;
 					end
 					
 				DoNothing:
 					begin
-						if(AES_START)
-							Next_state = KE0;
+//						if(AES_START)
+//							Next_state = KE0;
+						Next_state = Halt;
 					end
 					
 				default: ;

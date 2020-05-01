@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab6
-Wed Feb 26 15:27:31 2020
+Thu Apr 30 19:32:23 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -19,17 +19,22 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
  11. Multiplexer Restructuring Statistics (Restructuring Performed)
  12. Parameter Settings for User Entity Instance: slc3:my_slc|tristate:tr0
  13. Parameter Settings for User Entity Instance: slc3:my_slc|tristate_gate:pc_tristate
- 14. Parameter Settings for User Entity Instance: test_memory:my_test_memory
- 15. Parameter Settings for User Entity Instance: test_memory:my_test_memory|memory_parser:parser
- 16. Port Connectivity Checks: "slc3:my_slc|pcmux:pc_mux"
- 17. Port Connectivity Checks: "slc3:my_slc|register16:pc_register"
- 18. Port Connectivity Checks: "slc3:my_slc|ISDU:state_controller"
- 19. Port Connectivity Checks: "slc3:my_slc|Mem2IO:memory_subsystem"
- 20. Port Connectivity Checks: "slc3:my_slc|datapath:d0"
- 21. Post-Synthesis Netlist Statistics for Top Partition
- 22. Elapsed Time Per Partition
- 23. Analysis & Synthesis Messages
- 24. Analysis & Synthesis Suppressed Messages
+ 14. Parameter Settings for User Entity Instance: slc3:my_slc|tristate_gate:marmux_tristate
+ 15. Parameter Settings for User Entity Instance: slc3:my_slc|tristate_gate:mdr_tristate
+ 16. Parameter Settings for User Entity Instance: slc3:my_slc|tristate_gate:alu_tristate
+ 17. Parameter Settings for User Entity Instance: test_memory:my_test_memory
+ 18. Parameter Settings for User Entity Instance: test_memory:my_test_memory|memory_parser:parser
+ 19. Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA0"
+ 20. Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car"
+ 21. Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha6"
+ 22. Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa22"
+ 23. Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul"
+ 24. Port Connectivity Checks: "slc3:my_slc|registerUnit:regFile|mux2_3:DR_mux"
+ 25. Port Connectivity Checks: "slc3:my_slc|Mem2IO:memory_subsystem"
+ 26. Post-Synthesis Netlist Statistics for Top Partition
+ 27. Elapsed Time Per Partition
+ 28. Analysis & Synthesis Messages
+ 29. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -55,15 +60,15 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Feb 26 15:27:31 2020       ;
+; Analysis & Synthesis Status        ; Successful - Thu Apr 30 19:32:23 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; lab6                                        ;
 ; Top-level Entity Name              ; lab6_toplevel                               ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 9                                           ;
-;     Total combinational functions  ; 9                                           ;
-;     Dedicated logic registers      ; 7                                           ;
-; Total registers                    ; 7                                           ;
+; Total logic elements               ; 1,053                                       ;
+;     Total combinational functions  ; 877                                         ;
+;     Dedicated logic registers      ; 281                                         ;
+; Total registers                    ; 281                                         ;
 ; Total pins                         ; 129                                         ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
@@ -175,101 +180,279 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                         ;
-+----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                     ; Library ;
-+----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+---------+
-; Registers.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv       ;         ;
-; HexDriver.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/HexDriver.sv       ;         ;
-; tristate.sv                      ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/tristate.sv        ;         ;
-; test_memory.sv                   ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv     ;         ;
-; SLC3_2.sv                        ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/SLC3_2.sv          ;         ;
-; slc3.sv                          ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv            ;         ;
-; memory_contents.sv               ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/memory_contents.sv ;         ;
-; Mem2IO.sv                        ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Mem2IO.sv          ;         ;
-; lab6_toplevel.sv                 ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv   ;         ;
-; ISDU.sv                          ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/ISDU.sv            ;         ;
-; datapath.sv                      ; yes             ; User SystemVerilog HDL File  ; C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/datapath.sv        ;         ;
-+----------------------------------+-----------------+------------------------------+------------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                        ;
++----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                              ; Library ;
++----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------+---------+
+; alu.sv                           ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/alu.sv             ;         ;
+; WallaceTree.sv                   ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/WallaceTree.sv     ;         ;
+; adders.sv                        ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/adders.sv          ;         ;
+; pc_increment.sv                  ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/pc_increment.sv    ;         ;
+; Registers.sv                     ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv       ;         ;
+; HexDriver.sv                     ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/HexDriver.sv       ;         ;
+; tristate.sv                      ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/tristate.sv        ;         ;
+; test_memory.sv                   ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/test_memory.sv     ;         ;
+; SLC3_2.sv                        ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/SLC3_2.sv          ;         ;
+; slc3.sv                          ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv            ;         ;
+; memory_contents.sv               ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/memory_contents.sv ;         ;
+; Mem2IO.sv                        ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/Mem2IO.sv          ;         ;
+; lab6_toplevel.sv                 ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv   ;         ;
+; ISDU.sv                          ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/ISDU.sv            ;         ;
+; addr_unit.sv                     ; yes             ; User SystemVerilog HDL File        ; C:/Users/KevPy/Desktop/ece385Repo/lab6/addr_unit.sv       ;         ;
+; registerunit.sv                  ; yes             ; Auto-Found SystemVerilog HDL File  ; C:/Users/KevPy/Desktop/ece385Repo/lab6/registerunit.sv    ;         ;
+; nzp.sv                           ; yes             ; Auto-Found SystemVerilog HDL File  ; C:/Users/KevPy/Desktop/ece385Repo/lab6/nzp.sv             ;         ;
++----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary               ;
-+---------------------------------------------+-------------+
-; Resource                                    ; Usage       ;
-+---------------------------------------------+-------------+
-; Estimated Total logic elements              ; 9           ;
-;                                             ;             ;
-; Total combinational functions               ; 9           ;
-; Logic element usage by number of LUT inputs ;             ;
-;     -- 4 input functions                    ; 3           ;
-;     -- 3 input functions                    ; 1           ;
-;     -- <=2 input functions                  ; 5           ;
-;                                             ;             ;
-; Logic elements by mode                      ;             ;
-;     -- normal mode                          ; 9           ;
-;     -- arithmetic mode                      ; 0           ;
-;                                             ;             ;
-; Total registers                             ; 7           ;
-;     -- Dedicated logic registers            ; 7           ;
-;     -- I/O registers                        ; 0           ;
-;                                             ;             ;
-; I/O pins                                    ; 129         ;
-;                                             ;             ;
-; Embedded Multiplier 9-bit elements          ; 0           ;
-;                                             ;             ;
-; Maximum fan-out node                        ; Reset~input ;
-; Maximum fan-out                             ; 7           ;
-; Total fan-out                               ; 185         ;
-; Average fan-out                             ; 0.64        ;
-+---------------------------------------------+-------------+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 1,053     ;
+;                                             ;           ;
+; Total combinational functions               ; 877       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 646       ;
+;     -- 3 input functions                    ; 127       ;
+;     -- <=2 input functions                  ; 104       ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 832       ;
+;     -- arithmetic mode                      ; 45        ;
+;                                             ;           ;
+; Total registers                             ; 281       ;
+;     -- Dedicated logic registers            ; 281       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 129       ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; Clk~input ;
+; Maximum fan-out                             ; 281       ;
+; Total fan-out                               ; 4304      ;
+; Average fan-out                             ; 3.01      ;
++---------------------------------------------+-----------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                        ;
-+-------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------+---------------+--------------+
-; Compilation Hierarchy Node    ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                              ; Entity Name   ; Library Name ;
-+-------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------+---------------+--------------+
-; |lab6_toplevel                ; 9 (0)               ; 7 (0)                     ; 0           ; 0            ; 0       ; 0         ; 129  ; 0            ; |lab6_toplevel                                   ; lab6_toplevel ; work         ;
-;    |slc3:my_slc|              ; 9 (0)               ; 7 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc                       ; slc3          ; work         ;
-;       |ISDU:state_controller| ; 9 (9)               ; 7 (7)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|ISDU:state_controller ; ISDU          ; work         ;
-+-------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------+---------------+--------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                ;
++-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
+; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                ; Entity Name             ; Library Name ;
++-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
+; |lab6_toplevel                            ; 877 (0)             ; 281 (0)                   ; 0           ; 0            ; 0       ; 0         ; 129  ; 0            ; |lab6_toplevel                                                                                                     ; lab6_toplevel           ; work         ;
+;    |slc3:my_slc|                          ; 877 (69)            ; 281 (0)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc                                                                                         ; slc3                    ; work         ;
+;       |HexDriver:hex_driver0|             ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|HexDriver:hex_driver0                                                                   ; HexDriver               ; work         ;
+;       |HexDriver:hex_driver1|             ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|HexDriver:hex_driver1                                                                   ; HexDriver               ; work         ;
+;       |HexDriver:hex_driver2|             ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|HexDriver:hex_driver2                                                                   ; HexDriver               ; work         ;
+;       |HexDriver:hex_driver3|             ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|HexDriver:hex_driver3                                                                   ; HexDriver               ; work         ;
+;       |HexDriver:hex_driver4|             ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|HexDriver:hex_driver4                                                                   ; HexDriver               ; work         ;
+;       |HexDriver:hex_driver5|             ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|HexDriver:hex_driver5                                                                   ; HexDriver               ; work         ;
+;       |HexDriver:hex_driver6|             ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|HexDriver:hex_driver6                                                                   ; HexDriver               ; work         ;
+;       |HexDriver:hex_driver7|             ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|HexDriver:hex_driver7                                                                   ; HexDriver               ; work         ;
+;       |ISDU:state_controller|             ; 46 (46)             ; 25 (25)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|ISDU:state_controller                                                                   ; ISDU                    ; work         ;
+;       |Mem2IO:memory_subsystem|           ; 22 (22)             ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|Mem2IO:memory_subsystem                                                                 ; Mem2IO                  ; work         ;
+;       |addr_unit:addr_bruh|               ; 46 (16)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|addr_unit:addr_bruh                                                                     ; addr_unit               ; work         ;
+;          |mux2_16:addr1mux|               ; 16 (16)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|addr_unit:addr_bruh|mux2_16:addr1mux                                                    ; mux2_16                 ; work         ;
+;          |mux4_16:addr2mux|               ; 14 (14)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|addr_unit:addr_bruh|mux4_16:addr2mux                                                    ; mux4_16                 ; work         ;
+;       |alu:alu_bruh|                      ; 349 (24)            ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh                                                                            ; alu                     ; work         ;
+;          |WallaceTree:mul|                ; 325 (78)            ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul                                                            ; WallaceTree             ; work         ;
+;             |carry_lookahead_adder32:car| ; 38 (3)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car                                ; carry_lookahead_adder32 ; work         ;
+;                |four_bit_cla:CLA1|        ; 1 (0)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA1              ; four_bit_cla            ; work         ;
+;                   |bit_cla:cla3|          ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA1|bit_cla:cla3 ; bit_cla                 ; work         ;
+;                |four_bit_cla:CLA2|        ; 13 (7)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA2              ; four_bit_cla            ; work         ;
+;                   |bit_cla:cla0|          ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA2|bit_cla:cla0 ; bit_cla                 ; work         ;
+;                   |bit_cla:cla1|          ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA2|bit_cla:cla1 ; bit_cla                 ; work         ;
+;                   |bit_cla:cla2|          ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA2|bit_cla:cla2 ; bit_cla                 ; work         ;
+;                   |bit_cla:cla3|          ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA2|bit_cla:cla3 ; bit_cla                 ; work         ;
+;                |four_bit_cla:CLA3|        ; 21 (2)              ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA3              ; four_bit_cla            ; work         ;
+;                   |bit_cla:cla0|          ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA3|bit_cla:cla0 ; bit_cla                 ; work         ;
+;                   |bit_cla:cla1|          ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA3|bit_cla:cla1 ; bit_cla                 ; work         ;
+;                   |bit_cla:cla2|          ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA3|bit_cla:cla2 ; bit_cla                 ; work         ;
+;                   |bit_cla:cla3|          ; 16 (16)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA3|bit_cla:cla3 ; bit_cla                 ; work         ;
+;             |full_adder:fa0|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa0                                             ; full_adder              ; work         ;
+;             |full_adder:fa100|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa100                                           ; full_adder              ; work         ;
+;             |full_adder:fa10|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa10                                            ; full_adder              ; work         ;
+;             |full_adder:fa113|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa113                                           ; full_adder              ; work         ;
+;             |full_adder:fa114|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa114                                           ; full_adder              ; work         ;
+;             |full_adder:fa115|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa115                                           ; full_adder              ; work         ;
+;             |full_adder:fa116|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa116                                           ; full_adder              ; work         ;
+;             |full_adder:fa117|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa117                                           ; full_adder              ; work         ;
+;             |full_adder:fa118|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa118                                           ; full_adder              ; work         ;
+;             |full_adder:fa119|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa119                                           ; full_adder              ; work         ;
+;             |full_adder:fa11|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa11                                            ; full_adder              ; work         ;
+;             |full_adder:fa120|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa120                                           ; full_adder              ; work         ;
+;             |full_adder:fa121|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa121                                           ; full_adder              ; work         ;
+;             |full_adder:fa122|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa122                                           ; full_adder              ; work         ;
+;             |full_adder:fa127|            ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa127                                           ; full_adder              ; work         ;
+;             |full_adder:fa128|            ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa128                                           ; full_adder              ; work         ;
+;             |full_adder:fa129|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa129                                           ; full_adder              ; work         ;
+;             |full_adder:fa12|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa12                                            ; full_adder              ; work         ;
+;             |full_adder:fa140|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa140                                           ; full_adder              ; work         ;
+;             |full_adder:fa141|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa141                                           ; full_adder              ; work         ;
+;             |full_adder:fa142|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa142                                           ; full_adder              ; work         ;
+;             |full_adder:fa144|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa144                                           ; full_adder              ; work         ;
+;             |full_adder:fa145|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa145                                           ; full_adder              ; work         ;
+;             |full_adder:fa146|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa146                                           ; full_adder              ; work         ;
+;             |full_adder:fa147|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa147                                           ; full_adder              ; work         ;
+;             |full_adder:fa14|             ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa14                                            ; full_adder              ; work         ;
+;             |full_adder:fa15|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa15                                            ; full_adder              ; work         ;
+;             |full_adder:fa16|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa16                                            ; full_adder              ; work         ;
+;             |full_adder:fa170|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa170                                           ; full_adder              ; work         ;
+;             |full_adder:fa171|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa171                                           ; full_adder              ; work         ;
+;             |full_adder:fa172|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa172                                           ; full_adder              ; work         ;
+;             |full_adder:fa173|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa173                                           ; full_adder              ; work         ;
+;             |full_adder:fa174|            ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa174                                           ; full_adder              ; work         ;
+;             |full_adder:fa17|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa17                                            ; full_adder              ; work         ;
+;             |full_adder:fa18|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa18                                            ; full_adder              ; work         ;
+;             |full_adder:fa19|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa19                                            ; full_adder              ; work         ;
+;             |full_adder:fa1|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa1                                             ; full_adder              ; work         ;
+;             |full_adder:fa20|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa20                                            ; full_adder              ; work         ;
+;             |full_adder:fa21|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa21                                            ; full_adder              ; work         ;
+;             |full_adder:fa22|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa22                                            ; full_adder              ; work         ;
+;             |full_adder:fa23|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa23                                            ; full_adder              ; work         ;
+;             |full_adder:fa24|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa24                                            ; full_adder              ; work         ;
+;             |full_adder:fa28|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa28                                            ; full_adder              ; work         ;
+;             |full_adder:fa29|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa29                                            ; full_adder              ; work         ;
+;             |full_adder:fa2|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa2                                             ; full_adder              ; work         ;
+;             |full_adder:fa30|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa30                                            ; full_adder              ; work         ;
+;             |full_adder:fa31|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa31                                            ; full_adder              ; work         ;
+;             |full_adder:fa32|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa32                                            ; full_adder              ; work         ;
+;             |full_adder:fa33|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa33                                            ; full_adder              ; work         ;
+;             |full_adder:fa34|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa34                                            ; full_adder              ; work         ;
+;             |full_adder:fa3|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa3                                             ; full_adder              ; work         ;
+;             |full_adder:fa42|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa42                                            ; full_adder              ; work         ;
+;             |full_adder:fa43|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa43                                            ; full_adder              ; work         ;
+;             |full_adder:fa44|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa44                                            ; full_adder              ; work         ;
+;             |full_adder:fa45|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa45                                            ; full_adder              ; work         ;
+;             |full_adder:fa4|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa4                                             ; full_adder              ; work         ;
+;             |full_adder:fa56|             ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa56                                            ; full_adder              ; work         ;
+;             |full_adder:fa5|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa5                                             ; full_adder              ; work         ;
+;             |full_adder:fa6|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa6                                             ; full_adder              ; work         ;
+;             |full_adder:fa70|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa70                                            ; full_adder              ; work         ;
+;             |full_adder:fa71|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa71                                            ; full_adder              ; work         ;
+;             |full_adder:fa72|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa72                                            ; full_adder              ; work         ;
+;             |full_adder:fa73|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa73                                            ; full_adder              ; work         ;
+;             |full_adder:fa74|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa74                                            ; full_adder              ; work         ;
+;             |full_adder:fa75|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa75                                            ; full_adder              ; work         ;
+;             |full_adder:fa76|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa76                                            ; full_adder              ; work         ;
+;             |full_adder:fa77|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa77                                            ; full_adder              ; work         ;
+;             |full_adder:fa78|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa78                                            ; full_adder              ; work         ;
+;             |full_adder:fa79|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa79                                            ; full_adder              ; work         ;
+;             |full_adder:fa7|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa7                                             ; full_adder              ; work         ;
+;             |full_adder:fa80|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa80                                            ; full_adder              ; work         ;
+;             |full_adder:fa81|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa81                                            ; full_adder              ; work         ;
+;             |full_adder:fa85|             ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa85                                            ; full_adder              ; work         ;
+;             |full_adder:fa86|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa86                                            ; full_adder              ; work         ;
+;             |full_adder:fa87|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa87                                            ; full_adder              ; work         ;
+;             |full_adder:fa88|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa88                                            ; full_adder              ; work         ;
+;             |full_adder:fa89|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa89                                            ; full_adder              ; work         ;
+;             |full_adder:fa8|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa8                                             ; full_adder              ; work         ;
+;             |full_adder:fa90|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa90                                            ; full_adder              ; work         ;
+;             |full_adder:fa91|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa91                                            ; full_adder              ; work         ;
+;             |full_adder:fa98|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa98                                            ; full_adder              ; work         ;
+;             |full_adder:fa99|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa99                                            ; full_adder              ; work         ;
+;             |full_adder:fa9|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa9                                             ; full_adder              ; work         ;
+;             |half_adder:ha0|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha0                                             ; half_adder              ; work         ;
+;             |half_adder:ha10|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha10                                            ; half_adder              ; work         ;
+;             |half_adder:ha11|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha11                                            ; half_adder              ; work         ;
+;             |half_adder:ha12|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha12                                            ; half_adder              ; work         ;
+;             |half_adder:ha16|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha16                                            ; half_adder              ; work         ;
+;             |half_adder:ha17|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha17                                            ; half_adder              ; work         ;
+;             |half_adder:ha18|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha18                                            ; half_adder              ; work         ;
+;             |half_adder:ha21|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha21                                            ; half_adder              ; work         ;
+;             |half_adder:ha23|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha23                                            ; half_adder              ; work         ;
+;             |half_adder:ha27|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha27                                            ; half_adder              ; work         ;
+;             |half_adder:ha28|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha28                                            ; half_adder              ; work         ;
+;             |half_adder:ha2|              ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha2                                             ; half_adder              ; work         ;
+;             |half_adder:ha33|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha33                                            ; half_adder              ; work         ;
+;             |half_adder:ha34|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha34                                            ; half_adder              ; work         ;
+;             |half_adder:ha35|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha35                                            ; half_adder              ; work         ;
+;             |half_adder:ha36|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha36                                            ; half_adder              ; work         ;
+;             |half_adder:ha37|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha37                                            ; half_adder              ; work         ;
+;             |half_adder:ha42|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha42                                            ; half_adder              ; work         ;
+;             |half_adder:ha43|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha43                                            ; half_adder              ; work         ;
+;             |half_adder:ha44|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha44                                            ; half_adder              ; work         ;
+;             |half_adder:ha45|             ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha45                                            ; half_adder              ; work         ;
+;             |half_adder:ha46|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha46                                            ; half_adder              ; work         ;
+;             |half_adder:ha47|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha47                                            ; half_adder              ; work         ;
+;             |half_adder:ha48|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha48                                            ; half_adder              ; work         ;
+;             |half_adder:ha49|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha49                                            ; half_adder              ; work         ;
+;             |half_adder:ha4|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha4                                             ; half_adder              ; work         ;
+;             |half_adder:ha50|             ; 1 (1)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha50                                            ; half_adder              ; work         ;
+;             |half_adder:ha8|              ; 2 (2)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha8                                             ; half_adder              ; work         ;
+;       |mux2_16:sr2_mux|                   ; 96 (96)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|mux2_16:sr2_mux                                                                         ; mux2_16                 ; work         ;
+;       |nzp:nzp_bruh|                      ; 13 (5)              ; 4 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|nzp:nzp_bruh                                                                            ; nzp                     ; work         ;
+;          |register1:ben_reg|              ; 3 (3)               ; 1 (1)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|nzp:nzp_bruh|register1:ben_reg                                                          ; register1               ; work         ;
+;          |register3:nzp_reg|              ; 5 (5)               ; 3 (3)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|nzp:nzp_bruh|register3:nzp_reg                                                          ; register3               ; work         ;
+;       |register12:ledreg|                 ; 12 (12)             ; 12 (12)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|register12:ledreg                                                                       ; register12              ; work         ;
+;       |register16:ir_register|            ; 1 (1)               ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|register16:ir_register                                                                  ; register16              ; work         ;
+;       |register16:mar_register|           ; 18 (18)             ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|register16:mar_register                                                                 ; register16              ; work         ;
+;       |register16:mdr_register|           ; 34 (34)             ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|register16:mdr_register                                                                 ; register16              ; work         ;
+;       |register16:pc_register|            ; 18 (18)             ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|register16:pc_register                                                                  ; register16              ; work         ;
+;       |registerUnit:regFile|              ; 97 (80)             ; 128 (0)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile                                                                    ; registerUnit            ; work         ;
+;          |mux2_3:SR1_mux|                 ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|mux2_3:SR1_mux                                                     ; mux2_3                  ; work         ;
+;          |register16:R0|                  ; 1 (1)               ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R0                                                      ; register16              ; work         ;
+;          |register16:R1|                  ; 2 (2)               ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R1                                                      ; register16              ; work         ;
+;          |register16:R2|                  ; 2 (2)               ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R2                                                      ; register16              ; work         ;
+;          |register16:R3|                  ; 1 (1)               ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R3                                                      ; register16              ; work         ;
+;          |register16:R4|                  ; 1 (1)               ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R4                                                      ; register16              ; work         ;
+;          |register16:R5|                  ; 3 (3)               ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R5                                                      ; register16              ; work         ;
+;          |register16:R6|                  ; 3 (3)               ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R6                                                      ; register16              ; work         ;
+;          |register16:R7|                  ; 1 (1)               ; 16 (16)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R7                                                      ; register16              ; work         ;
+;       |tristate:tr0|                      ; 0 (0)               ; 32 (32)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |lab6_toplevel|slc3:my_slc|tristate:tr0                                                                            ; tristate                ; work         ;
++-------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------+-------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |lab6_toplevel|slc3:my_slc|ISDU:state_controller|State                                                                            ;
-+----------------+------------+------------+--------------+--------------+------------+----------------+----------------+--------------+------------+
-; Name           ; State.S_32 ; State.S_35 ; State.S_33_2 ; State.S_33_1 ; State.S_18 ; State.PauseIR2 ; State.PauseIR1 ; State.Halted ; State.S_01 ;
-+----------------+------------+------------+--------------+--------------+------------+----------------+----------------+--------------+------------+
-; State.Halted   ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 0            ; 0          ;
-; State.PauseIR1 ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 1              ; 1            ; 0          ;
-; State.PauseIR2 ; 0          ; 0          ; 0            ; 0            ; 0          ; 1              ; 0              ; 1            ; 0          ;
-; State.S_18     ; 0          ; 0          ; 0            ; 0            ; 1          ; 0              ; 0              ; 1            ; 0          ;
-; State.S_33_1   ; 0          ; 0          ; 0            ; 1            ; 0          ; 0              ; 0              ; 1            ; 0          ;
-; State.S_33_2   ; 0          ; 0          ; 1            ; 0            ; 0          ; 0              ; 0              ; 1            ; 0          ;
-; State.S_35     ; 0          ; 1          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ; 0          ;
-; State.S_32     ; 1          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ; 0          ;
-; State.S_01     ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ; 1          ;
-+----------------+------------+------------+--------------+--------------+------------+----------------+----------------+--------------+------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |lab6_toplevel|slc3:my_slc|ISDU:state_controller|State                                                                                                                                                                                                                                                                                                     ;
++----------------+------------+------------+------------+------------+------------+--------------+--------------+------------+------------+------------+--------------+--------------+------------+------------+------------+-------------+------------+------------+------------+--------------+--------------+------------+----------------+----------------+--------------+
+; Name           ; State.S_21 ; State.S_04 ; State.S_12 ; State.S_22 ; State.S_00 ; State.S_16_2 ; State.S_16_1 ; State.S_23 ; State.S_07 ; State.S_27 ; State.S_25_2 ; State.S_25_1 ; State.S_06 ; State.S_09 ; State.S_05 ; State.S_MUL ; State.S_01 ; State.S_32 ; State.S_35 ; State.S_33_2 ; State.S_33_1 ; State.S_18 ; State.PauseIR2 ; State.PauseIR1 ; State.Halted ;
++----------------+------------+------------+------------+------------+------------+--------------+--------------+------------+------------+------------+--------------+--------------+------------+------------+------------+-------------+------------+------------+------------+--------------+--------------+------------+----------------+----------------+--------------+
+; State.Halted   ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 0            ;
+; State.PauseIR1 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 1              ; 1            ;
+; State.PauseIR2 ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 1              ; 0              ; 1            ;
+; State.S_18     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 1          ; 0              ; 0              ; 1            ;
+; State.S_33_1   ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 1            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_33_2   ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 1            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_35     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 1          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_32     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 1          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_01     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 1          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_MUL    ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 1           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_05     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 1          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_09     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 1          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_06     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 1          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_25_1   ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 1            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_25_2   ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 1            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_27     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 1          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_07     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 1          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_23     ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 1          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_16_1   ; 0          ; 0          ; 0          ; 0          ; 0          ; 0            ; 1            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_16_2   ; 0          ; 0          ; 0          ; 0          ; 0          ; 1            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_00     ; 0          ; 0          ; 0          ; 0          ; 1          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_22     ; 0          ; 0          ; 0          ; 1          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_12     ; 0          ; 0          ; 1          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_04     ; 0          ; 1          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
+; State.S_21     ; 1          ; 0          ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0          ; 0          ; 0           ; 0          ; 0          ; 0          ; 0            ; 0            ; 0          ; 0              ; 0              ; 1            ;
++----------------+------------+------------+------------+------------+------------+--------------+--------------+------------+------------+------------+--------------+--------------+------------+------------+------------+-------------+------------+------------+------------+--------------+--------------+------------+----------------+----------------+--------------+
 
 
-+---------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                          ;
-+----------------------------------------------------+----------------------------------------+
-; Register name                                      ; Reason for Removal                     ;
-+----------------------------------------------------+----------------------------------------+
-; slc3:my_slc|register16:pc_register|Data_Out[0..15] ; Stuck at GND due to stuck port clock   ;
-; slc3:my_slc|tristate:tr0|Data_write_buffer[0..15]  ; Stuck at GND due to stuck port data_in ;
-; slc3:my_slc|ISDU:state_controller|State.S_32       ; Lost fanout                            ;
-; slc3:my_slc|ISDU:state_controller|State.S_01       ; Lost fanout                            ;
-; slc3:my_slc|ISDU:state_controller|State~2          ; Lost fanout                            ;
-; slc3:my_slc|ISDU:state_controller|State~3          ; Lost fanout                            ;
-; slc3:my_slc|ISDU:state_controller|State~4          ; Lost fanout                            ;
-; Total Number of Removed Registers = 37             ;                                        ;
-+----------------------------------------------------+----------------------------------------+
++----------------------------------------------------------------+
+; Registers Removed During Synthesis                             ;
++-------------------------------------------+--------------------+
+; Register name                             ; Reason for Removal ;
++-------------------------------------------+--------------------+
+; slc3:my_slc|ISDU:state_controller|State~2 ; Lost fanout        ;
+; slc3:my_slc|ISDU:state_controller|State~3 ; Lost fanout        ;
+; slc3:my_slc|ISDU:state_controller|State~4 ; Lost fanout        ;
+; slc3:my_slc|ISDU:state_controller|State~5 ; Lost fanout        ;
+; slc3:my_slc|ISDU:state_controller|State~6 ; Lost fanout        ;
+; Total Number of Removed Registers = 5     ;                    ;
++-------------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -277,23 +460,40 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 7     ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Total registers                              ; 281   ;
+; Number of registers using Synchronous Clear  ; 35    ;
+; Number of registers using Synchronous Load   ; 31    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 210   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                       ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                             ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |lab6_toplevel|slc3:my_slc|ISDU:state_controller|State ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------+
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|register16:ir_register|data_out[6]              ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|Mem2IO:memory_subsystem|hex_data[4]             ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|register16:mar_register|data_out[0]             ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R0|data_out[1]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R1|data_out[7]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R2|data_out[1]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R3|data_out[10] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R4|data_out[10] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R5|data_out[2]  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R6|data_out[11] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|register16:R7|data_out[9]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |lab6_toplevel|slc3:my_slc|register16:pc_register|data_out[4]              ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |lab6_toplevel|slc3:my_slc|nzp:nzp_bruh|register3:nzp_reg|data_out[0]      ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |lab6_toplevel|slc3:my_slc|register16:mdr_register|data_out[9]             ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |lab6_toplevel|slc3:my_slc|addr_unit:addr_bruh|mux4_16:addr2mux|Mux0       ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 80 LEs               ; 0 LEs                  ; No         ; |lab6_toplevel|slc3:my_slc|registerUnit:regFile|Mux17                      ;
+; 9:1                ; 16 bits   ; 96 LEs        ; 96 LEs               ; 0 LEs                  ; No         ; |lab6_toplevel|slc3:my_slc|mux2_16:sr2_mux|data_out[13]                    ;
+; 11:1               ; 15 bits   ; 105 LEs       ; 75 LEs               ; 30 LEs                 ; No         ; |lab6_toplevel|slc3:my_slc|bus_data[10]                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------+
@@ -313,6 +513,36 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+-----------------------------------------------------------+
 ; N              ; 16    ; Signed Integer                                            ;
 +----------------+-------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: slc3:my_slc|tristate_gate:marmux_tristate ;
++----------------+-------+---------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                          ;
++----------------+-------+---------------------------------------------------------------+
+; N              ; 16    ; Signed Integer                                                ;
++----------------+-------+---------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: slc3:my_slc|tristate_gate:mdr_tristate ;
++----------------+-------+------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                       ;
++----------------+-------+------------------------------------------------------------+
+; N              ; 16    ; Signed Integer                                             ;
++----------------+-------+------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: slc3:my_slc|tristate_gate:alu_tristate ;
++----------------+-------+------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                       ;
++----------------+-------+------------------------------------------------------------+
+; N              ; 16    ; Signed Integer                                             ;
++----------------+-------+------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -337,70 +567,70 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "slc3:my_slc|pcmux:pc_mux"                                                                                          ;
-+----------------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; Port           ; Type   ; Severity ; Details                                                                                                  ;
-+----------------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; PC_offset_data ; Input  ; Info     ; Stuck at GND                                                                                             ;
-; Plus_data      ; Input  ; Info     ; Stuck at GND                                                                                             ;
-; Data_out       ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-+----------------+--------+----------+----------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA0"                                                                                               ;
++---------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                                                                                                                            ;
++---------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; cin     ; Input  ; Warning  ; Input port expression (32 bits) is wider than the input port (1 bits) it drives.  The 31 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
+; cin[-1] ; Input  ; Info     ; Stuck at GND                                                                                                                                                                       ;
+; pOut    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                ;
++---------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "slc3:my_slc|register16:pc_register"                                                                                                                 ;
-+---------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port    ; Type  ; Severity ; Details                                                                                                                                           ;
-+---------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; Clk     ; Input ; Info     ; Explicitly unconnected                                                                                                                            ;
-; Data_In ; Input ; Warning  ; Input port expression (1 bits) is smaller than the input port (16 bits) it drives.  Extra input bit(s) "Data_In[15..1]" will be connected to GND. ;
-+---------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car"                  ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; B[6..0] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; C0      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "slc3:my_slc|ISDU:state_controller"                                                      ;
-+----------+--------+----------+-------------------------------------------------------------------------------------+
-; Port     ; Type   ; Severity ; Details                                                                             ;
-+----------+--------+----------+-------------------------------------------------------------------------------------+
-; BEN      ; Input  ; Info     ; Stuck at GND                                                                        ;
-; LD_MAR   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; LD_MDR   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; LD_IR    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; LD_BEN   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; LD_CC    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; LD_REG   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; LD_LED   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; DRMUX    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; SR1MUX   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; SR2MUX   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; ADDR1MUX ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; ADDR2MUX ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; ALUK     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+----------+--------+----------+-------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha6"                            ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; s    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "slc3:my_slc|Mem2IO:memory_subsystem"                                                        ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; ADDR[19..16] ; Input  ; Info     ; Stuck at GND                                                                        ;
-; HEX0         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; HEX1         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; HEX2         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; HEX3         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; Data_to_CPU  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa22"                           ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; s    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+-----------------------------------------------------+
-; Port Connectivity Checks: "slc3:my_slc|datapath:d0" ;
-+-------+-------+----------+--------------------------+
-; Port  ; Type  ; Severity ; Details                  ;
-+-------+-------+----------+--------------------------+
-; data3 ; Input ; Info     ; Stuck at GND             ;
-+-------+-------+----------+--------------------------+
++--------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "slc3:my_slc|alu:alu_bruh|WallaceTree:mul"                                                     ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port           ; Type   ; Severity ; Details                                                                             ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; result[31..16] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------+
+; Port Connectivity Checks: "slc3:my_slc|registerUnit:regFile|mux2_3:DR_mux" ;
++-----------+-------+----------+---------------------------------------------+
+; Port      ; Type  ; Severity ; Details                                     ;
++-----------+-------+----------+---------------------------------------------+
+; data_in_2 ; Input ; Info     ; Stuck at VCC                                ;
++-----------+-------+----------+---------------------------------------------+
+
+
++-----------------------------------------------------------------+
+; Port Connectivity Checks: "slc3:my_slc|Mem2IO:memory_subsystem" ;
++--------------+-------+----------+-------------------------------+
+; Port         ; Type  ; Severity ; Details                       ;
++--------------+-------+----------+-------------------------------+
+; ADDR[19..16] ; Input ; Info     ; Stuck at GND                  ;
++--------------+-------+----------+-------------------------------+
 
 
 +-----------------------------------------------------+
@@ -409,19 +639,25 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 129                         ;
-; cycloneiii_ff         ; 7                           ;
-;     plain             ; 7                           ;
+; cycloneiii_ff         ; 281                         ;
+;     ENA               ; 179                         ;
+;     ENA SCLR SLD      ; 31                          ;
+;     SCLR              ; 4                           ;
+;     plain             ; 67                          ;
 ; cycloneiii_io_obuf    ; 16                          ;
-; cycloneiii_lcell_comb ; 12                          ;
-;     normal            ; 12                          ;
-;         0 data inputs ; 2                           ;
-;         1 data inputs ; 1                           ;
-;         2 data inputs ; 5                           ;
-;         3 data inputs ; 1                           ;
-;         4 data inputs ; 3                           ;
+; cycloneiii_lcell_comb ; 888                         ;
+;     arith             ; 45                          ;
+;         2 data inputs ; 15                          ;
+;         3 data inputs ; 30                          ;
+;     normal            ; 843                         ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 11                          ;
+;         2 data inputs ; 88                          ;
+;         3 data inputs ; 97                          ;
+;         4 data inputs ; 646                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 2.00                        ;
-; Average LUT depth     ; 0.77                        ;
+; Max LUT depth         ; 24.00                       ;
+; Average LUT depth     ; 13.44                       ;
 +-----------------------+-----------------------------+
 
 
@@ -430,7 +666,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:03     ;
 +----------------+--------------+
 
 
@@ -440,194 +676,142 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed Feb 26 15:27:17 2020
+    Info: Processing started: Thu Apr 30 19:32:06 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab6 -c lab6
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
+Info (12021): Found 5 design units, including 5 entities, in source file alu.sv
+    Info (12023): Found entity 1: alu File: C:/Users/KevPy/Desktop/ece385Repo/lab6/alu.sv Line: 1
+    Info (12023): Found entity 2: sext_5_16 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/alu.sv Line: 28
+    Info (12023): Found entity 3: sext_6_16 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/alu.sv Line: 39
+    Info (12023): Found entity 4: sext_9_16 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/alu.sv Line: 50
+    Info (12023): Found entity 5: sext_11_16 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/alu.sv Line: 61
+Info (12021): Found 1 design units, including 1 entities, in source file wallacetree.sv
+    Info (12023): Found entity 1: WallaceTree File: C:/Users/KevPy/Desktop/ece385Repo/lab6/WallaceTree.sv Line: 1
+Info (12021): Found 6 design units, including 6 entities, in source file adders.sv
+    Info (12023): Found entity 1: full_adder File: C:/Users/KevPy/Desktop/ece385Repo/lab6/adders.sv Line: 1
+    Info (12023): Found entity 2: half_adder File: C:/Users/KevPy/Desktop/ece385Repo/lab6/adders.sv Line: 11
+    Info (12023): Found entity 3: carry_lookahead_adder32 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/adders.sv Line: 18
+    Info (12023): Found entity 4: carry_lookahead_adder File: C:/Users/KevPy/Desktop/ece385Repo/lab6/adders.sv Line: 53
+    Info (12023): Found entity 5: four_bit_cla File: C:/Users/KevPy/Desktop/ece385Repo/lab6/adders.sv Line: 77
+    Info (12023): Found entity 6: bit_cla File: C:/Users/KevPy/Desktop/ece385Repo/lab6/adders.sv Line: 102
 Info (12021): Found 1 design units, including 1 entities, in source file testbench.sv
-    Info (12023): Found entity 1: testbench File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/testbench.sv Line: 1
+    Info (12023): Found entity 1: testbench File: C:/Users/KevPy/Desktop/ece385Repo/lab6/testbench.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file pc_increment.sv
-    Info (12023): Found entity 1: pc_increment File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/pc_increment.sv Line: 1
-Info (12021): Found 4 design units, including 4 entities, in source file registers.sv
-    Info (12023): Found entity 1: registerB File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 4
-    Info (12023): Found entity 2: registerA File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 24
-    Info (12023): Found entity 3: register16 File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 46
-    Info (12023): Found entity 4: pcmux File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 60
+    Info (12023): Found entity 1: pc_increment File: C:/Users/KevPy/Desktop/ece385Repo/lab6/pc_increment.sv Line: 1
+Info (12021): Found 5 design units, including 5 entities, in source file registers.sv
+    Info (12023): Found entity 1: register16 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 2
+    Info (12023): Found entity 2: register12 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 16
+    Info (12023): Found entity 3: mux4_16 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 28
+    Info (12023): Found entity 4: mux2_16 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 46
+    Info (12023): Found entity 5: mux2_3 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 61
 Info (12021): Found 1 design units, including 1 entities, in source file hexdriver.sv
-    Info (12023): Found entity 1: HexDriver File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/HexDriver.sv Line: 1
+    Info (12023): Found entity 1: HexDriver File: C:/Users/KevPy/Desktop/ece385Repo/lab6/HexDriver.sv Line: 1
 Info (12021): Found 2 design units, including 2 entities, in source file tristate.sv
-    Info (12023): Found entity 1: tristate File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/tristate.sv Line: 16
-    Info (12023): Found entity 2: tristate_gate File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/tristate.sv Line: 42
+    Info (12023): Found entity 1: tristate File: C:/Users/KevPy/Desktop/ece385Repo/lab6/tristate.sv Line: 16
+    Info (12023): Found entity 2: tristate_gate File: C:/Users/KevPy/Desktop/ece385Repo/lab6/tristate.sv Line: 42
 Info (12021): Found 1 design units, including 1 entities, in source file test_memory.sv
-    Info (12023): Found entity 1: test_memory File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv Line: 22
+    Info (12023): Found entity 1: test_memory File: C:/Users/KevPy/Desktop/ece385Repo/lab6/test_memory.sv Line: 22
 Info (12021): Found 1 design units, including 0 entities, in source file slc3_2.sv
-    Info (12022): Found design unit 1: SLC3_2 (SystemVerilog) File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/SLC3_2.sv Line: 24
-Warning (10275): Verilog HDL Module Instantiation warning at slc3.sv(112): ignored dangling comma in List of Port Connections File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 112
+    Info (12022): Found design unit 1: SLC3_2 (SystemVerilog) File: C:/Users/KevPy/Desktop/ece385Repo/lab6/SLC3_2.sv Line: 24
 Info (12021): Found 1 design units, including 1 entities, in source file slc3.sv
-    Info (12023): Found entity 1: slc3 File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 19
+    Info (12023): Found entity 1: slc3 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 19
 Info (12021): Found 1 design units, including 1 entities, in source file memory_contents.sv
-    Info (12023): Found entity 1: memory_parser File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/memory_contents.sv Line: 16
+    Info (12023): Found entity 1: memory_parser File: C:/Users/KevPy/Desktop/ece385Repo/lab6/memory_contents.sv Line: 16
 Info (12021): Found 1 design units, including 1 entities, in source file mem2io.sv
-    Info (12023): Found entity 1: Mem2IO File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Mem2IO.sv Line: 16
+    Info (12023): Found entity 1: Mem2IO File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Mem2IO.sv Line: 16
 Info (12021): Found 1 design units, including 1 entities, in source file lab6_toplevel.sv
-    Info (12023): Found entity 1: lab6_toplevel File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
+    Info (12023): Found entity 1: lab6_toplevel File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 10
 Info (12021): Found 1 design units, including 1 entities, in source file isdu.sv
-    Info (12023): Found entity 1: ISDU File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/ISDU.sv Line: 19
+    Info (12023): Found entity 1: ISDU File: C:/Users/KevPy/Desktop/ece385Repo/lab6/ISDU.sv Line: 19
 Info (12021): Found 1 design units, including 1 entities, in source file datapath.sv
-    Info (12023): Found entity 1: datapath File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/datapath.sv Line: 1
-Warning (10236): Verilog HDL Implicit Net warning at slc3.sv(106): created implicit net for "PCMux_Out" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 106
+    Info (12023): Found entity 1: datapath File: C:/Users/KevPy/Desktop/ece385Repo/lab6/datapath.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file addr_unit.sv
+    Info (12023): Found entity 1: addr_unit File: C:/Users/KevPy/Desktop/ece385Repo/lab6/addr_unit.sv Line: 3
 Info (12127): Elaborating entity "lab6_toplevel" for the top level hierarchy
-Info (12128): Elaborating entity "slc3" for hierarchy "slc3:my_slc" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 18
-Warning (10036): Verilog HDL or VHDL warning at slc3.sv(42): object "MIO_EN" assigned a value but never read File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 42
-Warning (10030): Net "BEN" at slc3.sv(37) has no driver or initial value, using a default initial value '0' File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 37
-Warning (10034): Output port "LED" at slc3.sv(22) has no driver File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 22
-Info (12128): Elaborating entity "HexDriver" for hierarchy "slc3:my_slc|HexDriver:hex_driver3" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 58
-Info (12128): Elaborating entity "datapath" for hierarchy "slc3:my_slc|datapath:d0" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 83
-Info (10264): Verilog HDL Case Statement information at datapath.sv(16): all case item expressions in this case statement are onehot File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/datapath.sv Line: 16
-Info (12128): Elaborating entity "Mem2IO" for hierarchy "slc3:my_slc|Mem2IO:memory_subsystem" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 91
-Info (12128): Elaborating entity "tristate" for hierarchy "slc3:my_slc|tristate:tr0" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 96
-Info (12128): Elaborating entity "ISDU" for hierarchy "slc3:my_slc|ISDU:state_controller" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 103
-Info (12128): Elaborating entity "register16" for hierarchy "slc3:my_slc|register16:pc_register" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 108
-Info (12128): Elaborating entity "tristate_gate" for hierarchy "slc3:my_slc|tristate_gate:pc_tristate" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 112
-Info (12128): Elaborating entity "pcmux" for hierarchy "slc3:my_slc|pcmux:pc_mux" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/slc3.sv Line: 116
-Warning (10272): Verilog HDL Case Statement warning at Registers.sv(71): case item expression covers a value already covered by a previous case item File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 71
-Warning (10958): SystemVerilog warning at Registers.sv(67): unique or priority keyword makes case statement complete File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 67
-Warning (10829): SystemVerilog warning at Registers.sv(67): unique case statement has overlapping case items File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/Registers.sv Line: 67
-Info (12128): Elaborating entity "test_memory" for hierarchy "test_memory:my_test_memory" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 22
-Warning (10036): Verilog HDL or VHDL warning at test_memory.sv(42): object "actual_address" assigned a value but never read File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv Line: 42
-Info (12128): Elaborating entity "memory_parser" for hierarchy "test_memory:my_test_memory|memory_parser:parser" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv Line: 48
-Warning (12158): Entity "memory_parser" contains only dangling pins File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/test_memory.sv Line: 48
-Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (12128): Elaborating entity "slc3" for hierarchy "slc3:my_slc" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 18
+Info (12128): Elaborating entity "HexDriver" for hierarchy "slc3:my_slc|HexDriver:hex_driver3" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 73
+Info (12128): Elaborating entity "Mem2IO" for hierarchy "slc3:my_slc|Mem2IO:memory_subsystem" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 101
+Info (12128): Elaborating entity "tristate" for hierarchy "slc3:my_slc|tristate:tr0" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 106
+Info (12128): Elaborating entity "ISDU" for hierarchy "slc3:my_slc|ISDU:state_controller" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 114
+Warning (12125): Using design file registerunit.sv, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
+    Info (12023): Found entity 1: registerUnit File: C:/Users/KevPy/Desktop/ece385Repo/lab6/registerunit.sv Line: 1
+Info (12128): Elaborating entity "registerUnit" for hierarchy "slc3:my_slc|registerUnit:regFile" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 125
+Info (12128): Elaborating entity "mux2_3" for hierarchy "slc3:my_slc|registerUnit:regFile|mux2_3:DR_mux" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/registerunit.sv Line: 143
+Info (12128): Elaborating entity "register16" for hierarchy "slc3:my_slc|registerUnit:regFile|register16:R0" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/registerunit.sv Line: 153
+Info (12128): Elaborating entity "sext_5_16" for hierarchy "slc3:my_slc|sext_5_16:sext516" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 129
+Info (12128): Elaborating entity "mux2_16" for hierarchy "slc3:my_slc|mux2_16:sr2_mux" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 134
+Info (12128): Elaborating entity "alu" for hierarchy "slc3:my_slc|alu:alu_bruh" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 139
+Info (12128): Elaborating entity "WallaceTree" for hierarchy "slc3:my_slc|alu:alu_bruh|WallaceTree:mul" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/alu.sv Line: 24
+Info (12128): Elaborating entity "half_adder" for hierarchy "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|half_adder:ha0" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/WallaceTree.sv Line: 50
+Info (12128): Elaborating entity "full_adder" for hierarchy "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|full_adder:fa0" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/WallaceTree.sv Line: 51
+Info (12128): Elaborating entity "carry_lookahead_adder32" for hierarchy "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/WallaceTree.sv Line: 454
+Info (12128): Elaborating entity "four_bit_cla" for hierarchy "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA0" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/adders.sv Line: 26
+Info (12128): Elaborating entity "bit_cla" for hierarchy "slc3:my_slc|alu:alu_bruh|WallaceTree:mul|carry_lookahead_adder32:car|four_bit_cla:CLA0|bit_cla:cla0" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/adders.sv Line: 87
+Info (12128): Elaborating entity "addr_unit" for hierarchy "slc3:my_slc|addr_unit:addr_bruh" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 146
+Info (12128): Elaborating entity "sext_6_16" for hierarchy "slc3:my_slc|addr_unit:addr_bruh|sext_6_16:sext0" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/addr_unit.sv Line: 16
+Info (12128): Elaborating entity "sext_9_16" for hierarchy "slc3:my_slc|addr_unit:addr_bruh|sext_9_16:sext1" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/addr_unit.sv Line: 20
+Info (12128): Elaborating entity "sext_11_16" for hierarchy "slc3:my_slc|addr_unit:addr_bruh|sext_11_16:sext2" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/addr_unit.sv Line: 24
+Info (12128): Elaborating entity "mux4_16" for hierarchy "slc3:my_slc|addr_unit:addr_bruh|mux4_16:addr2mux" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/addr_unit.sv Line: 29
+Warning (12125): Using design file nzp.sv, which is not specified as a design file for the current project, but contains definitions for 3 design units and 3 entities in project
+    Info (12023): Found entity 1: nzp File: C:/Users/KevPy/Desktop/ece385Repo/lab6/nzp.sv Line: 1
+    Info (12023): Found entity 2: register3 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/nzp.sv Line: 68
+    Info (12023): Found entity 3: register1 File: C:/Users/KevPy/Desktop/ece385Repo/lab6/nzp.sv Line: 82
+Info (12128): Elaborating entity "nzp" for hierarchy "slc3:my_slc|nzp:nzp_bruh" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 152
+Info (12128): Elaborating entity "register3" for hierarchy "slc3:my_slc|nzp:nzp_bruh|register3:nzp_reg" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/nzp.sv Line: 57
+Info (12128): Elaborating entity "register1" for hierarchy "slc3:my_slc|nzp:nzp_bruh|register1:ben_reg" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/nzp.sv Line: 62
+Info (12128): Elaborating entity "tristate_gate" for hierarchy "slc3:my_slc|tristate_gate:pc_tristate" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 192
+Info (12128): Elaborating entity "pc_increment" for hierarchy "slc3:my_slc|pc_increment:pcplusone" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 209
+Info (12128): Elaborating entity "register12" for hierarchy "slc3:my_slc|register12:ledreg" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 214
+Info (12128): Elaborating entity "test_memory" for hierarchy "test_memory:my_test_memory" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 22
+Warning (10036): Verilog HDL or VHDL warning at test_memory.sv(42): object "actual_address" assigned a value but never read File: C:/Users/KevPy/Desktop/ece385Repo/lab6/test_memory.sv Line: 42
+Info (12128): Elaborating entity "memory_parser" for hierarchy "test_memory:my_test_memory|memory_parser:parser" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/test_memory.sv Line: 48
+Warning (13046): Tri-state node(s) do not directly drive top-level pin(s)
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[15]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[14]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[13]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[12]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[11]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[10]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[9]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[8]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[7]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[6]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[5]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[4]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[3]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[2]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[1]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+    Warning (13048): Converted tri-state node "slc3:my_slc|bus_data[0]" into a selector File: C:/Users/KevPy/Desktop/ece385Repo/lab6/Registers.sv Line: 4
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LED[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[6]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[7]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[8]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[9]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[10]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "LED[11]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 12
-    Warning (13410): Pin "HEX0[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX0[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX1[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX2[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX3[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX4[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX5[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX6[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "HEX7[6]" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 13
-    Warning (13410): Pin "CE" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 14
-    Warning (13410): Pin "UB" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 14
-    Warning (13410): Pin "LB" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 14
-    Warning (13410): Pin "WE" is stuck at VCC File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 14
-    Warning (13410): Pin "ADDR[0]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[1]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[2]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[3]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[4]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[5]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[6]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[7]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[8]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[9]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[10]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[11]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[12]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[13]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[14]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[15]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[16]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[17]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[18]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
-    Warning (13410): Pin "ADDR[19]" is stuck at GND File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "CE" is stuck at GND File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 14
+    Warning (13410): Pin "UB" is stuck at GND File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 14
+    Warning (13410): Pin "LB" is stuck at GND File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 14
+    Warning (13410): Pin "ADDR[16]" is stuck at GND File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[17]" is stuck at GND File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[18]" is stuck at GND File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 15
+    Warning (13410): Pin "ADDR[19]" is stuck at GND File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 15
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 5 registers lost all their fanouts during netlist optimizations.
-Info (144001): Generated suppressed messages file C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/output_files/lab6.map.smsg
+Info (144001): Generated suppressed messages file C:/Users/KevPy/Desktop/ece385Repo/lab6/output_files/lab6.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 16 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "S[0]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[1]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[2]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[3]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[4]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[5]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[6]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[7]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[8]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[9]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[10]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[11]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[12]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[13]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[14]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-    Warning (15610): No output dependent on input pin "S[15]" File: C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/lab6_toplevel.sv Line: 10
-Info (21057): Implemented 138 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1213 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 20 input pins
     Info (21059): Implemented 93 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 9 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 122 warnings
-    Info: Peak virtual memory: 4748 megabytes
-    Info: Processing ended: Wed Feb 26 15:27:31 2020
-    Info: Elapsed time: 00:00:14
-    Info: Total CPU time (on all processors): 00:00:30
+    Info (21061): Implemented 1084 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 30 warnings
+    Info: Peak virtual memory: 4759 megabytes
+    Info: Processing ended: Thu Apr 30 19:32:23 2020
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:32
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/Users/Joe/Documents/WSL/ECE385/ece385/lab6/output_files/lab6.map.smsg.
+The suppressed messages can be found in C:/Users/KevPy/Desktop/ece385Repo/lab6/output_files/lab6.map.smsg.
 
 

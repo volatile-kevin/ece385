@@ -46,7 +46,7 @@ module ISDU (   input logic         Clk,
 									SR2MUX,
 									ADDR1MUX,
 				output logic [1:0]  ADDR2MUX,
-									ALUK,
+				output logic [2:0] ALUK,
 				  
 				output logic        Mem_CE,
 									Mem_UB,
@@ -64,6 +64,7 @@ module ISDU (   input logic         Clk,
 						S_35, 
 						S_32, 
 						S_01,
+						S_MUL,
 
 						S_05,
 						S_09,
@@ -110,7 +111,7 @@ module ISDU (   input logic         Clk,
 		GateALU = 1'b0;
 		GateMARMUX = 1'b0;
 		 
-		ALUK = 2'b00;
+		ALUK = 3'b000;
 		 
 		PCMUX = 2'b00;
 		DRMUX = 1'b0;
@@ -179,11 +180,16 @@ module ISDU (   input logic         Clk,
 						Next_state = S_07;
 					4'b1101 : // PAUSE
 						Next_state = PauseIR1;
-					
+					4'b1111 : // MUL
+						Next_state = S_MUL;
 					default : 
 						Next_state = S_18;
 				endcase
 			// TODO: control 
+			S_MUL :
+				begin
+					Next_state = S_18;
+				end
 			S_01 : // DR <- SR1 + OP2, set CC
 				begin
 					Next_state = S_18;
@@ -263,6 +269,17 @@ module ISDU (   input logic         Clk,
 		// Assign control signals based on current state
 		case (State)
 			Halted: ;
+			S_MUL : 
+				begin
+					$display("state %s hit", State);
+					SR2MUX = IR_5;
+					ALUK = 3'b100;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+				end
 			S_18 : 
 				begin 
 					$display("state %s hit", State);
@@ -305,7 +322,7 @@ module ISDU (   input logic         Clk,
 				begin 
 					$display("state %s hit", State);
 					SR2MUX = IR_5;
-					ALUK = 2'b00;
+					ALUK = 3'b000;
 					GateALU = 1'b1;
 					LD_REG = 1'b1;
 					DRMUX = 1'b0;
@@ -316,7 +333,7 @@ module ISDU (   input logic         Clk,
 				begin
 					$display("state %s hit", State);
 					SR2MUX = IR_5;
-					ALUK = 2'b01;
+					ALUK = 3'b001;
 					GateALU = 1'b1;
 					LD_REG = 1'b1;
 					DRMUX = 1'b0;
@@ -326,7 +343,7 @@ module ISDU (   input logic         Clk,
 			S_09 : // DR <- NOT(SR), set CC
 				begin
 					$display("state %s hit", State);
-					ALUK = 2'b10;
+					ALUK = 3'b010;
 					GateALU = 1'b1;
 					SR1MUX = 1'b0;
 					LD_REG = 1'b1;
@@ -376,7 +393,7 @@ module ISDU (   input logic         Clk,
 						LD_MDR = 1'b1;
 						SR1MUX = 1'b1;
 						GateALU = 1'b1;
-						ALUK = 2'b11;
+						ALUK = 3'b011;
 					end
 				S_16_1 : // M[MAR] <- MDR
 					begin

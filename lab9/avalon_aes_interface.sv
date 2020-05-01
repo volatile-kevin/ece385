@@ -126,13 +126,13 @@ module avalon_aes_interface (
 							4'b0111:
 								AVL_READDATA = AES_MSG_EN[127:96];
 							4'b1000:
-								AVL_READDATA = AES_MSG_DE_READ[31:0];
+								AVL_READDATA = AES_MSG_DE[127:96];
 							4'b1001:
-								AVL_READDATA = AES_MSG_DE_READ[63:32];
+								AVL_READDATA = AES_MSG_DE[95:64];
 							4'b1010:
-								AVL_READDATA = AES_MSG_DE_READ[95:64];
+								AVL_READDATA = AES_MSG_DE[63:32];
 							4'b1011:
-								AVL_READDATA = AES_MSG_DE_READ[127:96];
+								AVL_READDATA = AES_MSG_DE[31:0];
 							//start and done
 							4'b1110:
 								AVL_READDATA = dumb_start;
@@ -215,7 +215,7 @@ module avalon_aes_interface (
 		
 		//START & DONE
 		register32 START(
-		.Clk(CLK), .Reset(RESET | dumbReset), .load_enable(LE_START), .byte_enable(4'b1111), .data_in(AVL_WRITEDATA), 
+		.Clk(CLK), .Reset(RESET), .load_enable(LE_START), .byte_enable(4'b1111), .data_in(AVL_WRITEDATA), 
 		.data_out(dumb_start)
 		);
 		
