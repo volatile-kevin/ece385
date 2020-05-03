@@ -1,5 +1,5 @@
 Analysis & Synthesis report for lab6
-Thu Apr 30 19:32:23 2020
+Sun May 03 18:07:26 2020
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -60,7 +60,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Apr 30 19:32:23 2020       ;
+; Analysis & Synthesis Status        ; Successful - Sun May 03 18:07:25 2020       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; lab6                                        ;
 ; Top-level Entity Name              ; lab6_toplevel                               ;
@@ -676,7 +676,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Thu Apr 30 19:32:06 2020
+    Info: Processing started: Sun May 03 18:07:08 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off lab6 -c lab6
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -728,6 +728,9 @@ Info (12021): Found 1 design units, including 1 entities, in source file datapat
     Info (12023): Found entity 1: datapath File: C:/Users/KevPy/Desktop/ece385Repo/lab6/datapath.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file addr_unit.sv
     Info (12023): Found entity 1: addr_unit File: C:/Users/KevPy/Desktop/ece385Repo/lab6/addr_unit.sv Line: 3
+Info (12021): Found 2 design units, including 2 entities, in source file lru.sv
+    Info (12023): Found entity 1: lru File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lru.sv Line: 1
+    Info (12023): Found entity 2: queue File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lru.sv Line: 12
 Info (12127): Elaborating entity "lab6_toplevel" for the top level hierarchy
 Info (12128): Elaborating entity "slc3" for hierarchy "slc3:my_slc" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/lab6_toplevel.sv Line: 18
 Info (12128): Elaborating entity "HexDriver" for hierarchy "slc3:my_slc|HexDriver:hex_driver3" File: C:/Users/KevPy/Desktop/ece385Repo/lab6/slc3.sv Line: 73
@@ -804,9 +807,9 @@ Info (21057): Implemented 1213 device resources after synthesis - the final reso
     Info (21061): Implemented 1084 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 30 warnings
     Info: Peak virtual memory: 4759 megabytes
-    Info: Processing ended: Thu Apr 30 19:32:23 2020
-    Info: Elapsed time: 00:00:17
-    Info: Total CPU time (on all processors): 00:00:32
+    Info: Processing ended: Sun May 03 18:07:26 2020
+    Info: Elapsed time: 00:00:18
+    Info: Total CPU time (on all processors): 00:00:35
 
 
 +------------------------------------------+
