@@ -45,7 +45,7 @@ logic MIO_EN; //mio energy
 logic [15:0] MDR_In;
 logic [15:0] MAR, PC, MDR, IR; 
 logic [15:0] Data_from_SRAM, Data_to_SRAM;
-
+logic [15:0] temp0, temp1;
 
 
 
@@ -92,18 +92,7 @@ assign MIO_EN = ~OE;
 // Be careful about whether Reset is active high or low
 // datapath d0 (.Reset(Reset_ah), .data1(PC), .data1_select(GatePC),.data2(MDR), .data2_select(GateMDR),.data3(ALU), .data3_select(GateALU),.data4(MAR), .data4_select(GateMARMUX), .data_out(bus_data));
 
-// Our SRAM and I/O controller
-Mem2IO memory_subsystem(
-    .*, .Reset(Reset_ah), .ADDR(ADDR), .Switches(S),
-    .HEX0(hex_4[0][3:0]), .HEX1(hex_4[1][3:0]), .HEX2(hex_4[2][3:0]), .HEX3(hex_4[3][3:0]),
-    .Data_from_CPU(MDR), .Data_to_CPU(MDR_In),
-    .Data_from_SRAM(Data_from_SRAM), .Data_to_SRAM(Data_to_SRAM)
-);
 
-// The tri-state buffer serves as the interface between Mem2IO and SRAM
-tristate #(.N(16)) tr0(
-    .Clk(Clk), .tristate_output_enable(~WE), .Data_write(Data_to_SRAM), .Data_read(Data_from_SRAM), .Data(Data)
-);
 
 
 // State machine and control signals
@@ -111,6 +100,28 @@ ISDU state_controller(
     .*, .Reset(Reset_ah), .Run(Run_ah), .Continue(Continue_ah),
     .Opcode(IR[15:12]), .IR_5(IR[5]), .IR_11(IR[11]),
     .Mem_CE(CE), .Mem_UB(UB), .Mem_LB(LB), .Mem_OE(OE), .Mem_WE(WE)
+);
+
+//*****************************************************************************************//
+// final project
+//*****************************************************************************************//
+// Our SRAM and I/O controller
+Mem2IO memory_subsystem(
+    .*, .Reset(Reset_ah), .ADDR(ADDR), .Switches(S),
+    .HEX0(hex_4[0][3:0]), .HEX1(hex_4[1][3:0]), .HEX2(hex_4[2][3:0]), .HEX3(hex_4[3][3:0]),
+    .Data_from_CPU(MDR), .Data_from_SRAM(temp1),
+    .Data_to_CPU(MDR_In), .Data_to_SRAM(temp0)
+);
+
+// The tri-state buffer serves as the interface between Mem2IO and SRAM
+tristate #(.N(16)) tr0(
+    .Clk(Clk), .tristate_output_enable(~WE), .Data_write(Data_to_SRAM), 
+	 .Data_read(Data_from_SRAM), .Data(Data)
+);
+
+lru lruCache(
+		.CLK(Clk), .READ(~Mem_OE), .WRITE(~Mem_WE), .RESET(Reset_ah), .addr(MAR), .write_from_MEM2IO(temp0), .read_from_SRAM(Data_from_SRAM),
+		.read_to_MEM2IO(temp1), .write_to_SRAM(Data_to_SRAM)
 );
 
 
