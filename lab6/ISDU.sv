@@ -34,6 +34,8 @@ module ISDU (   input logic         Clk,
 									LD_REG,
 									LD_PC,
 									LD_LED, // for PAUSE instruction
+									LD_AUX,
+									div_start,
 									
 				output logic        GatePC,
 									GateMDR,
@@ -52,10 +54,13 @@ module ISDU (   input logic         Clk,
 									Mem_UB,
 									Mem_LB,
 									Mem_OE,
-									Mem_WE
+									Mem_WE,
+									
+									my_OE,
+									my_WE
 				);
 
-	enum logic [4:0] {  Halted, 
+	enum logic [5:0] {  Halted, 
 						PauseIR1, 
 						PauseIR2, 
 						S_18, 
@@ -64,7 +69,29 @@ module ISDU (   input logic         Clk,
 						S_35, 
 						S_32, 
 						S_01,
+						
 						S_MUL,
+						S_DIV,
+						S_DIV0,
+						S_DIV1,
+						S_DIV2,
+						S_DIV3,
+						S_DIV4,
+						S_DIV5,
+						S_DIV6,
+						S_DIV7,
+						S_DIV8,
+						S_DIV9,
+						S_DIV10,
+						S_DIV11,
+						S_DIV12,
+						S_DIV13,
+						S_DIV14,
+						S_DIV15,
+						S_DIV16,
+
+
+
 
 						S_05,
 						S_09,
@@ -105,7 +132,9 @@ module ISDU (   input logic         Clk,
 		LD_REG = 1'b0;
 		LD_PC = 1'b0;
 		LD_LED = 1'b0;
-		 
+		LD_AUX = 1'b0;
+		div_start = 1'b0;
+		
 		GatePC = 1'b0;
 		GateMDR = 1'b0;
 		GateALU = 1'b0;
@@ -122,6 +151,9 @@ module ISDU (   input logic         Clk,
 		 
 		Mem_OE = 1'b1;
 		Mem_WE = 1'b1;
+		
+		my_OE = 1'b1;
+		my_WE = 1'b1;
 	
 		// Assign next state
 		unique case (State)
@@ -182,6 +214,8 @@ module ISDU (   input logic         Clk,
 						Next_state = PauseIR1;
 					4'b1111 : // MUL
 						Next_state = S_MUL;
+					4'b1110 : // DIV
+						Next_state = S_DIV;
 					default : 
 						Next_state = S_18;
 				endcase
@@ -190,6 +224,43 @@ module ISDU (   input logic         Clk,
 				begin
 					Next_state = S_18;
 				end
+			S_DIV : 
+				Next_state = S_DIV0;
+			S_DIV0 : 
+				Next_state = S_DIV1;
+			S_DIV1 : 
+				Next_state = S_DIV2;
+			S_DIV2 : 
+				Next_state = S_DIV3;
+			S_DIV3 : 
+				Next_state = S_DIV4;
+			S_DIV4 : 
+				Next_state = S_DIV5;
+			S_DIV5 : 
+				Next_state = S_DIV6;
+			S_DIV6 : 
+				Next_state = S_DIV7;
+			S_DIV7 : 
+				Next_state = S_DIV8;
+			S_DIV8 : 
+				Next_state = S_DIV9;
+			S_DIV9 : 
+				Next_state = S_DIV10;
+			S_DIV10 : 
+				Next_state = S_DIV11;
+			S_DIV11 : 
+				Next_state = S_DIV12;
+			S_DIV12 : 
+				Next_state = S_DIV13;
+			S_DIV13 : 
+				Next_state = S_DIV14;
+			S_DIV14: 
+				Next_state = S_DIV15;
+			S_DIV15: 
+				Next_state = S_DIV16;
+			S_DIV16: 
+				Next_state = S_18;
+			
 			S_01 : // DR <- SR1 + OP2, set CC
 				begin
 					Next_state = S_18;
@@ -279,7 +350,208 @@ module ISDU (   input logic         Clk,
 					DRMUX = 1'b0;
 					SR1MUX = 1'b0;
 					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
 				end
+			S_DIV : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+					div_start = 1'b1;
+				end
+			S_DIV0 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV1 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV2 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV3 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV4 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV5 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV6 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV7 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV8 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV9 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV10 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV11 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV12 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV13 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV14 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV15 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			S_DIV16 : 
+				begin
+					SR2MUX = IR_5;
+					ALUK = 3'b101;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					SR1MUX = 1'b0;
+					LD_CC = 1'b1;
+					LD_AUX = 1'b1;
+				end
+			
 			S_18 : 
 				begin 
 					$display("state %s hit", State);
@@ -301,6 +573,7 @@ module ISDU (   input logic         Clk,
 					$display("state %s hit", State);
 					Mem_OE = 1'b0;
 					LD_MDR = 1'b1;
+					my_OE = 1'b0;
 				end
 			S_35 : 
 				begin 
@@ -369,6 +642,7 @@ module ISDU (   input logic         Clk,
 						$display("state %s hit", State);
 						Mem_OE = 1'b0;
 						LD_MDR = 1'b1;
+						my_OE = 1'b0;
 					end
 				S_27 : // DR <- MDR, set CC
 					begin
@@ -406,6 +680,7 @@ module ISDU (   input logic         Clk,
 						$display("state %s hit", State);
 						// if(R)
 						Mem_WE = 1'b0;
+						my_WE = 1'b0;
 					end
 			S_00 : // [BEN]
 				begin 

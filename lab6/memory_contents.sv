@@ -27,23 +27,45 @@ task memory_contents(output logic[15:0] mem_array[0:size-1]);
 // Note that if you do this, remember to turn "init_external" in test_memory.sv to 1 for 
 // any of your modifications to take effect.
 		
+//		mem_array[0] = opCLR(R0);
+//		mem_array[1] = opADDi(R0, R0, 3);
+//		mem_array[2] = opCLR(R2);
+//		mem_array[3] = opCLR(R3);
+//
+//		mem_array[4] = opCLR(R4);
+//		mem_array[5] = opCLR(R5);
+//		mem_array[6] = opADDi(R0, R0, -2);
+//		mem_array[7] = opBR(zp, -4);
+//		
+//		mem_array[8] = opADDi(R0, R0, 10);
+//		mem_array[9] = opCLR(R1);
+//		mem_array[10] = opADDi(R0, R0, 15);
+//		mem_array[11] = opCLR(R3);
+//		
+//		mem_array[12] = opADDi(R0, R0, 11);
+//		mem_array[13] = opCLR(R5);
+//		mem_array[14] = opADDi(R0, R0, 16);
+//		mem_array[15] = opCLR(R7);
+//		
+//		mem_array[16] = opADDi(R0, R0, 12);
+//		mem_array[17] = opCLR(R1);
+//		mem_array[18] = opADDi(R0, R0, 17);
+//		mem_array[19] = opCLR(R3);
+//		
+//		mem_array[20] = opADDi(R0, R0, 13);
+//		mem_array[21] = opCLR(R5);
+//		mem_array[22] = opADDi(R0, R0, 18);
+//		mem_array[23] = opCLR(R7);
+		
 		mem_array[0] = opCLR(R0);
-		mem_array[1] = opADDi(R0, R0, 2);
-		mem_array[2] = opADDi(R1, R0, 2);
-		mem_array[3] = opMUL(R0, R0, R1);
+		mem_array[1] = opADDi(R0, R0, 15);
+		mem_array[2] = opCLR(R1);		
+		mem_array[3] = opADDi(R1, R1, 5);
 
-//   mem_array[   0 ] =    opCLR(R0)                ;       // Clear the register so it can be used as a base
-//   mem_array[   1 ] =    opADDi(R0, R0, 2)      ;       // Load switches
-//   mem_array[   2 ] =    opLDR(R1, R0, -2)                ;       // Jump to the start of a program
-//   mem_array[   3 ] =    opBR(nzp, -4) ;
-                                                          // Basic I/O test 1
-//   mem_array[   3 ] =    opLDR(R1, R0, inSW)      ;       // Load switches
-   mem_array[   4 ] =    opSTR(R1, R0, outHEX)    ;       // Output
-   mem_array[   5 ] =    opBR(nzp, -3)            ;       // Repeat
-                                      
-                                                          // Basic I/O test 2
-   mem_array[   6 ] =    opPSE(12'h801)           ;       // Checkpoint 1 - prepare to input
-   mem_array[   7 ] =    opLDR(R1, R0, inSW)      ;       // Load switches
+		mem_array[4] = opDIV(R0, R0, R1);
+		mem_array[5] = opDIVi(R0, R0, 2);
+		mem_array[6] = opMULi(R0, R0, -2);
+		mem_array[7] = opBR(nzp, -8);
    mem_array[   8 ] =    opSTR(R1, R0, outHEX)    ;       // Output
    mem_array[   9 ] =    opPSE(12'hC02)           ;       // Checkpoint 2 - read output, prepare to input
    mem_array[  10 ] =    opBR(nzp, -4)            ;       // Repeat

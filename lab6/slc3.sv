@@ -46,7 +46,7 @@ logic [15:0] MDR_In;
 logic [15:0] MAR, PC, MDR, IR; 
 logic [15:0] Data_from_SRAM, Data_to_SRAM;
 logic [15:0] temp0, temp1;
-
+logic [7:0] hex_hits, hex_misses;
 
 
 // MODIFIED:
@@ -63,6 +63,12 @@ logic [15:0] IR_SEXT;
 // Signals being displayed on hex display
 logic [3:0][3:0] hex_4;
 
+
+logic my_OE, my_WE;
+
+
+logic [15:0] aux_reg_out, aux_reg_in;
+logic LD_AUX, div_start;
 //// For week 1, hexdrivers will display IR. Comment out these in week 2.
 //HexDriver hex_driver3 (IR[15:12], HEX3);
 //HexDriver hex_driver2 (IR[11:8], HEX2);
@@ -70,10 +76,10 @@ logic [3:0][3:0] hex_4;
 //HexDriver hex_driver0 (IR[3:0], HEX0);
 
 // For week 2, hexdrivers will be mounted to Mem2IO
- HexDriver hex_driver3 (hex_4[3][3:0], HEX3);
- HexDriver hex_driver2 (hex_4[2][3:0], HEX2);
- HexDriver hex_driver1 (hex_4[1][3:0], HEX1);
- HexDriver hex_driver0 (hex_4[0][3:0], HEX0);
+ HexDriver hex_driver3 (hex_hits[7:4], HEX3);
+ HexDriver hex_driver2 (hex_hits[3:0], HEX2);
+ HexDriver hex_driver1 (hex_misses[7:4], HEX1);
+ HexDriver hex_driver0 (hex_misses[3:0], HEX0);
 
 // The other hex display will show PC for both weeks.
 HexDriver hex_driver7 (PC[15:12], HEX7);
@@ -113,15 +119,17 @@ Mem2IO memory_subsystem(
     .Data_to_CPU(MDR_In), .Data_to_SRAM(temp0)
 );
 
+
 // The tri-state buffer serves as the interface between Mem2IO and SRAM
 tristate #(.N(16)) tr0(
     .Clk(Clk), .tristate_output_enable(~WE), .Data_write(Data_to_SRAM), 
 	 .Data_read(Data_from_SRAM), .Data(Data)
 );
 
-lru lruCache(
-		.CLK(Clk), .READ(~Mem_OE), .WRITE(~Mem_WE), .RESET(Reset_ah), .addr(MAR), .write_from_MEM2IO(temp0), .read_from_SRAM(Data_from_SRAM),
-		.read_to_MEM2IO(temp1), .write_to_SRAM(Data_to_SRAM)
+cache lruCache(
+		.CLK(Clk), .READ(~my_OE), .WRITE(~my_WE), .RESET(Reset_ah), .addr(MAR), .write_from_MEM2IO(temp0), .read_from_SRAM(Data_from_SRAM),
+		.read_to_MEM2IO(temp1), .write_to_SRAM(Data_to_SRAM),
+		.hex_hits(hex_hits), .hex_misses(hex_misses)
 );
 
 
@@ -145,8 +153,8 @@ mux2_16 sr2_mux(
 );
 // ALU, bruh
 alu alu_bruh (
-    .select(ALUK), .A(SR1), .B(SR2MUX_out),
-    .data_out(ALU)
+    .Clk(Clk), .select(ALUK), .A(SR1), .B(SR2MUX_out), .div_start(div_start),
+    .data_out(ALU), .aux_reg(aux_reg_in)
 );
 
 
@@ -164,6 +172,11 @@ nzp nzp_bruh(
 
 
 // registers
+register16 aux_register(
+	 .Clk(Clk), .Reset(Reset_ah), .data_in(aux_reg_in), .Load_Enable(LD_AUX),
+	 .data_out(aux_reg_out)
+);
+
 register16 pc_register(
 	 .Clk(Clk), .Reset(Reset_ah), .data_in(PC_mux_out), .Load_Enable(LD_PC),
 	 .data_out(PC)

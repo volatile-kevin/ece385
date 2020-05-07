@@ -420,6 +420,14 @@
 					"strict" : false
 				},
 				{
+					"name" : "Continue",
+					"strict" : false
+				},
+				{
+					"name" : "Run",
+					"strict" : false
+				},
+				{
 					"name" : "S[0]",
 					"strict" : false
 				},
@@ -481,14 +489,6 @@
 				},
 				{
 					"name" : "S[15]",
-					"strict" : false
-				},
-				{
-					"name" : "Continue",
-					"strict" : false
-				},
-				{
-					"name" : "Run",
 					"strict" : false
 				}
 			]
